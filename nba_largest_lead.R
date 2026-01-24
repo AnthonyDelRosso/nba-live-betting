@@ -2,9 +2,114 @@ library(tidyverse)
 library(magrittr)
 library(tidymodels)
 library(nbastatR)
+library(DBI)
+library(RSQLite)
 
 # Set higher connection buffer for API calls
 Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 2)
+
+# Database path
+DB_PATH <- "lead_database.sqlite"
+
+# ------------------------------------------------------------------------------
+# Database functions
+# ------------------------------------------------------------------------------
+
+#' Initialize SQLite database connection
+#' Creates database file and table if they don't exist
+init_database <- function(db_path = DB_PATH) {
+  # Connect to database (creates file if doesn't exist)
+
+conn <- dbConnect(RSQLite::SQLite(), db_path)
+
+  # Create table if it doesn't exist
+  dbExecute(conn, "
+    CREATE TABLE IF NOT EXISTS largest_leads (
+      idGame INTEGER,
+      largestLead INTEGER,
+      secondsElapsedAtLead REAL,
+      secondsRemainingAtLead REAL,
+      minutesElapsedAtLead REAL,
+      periodAtLead INTEGER,
+      scoreHomeAtLead INTEGER,
+      scoreAwayAtLead INTEGER,
+      teamWithLead TEXT,
+      slugTeamWinner TEXT,
+      slugTeamLoser TEXT,
+      slugTeam_home TEXT,
+      slugTeam_away TEXT,
+      slugTeamWithLead TEXT,
+      teamWithLeadWon INTEGER,
+      blewLead INTEGER,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (idGame, teamWithLead)
+    )
+  ")
+
+  message(sprintf("Connected to database: %s", db_path))
+  conn
+}
+
+#' Write lead data to database
+#' Inserts new records, skips duplicates based on idGame + teamWithLead
+write_to_database <- function(lead_data, conn) {
+  # Get existing game/team combinations
+  existing <- dbGetQuery(conn, "SELECT idGame, teamWithLead FROM largest_leads")
+
+  # Filter to new records only
+  if (nrow(existing) > 0) {
+    new_data <- lead_data %>%
+      anti_join(existing, by = c("idGame", "teamWithLead"))
+  } else {
+    new_data <- lead_data
+  }
+
+  if (nrow(new_data) == 0) {
+    message("No new records to insert.")
+    return(invisible(0))
+  }
+
+  # Prepare data for insertion (convert logicals to integers for SQLite)
+  insert_data <- new_data %>%
+    mutate(
+      teamWithLeadWon = as.integer(teamWithLeadWon),
+      blewLead = as.integer(blewLead)
+    ) %>%
+    select(
+      idGame, largestLead, secondsElapsedAtLead, secondsRemainingAtLead,
+      minutesElapsedAtLead, periodAtLead, scoreHomeAtLead, scoreAwayAtLead,
+      teamWithLead, slugTeamWinner, slugTeamLoser, slugTeam_home, slugTeam_away,
+      slugTeamWithLead, teamWithLeadWon, blewLead
+    )
+
+  # Write to database
+dbWriteTable(conn, "largest_leads", insert_data, append = TRUE, row.names = FALSE)
+
+  message(sprintf("Inserted %d new records into database.", nrow(insert_data)))
+  invisible(nrow(insert_data))
+}
+
+#' Read all data from database
+read_from_database <- function(db_path = DB_PATH) {
+  conn <- dbConnect(RSQLite::SQLite(), db_path)
+  on.exit(dbDisconnect(conn))
+
+  data <- dbGetQuery(conn, "SELECT * FROM largest_leads") %>%
+    as_tibble() %>%
+    mutate(
+      teamWithLeadWon = as.logical(teamWithLeadWon),
+      blewLead = as.logical(blewLead)
+    )
+
+  message(sprintf("Read %d records from database.", nrow(data)))
+  data
+}
+
+#' Close database connection
+close_database <- function(conn) {
+  dbDisconnect(conn)
+  message("Database connection closed.")
+}
 
 # ------------------------------------------------------------------------------
 # 1. Get game IDs for specified season(s)
@@ -178,13 +283,14 @@ add_game_outcomes <- function(largest_leads, game_info) {
 
 build_lead_dataset <- function(seasons = 2024,
                                 season_type = "Regular Season",
-                                chunk_size = 50) {
+                                chunk_size = 50,
+                                write_to_db = TRUE,
+                                db_path = DB_PATH) {
 
   message("Step 1: Fetching game logs...")
   game_info <- get_game_ids(seasons, season_type)
   game_ids <- unique(game_info$idGame)
   message(sprintf("Found %d unique games", length(game_ids)))
-
 
   message("\nStep 2: Fetching play-by-play data...")
   pbp_raw <- get_pbp_data(game_ids, chunk_size)
@@ -198,6 +304,14 @@ build_lead_dataset <- function(seasons = 2024,
 
   message("\nStep 5: Adding game outcomes...")
   final_data <- add_game_outcomes(largest_leads, game_info)
+
+  # Write to database if enabled
+  if (write_to_db) {
+    message("\nStep 6: Writing to database...")
+    conn <- init_database(db_path)
+    write_to_database(final_data, conn)
+    close_database(conn)
+  }
 
   message("\nDone! Dataset ready for modeling.")
 
