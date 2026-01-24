@@ -48,6 +48,10 @@ init_database <- function(db_path = DB_PATH) {
       away_rest_days INTEGER,
       leadTeamRestDays INTEGER,
       restAdvantage INTEGER,
+      home_net_rating REAL,
+      away_net_rating REAL,
+      leadTeamNetRating REAL,
+      netRatingAdvantage REAL,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY (game_id, teamWithLead)
     )
@@ -87,7 +91,8 @@ write_to_database <- function(lead_data, conn) {
       minutesElapsedAtLead, periodAtLead, scoreHomeAtLead, scoreAwayAtLead,
       teamWithLead, teamWinner, teamLoser, team_home, team_away,
       teamWithLeadAbbrev, teamWithLeadWon, blewLead,
-      home_rest_days, away_rest_days, leadTeamRestDays, restAdvantage
+      home_rest_days, away_rest_days, leadTeamRestDays, restAdvantage,
+      home_net_rating, away_net_rating, leadTeamNetRating, netRatingAdvantage
     )
 
   # Write to database
@@ -195,7 +200,64 @@ calculate_rest_days <- function(schedule) {
 }
 
 # ------------------------------------------------------------------------------
-# 3. Load play-by-play data for games
+# 3. Calculate rolling net ratings for each team
+# ------------------------------------------------------------------------------
+
+#' Calculate rolling net rating going into each game
+#' Uses Dean Oliver's formula to estimate possessions
+#' Returns OFF_RATING, DEF_RATING, NET_RATING per 100 possessions
+calculate_net_ratings <- function(seasons, season_type = 2) {
+  message("Loading team box scores for net rating calculation...")
+  team_box <- load_nba_team_box(seasons = seasons)
+
+  # Filter to specified season type
+  if (!is.null(season_type)) {
+    team_box <- team_box %>% filter(season_type == !!season_type)
+  }
+
+  # Calculate possessions using Dean Oliver formula approximation
+  # POSS ≈ FGA + 0.44*FTA - OREB + TOV
+  team_ratings <- team_box %>%
+    arrange(team_abbreviation, game_date) %>%
+    mutate(
+      poss = field_goals_attempted + 0.44 * free_throws_attempted -
+        offensive_rebounds + turnovers
+    ) %>%
+    group_by(team_abbreviation) %>%
+    mutate(
+      # Cumulative stats BEFORE current game (use lag)
+      cum_pts = lag(cumsum(team_score), default = NA_real_),
+      cum_pts_allowed = lag(cumsum(opponent_team_score), default = NA_real_),
+      cum_poss = lag(cumsum(poss), default = NA_real_),
+      # Calculate ratings per 100 possessions
+      off_rating = (cum_pts / cum_poss) * 100,
+      def_rating = (cum_pts_allowed / cum_poss) * 100,
+      net_rating = off_rating - def_rating
+    ) %>%
+    ungroup() %>%
+    select(game_id, team_abbreviation, net_rating)
+
+  # Pivot to get home and away ratings per game
+  home_ratings <- team_box %>%
+    filter(team_home_away == "home") %>%
+    select(game_id, team_abbreviation) %>%
+    left_join(team_ratings, by = c("game_id", "team_abbreviation")) %>%
+    select(game_id, home_net_rating = net_rating)
+
+  away_ratings <- team_box %>%
+    filter(team_home_away == "away") %>%
+    select(game_id, team_abbreviation) %>%
+    left_join(team_ratings, by = c("game_id", "team_abbreviation")) %>%
+    select(game_id, away_net_rating = net_rating)
+
+  # Combine
+  home_ratings %>%
+    left_join(away_ratings, by = "game_id") %>%
+    distinct()
+}
+
+# ------------------------------------------------------------------------------
+# 4. Load play-by-play data for games
 # ------------------------------------------------------------------------------
 
 get_pbp_data <- function(seasons = 2024) {
@@ -206,7 +268,7 @@ get_pbp_data <- function(seasons = 2024) {
 }
 
 # ------------------------------------------------------------------------------
-# 4. Parse scores and calculate margins
+# 5. Parse scores and calculate margins
 # ------------------------------------------------------------------------------
 
 parse_scores <- function(pbp_data) {
@@ -239,7 +301,7 @@ parse_scores <- function(pbp_data) {
 }
 
 # ------------------------------------------------------------------------------
-# 5. Calculate largest lead for each team in each game
+# 6. Calculate largest lead for each team in each game
 # ------------------------------------------------------------------------------
 
 calculate_largest_leads <- function(pbp_parsed) {
@@ -287,10 +349,10 @@ calculate_largest_leads <- function(pbp_parsed) {
 }
 
 # ------------------------------------------------------------------------------
-# 6. Join with game outcomes and rest data
+# 7. Join with game outcomes, rest data, and net ratings
 # ------------------------------------------------------------------------------
 
-add_game_outcomes <- function(largest_leads, schedule, rest_data) {
+add_game_outcomes <- function(largest_leads, schedule, rest_data, net_ratings) {
   # Get unique game outcomes
   game_outcomes <- schedule %>%
     select(game_id, teamWinner, teamLoser) %>%
@@ -299,6 +361,7 @@ add_game_outcomes <- function(largest_leads, schedule, rest_data) {
   largest_leads %>%
     left_join(game_outcomes, by = "game_id") %>%
     left_join(rest_data, by = "game_id") %>%
+    left_join(net_ratings, by = "game_id") %>%
     mutate(
       # Identify which team had the lead
       teamWithLeadAbbrev = if_else(teamWithLead == "home", team_home, team_away),
@@ -313,12 +376,20 @@ add_game_outcomes <- function(largest_leads, schedule, rest_data) {
         teamWithLead == "home",
         home_rest_days - away_rest_days,
         away_rest_days - home_rest_days
+      ),
+      # Net rating for the team with the lead
+      leadTeamNetRating = if_else(teamWithLead == "home", home_net_rating, away_net_rating),
+      # Net rating advantage (positive = lead team is better)
+      netRatingAdvantage = if_else(
+        teamWithLead == "home",
+        home_net_rating - away_net_rating,
+        away_net_rating - home_net_rating
       )
     )
 }
 
 # ------------------------------------------------------------------------------
-# 7. Main pipeline function
+# 8. Main pipeline function
 # ------------------------------------------------------------------------------
 
 build_lead_dataset <- function(seasons = 2024,
@@ -342,7 +413,11 @@ build_lead_dataset <- function(seasons = 2024,
   rest_data <- calculate_rest_days(schedule)
   message(sprintf("Calculated rest days for %d games", nrow(rest_data)))
 
-  message("\nStep 3: Loading play-by-play data...")
+  message("\nStep 3: Calculating net ratings...")
+  net_ratings <- calculate_net_ratings(seasons, season_type)
+  message(sprintf("Calculated net ratings for %d games", nrow(net_ratings)))
+
+  message("\nStep 4: Loading play-by-play data...")
   pbp_raw <- get_pbp_data(seasons)
 
   # Filter to games in our schedule
@@ -350,18 +425,18 @@ build_lead_dataset <- function(seasons = 2024,
     filter(game_id %in% game_ids)
   message(sprintf("Filtered to %d play-by-play records for selected games", nrow(pbp_raw)))
 
-  message("\nStep 4: Parsing scores and calculating margins...")
+  message("\nStep 5: Parsing scores and calculating margins...")
   pbp_parsed <- parse_scores(pbp_raw)
 
-  message("\nStep 5: Calculating largest leads...")
+  message("\nStep 6: Calculating largest leads...")
   largest_leads <- calculate_largest_leads(pbp_parsed)
 
-  message("\nStep 6: Adding game outcomes and rest data...")
-  final_data <- add_game_outcomes(largest_leads, schedule, rest_data)
+  message("\nStep 7: Adding game outcomes, rest data, and net ratings...")
+  final_data <- add_game_outcomes(largest_leads, schedule, rest_data, net_ratings)
 
   # Write to database if enabled
   if (write_to_db) {
-    message("\nStep 7: Writing to database...")
+    message("\nStep 8: Writing to database...")
     conn <- init_database(db_path)
     write_to_database(final_data, conn)
     close_database(conn)
@@ -373,7 +448,7 @@ build_lead_dataset <- function(seasons = 2024,
 }
 
 # ------------------------------------------------------------------------------
-# 8. Run the pipeline (adjust seasons as needed)
+# 9. Run the pipeline (adjust seasons as needed)
 # ------------------------------------------------------------------------------
 
 # Example: Pull data for 2023-24 season (Regular Season)
@@ -394,7 +469,7 @@ build_lead_dataset <- function(seasons = 2024,
 #   )
 
 # ------------------------------------------------------------------------------
-# 9. Prepare data for modeling
+# 10. Prepare data for modeling
 # ------------------------------------------------------------------------------
 
 prepare_model_data <- function(lead_data) {
@@ -409,7 +484,9 @@ prepare_model_data <- function(lead_data) {
       teamWithLead,
       blewLead,
       leadTeamRestDays,
-      restAdvantage
+      restAdvantage,
+      leadTeamNetRating,
+      netRatingAdvantage
     ) %>%
     mutate(
       blewLead = factor(blewLead, levels = c(FALSE, TRUE),
