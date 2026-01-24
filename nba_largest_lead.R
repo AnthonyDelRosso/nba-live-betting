@@ -496,30 +496,180 @@ prepare_model_data <- function(lead_data) {
     drop_na()
 }
 
-# Example modeling setup with tidymodels
-# library(tidymodels)
-# model_data <- prepare_model_data(lead_data)
-#
-# # Split data
-# set.seed(123)
-# split <- initial_split(model_data, prop = 0.8, strata = blewLead)
-# train <- training(split)
-# test <- testing(split)
-#
-# # Logistic regression recipe
-# lead_recipe <- recipe(blewLead ~ largestLead + minutesElapsedAtLead + periodAtLead,
-#                       data = train) %>%
-#   step_dummy(all_nominal_predictors())
-#
-# # Model specification
-# log_spec <- logistic_reg() %>%
-#   set_engine("glm") %>%
-#   set_mode("classification")
-#
-# # Workflow
-# lead_workflow <- workflow() %>%
-#   add_recipe(lead_recipe) %>%
-#   add_model(log_spec)
-#
-# # Fit
-# lead_fit <- lead_workflow %>% fit(data = train)
+# ------------------------------------------------------------------------------
+# 11. Train blown lead prediction model
+# ------------------------------------------------------------------------------
+
+MODEL_PATH <- "blown_lead_model.rds"
+
+#' Train logistic regression model to predict blown leads
+#' @param db_path Path to SQLite database
+#' @param save_model Whether to save the trained model to disk
+#' @return Trained workflow object
+train_blown_lead_model <- function(db_path = DB_PATH, save_model = TRUE) {
+  library(tidymodels)
+
+  # Load data from database
+  conn <- dbConnect(RSQLite::SQLite(), db_path)
+  lead_data <- dbGetQuery(conn, "SELECT * FROM largest_leads") %>% as_tibble()
+  dbDisconnect(conn)
+
+  # Prepare modeling data
+  model_data <- lead_data %>%
+    filter(!is.na(netRatingAdvantage), !is.na(restAdvantage)) %>%
+    mutate(
+      blewLead = factor(blewLead, levels = c(0, 1), labels = c("held", "blown")),
+      teamWithLead = factor(teamWithLead),
+      periodAtLead = factor(periodAtLead)
+    ) %>%
+    select(
+      blewLead,
+      largestLead,
+      minutesElapsedAtLead,
+      periodAtLead,
+      teamWithLead,
+      restAdvantage,
+      netRatingAdvantage
+    )
+
+  message(sprintf("Training on %d records...", nrow(model_data)))
+
+  # Create recipe
+  lead_recipe <- recipe(blewLead ~ ., data = model_data) %>%
+    step_dummy(all_nominal_predictors())
+
+  # Logistic regression specification
+  log_spec <- logistic_reg() %>%
+    set_engine("glm") %>%
+    set_mode("classification")
+
+  # Workflow
+  lead_workflow <- workflow() %>%
+    add_recipe(lead_recipe) %>%
+    add_model(log_spec)
+
+  # Fit model on all data
+  lead_fit <- lead_workflow %>% fit(data = model_data)
+
+  # Save model if requested
+ if (save_model) {
+    saveRDS(lead_fit, MODEL_PATH)
+    message(sprintf("Model saved to: %s", MODEL_PATH))
+  }
+
+  message("Model training complete!")
+  lead_fit
+}
+
+#' Load trained model from disk
+#' @param model_path Path to saved model RDS file
+#' @return Trained workflow object
+load_model <- function(model_path = MODEL_PATH) {
+  if (!file.exists(model_path)) {
+    stop(sprintf("Model file not found: %s. Run train_blown_lead_model() first.", model_path))
+  }
+  readRDS(model_path)
+}
+
+# ------------------------------------------------------------------------------
+# 12. Predict blown lead probability
+# ------------------------------------------------------------------------------
+
+#' Predict probability of blowing a lead
+#' @param model Trained model (or NULL to load from disk)
+#' @param largest_lead Size of the lead in points
+#' @param minutes_elapsed Minutes into the game when lead was reached
+#' @param period Quarter/period (1-4 for regulation, 5+ for OT)
+#' @param is_home Whether the team with the lead is the home team
+#' @param rest_advantage Days of rest advantage (positive = more rested)
+#' @param net_rating_advantage Net rating advantage (positive = better team)
+#' @return Probability of blowing the lead (0-1)
+predict_blown_lead <- function(model = NULL,
+                                largest_lead,
+                                minutes_elapsed,
+                                period = 1,
+                                is_home = TRUE,
+                                rest_advantage = 0,
+                                net_rating_advantage = 0) {
+  library(tidymodels)
+
+  # Load model if not provided
+  if (is.null(model)) {
+    model <- load_model()
+  }
+
+  # Create prediction data frame
+  new_data <- tibble(
+    largestLead = largest_lead,
+    minutesElapsedAtLead = minutes_elapsed,
+    periodAtLead = factor(period, levels = c(1, 2, 3, 4, 5, 6, 7)),
+    teamWithLead = factor(ifelse(is_home, "home", "away"), levels = c("away", "home")),
+    restAdvantage = rest_advantage,
+    netRatingAdvantage = net_rating_advantage
+  )
+
+  # Predict
+  pred <- predict(model, new_data, type = "prob")
+
+  # Return probability of blowing lead
+  pred$.pred_blown
+}
+
+#' Predict for multiple scenarios at once
+#' @param model Trained model (or NULL to load from disk)
+#' @param scenarios Data frame with columns: largest_lead, minutes_elapsed,
+#'        period, is_home, rest_advantage, net_rating_advantage
+#' @return Data frame with predictions added
+predict_scenarios <- function(model = NULL, scenarios) {
+  library(tidymodels)
+
+  if (is.null(model)) {
+    model <- load_model()
+  }
+
+  # Prepare data
+  pred_data <- scenarios %>%
+    mutate(
+      largestLead = largest_lead,
+      minutesElapsedAtLead = minutes_elapsed,
+      periodAtLead = factor(period, levels = c(1, 2, 3, 4, 5, 6, 7)),
+      teamWithLead = factor(ifelse(is_home, "home", "away"), levels = c("away", "home")),
+      restAdvantage = rest_advantage,
+      netRatingAdvantage = net_rating_advantage
+    )
+
+  # Predict
+  preds <- predict(model, pred_data, type = "prob")
+
+  # Return with predictions
+  scenarios %>%
+    mutate(prob_blown = preds$.pred_blown)
+}
+
+# ------------------------------------------------------------------------------
+# Example usage
+# ------------------------------------------------------------------------------
+
+# Train and save model:
+# model <- train_blown_lead_model()
+
+# Make a single prediction:
+# predict_blown_lead(
+#   largest_lead = 15,
+#   minutes_elapsed = 24,  # halftime
+#   period = 2,
+#   is_home = TRUE,
+#   rest_advantage = 1,
+#   net_rating_advantage = 5
+# )
+
+# Predict multiple scenarios:
+# scenarios <- tibble(
+#   largest_lead = c(10, 15, 20),
+#   minutes_elapsed = c(24, 24, 24),
+#   period = c(2, 2, 2),
+#   is_home = c(TRUE, TRUE, TRUE),
+#   rest_advantage = c(0, 0, 0),
+#   net_rating_advantage = c(0, 0, 0)
+# )
+# predict_scenarios(scenarios = scenarios)
