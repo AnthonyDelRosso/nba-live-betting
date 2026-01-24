@@ -1,12 +1,14 @@
 library(tidyverse)
-library(magrittr)
-library(tidymodels)
 library(nbastatR)
 library(DBI)
 library(RSQLite)
 
 # Set higher connection buffer for API calls
-Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 2)
+Sys.setenv("VROOM_CONNECTION_SIZE" = 262144)
+
+# Constants
+REGULATION_SECONDS <- 2880
+OVERTIME_SECONDS <- 300
 
 # Database path
 DB_PATH <- "lead_database.sqlite"
@@ -19,8 +21,7 @@ DB_PATH <- "lead_database.sqlite"
 #' Creates database file and table if they don't exist
 init_database <- function(db_path = DB_PATH) {
   # Connect to database (creates file if doesn't exist)
-
-conn <- dbConnect(RSQLite::SQLite(), db_path)
+  conn <- dbConnect(RSQLite::SQLite(), db_path)
 
   # Create table if it doesn't exist
   dbExecute(conn, "
@@ -83,7 +84,7 @@ write_to_database <- function(lead_data, conn) {
     )
 
   # Write to database
-dbWriteTable(conn, "largest_leads", insert_data, append = TRUE, row.names = FALSE)
+  dbWriteTable(conn, "largest_leads", insert_data, append = TRUE, row.names = FALSE)
 
   message(sprintf("Inserted %d new records into database.", nrow(insert_data)))
   invisible(nrow(insert_data))
@@ -185,8 +186,8 @@ parse_scores <- function(pbp_data) {
       # Total game seconds (regulation = 2880, each OT = 300)
       totalGameSeconds = if_else(
         numberPeriod <= 4,
-        2880,
-        2880 + (numberPeriod - 4) * 300
+        REGULATION_SECONDS,
+        REGULATION_SECONDS + (numberPeriod - 4) * OVERTIME_SECONDS
       ),
       # Time remaining
       secondsRemaining = totalGameSeconds - secondsElapsed,
@@ -201,8 +202,7 @@ parse_scores <- function(pbp_data) {
 
 calculate_largest_leads <- function(pbp_parsed) {
   # Get largest lead for home team
-
-home_leads <- pbp_parsed %>%
+  home_leads <- pbp_parsed %>%
     filter(marginHome > 0) %>%
     group_by(idGame) %>%
     slice_max(marginHome, n = 1, with_ties = FALSE) %>%
