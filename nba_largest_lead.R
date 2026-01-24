@@ -44,6 +44,10 @@ init_database <- function(db_path = DB_PATH) {
       teamWithLeadAbbrev TEXT,
       teamWithLeadWon INTEGER,
       blewLead INTEGER,
+      home_rest_days INTEGER,
+      away_rest_days INTEGER,
+      leadTeamRestDays INTEGER,
+      restAdvantage INTEGER,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY (game_id, teamWithLead)
     )
@@ -82,7 +86,8 @@ write_to_database <- function(lead_data, conn) {
       game_id, largestLead, secondsElapsedAtLead, secondsRemainingAtLead,
       minutesElapsedAtLead, periodAtLead, scoreHomeAtLead, scoreAwayAtLead,
       teamWithLead, teamWinner, teamLoser, team_home, team_away,
-      teamWithLeadAbbrev, teamWithLeadWon, blewLead
+      teamWithLeadAbbrev, teamWithLeadWon, blewLead,
+      home_rest_days, away_rest_days, leadTeamRestDays, restAdvantage
     )
 
   # Write to database
@@ -145,7 +150,52 @@ get_schedule <- function(seasons = 2024) {
 }
 
 # ------------------------------------------------------------------------------
-# 2. Load play-by-play data for games
+# 2. Calculate rest days for each team
+# ------------------------------------------------------------------------------
+
+#' Calculate rest days for each team before each game
+#' Rest days = days since previous game - 1 (so 0 = back-to-back)
+calculate_rest_days <- function(schedule) {
+  # Reshape to get one row per team per game
+  home_games <- schedule %>%
+    select(game_id, game_date, team = home_team_abbrev) %>%
+    mutate(location = "home")
+
+  away_games <- schedule %>%
+    select(game_id, game_date, team = away_team_abbrev) %>%
+    mutate(location = "away")
+
+  # Combine and calculate rest days per team
+  all_games <- bind_rows(home_games, away_games) %>%
+    mutate(game_date = as.Date(game_date)) %>%
+    arrange(team, game_date) %>%
+    group_by(team) %>%
+    mutate(
+      prev_game_date = lag(game_date),
+      rest_days = as.integer(game_date - prev_game_date) - 1L
+    ) %>%
+    ungroup() %>%
+    select(game_id, team, rest_days)
+
+  # Pivot to get home and away rest days per game
+  home_rest <- schedule %>%
+    select(game_id, team = home_team_abbrev) %>%
+    left_join(all_games, by = c("game_id", "team")) %>%
+    select(game_id, home_rest_days = rest_days)
+
+  away_rest <- schedule %>%
+    select(game_id, team = away_team_abbrev) %>%
+    left_join(all_games, by = c("game_id", "team")) %>%
+    select(game_id, away_rest_days = rest_days)
+
+  # Combine into single dataframe
+  home_rest %>%
+    left_join(away_rest, by = "game_id") %>%
+    distinct()
+}
+
+# ------------------------------------------------------------------------------
+# 3. Load play-by-play data for games
 # ------------------------------------------------------------------------------
 
 get_pbp_data <- function(seasons = 2024) {
@@ -156,7 +206,7 @@ get_pbp_data <- function(seasons = 2024) {
 }
 
 # ------------------------------------------------------------------------------
-# 3. Parse scores and calculate margins
+# 4. Parse scores and calculate margins
 # ------------------------------------------------------------------------------
 
 parse_scores <- function(pbp_data) {
@@ -189,7 +239,7 @@ parse_scores <- function(pbp_data) {
 }
 
 # ------------------------------------------------------------------------------
-# 4. Calculate largest lead for each team in each game
+# 5. Calculate largest lead for each team in each game
 # ------------------------------------------------------------------------------
 
 calculate_largest_leads <- function(pbp_parsed) {
@@ -237,30 +287,38 @@ calculate_largest_leads <- function(pbp_parsed) {
 }
 
 # ------------------------------------------------------------------------------
-# 5. Join with game outcomes to determine if lead was blown
+# 6. Join with game outcomes and rest data
 # ------------------------------------------------------------------------------
 
-add_game_outcomes <- function(largest_leads, schedule) {
+add_game_outcomes <- function(largest_leads, schedule, rest_data) {
   # Get unique game outcomes
-
-game_outcomes <- schedule %>%
+  game_outcomes <- schedule %>%
     select(game_id, teamWinner, teamLoser) %>%
     distinct()
 
   largest_leads %>%
     left_join(game_outcomes, by = "game_id") %>%
+    left_join(rest_data, by = "game_id") %>%
     mutate(
       # Identify which team had the lead
       teamWithLeadAbbrev = if_else(teamWithLead == "home", team_home, team_away),
       # Did the team with the lead win?
       teamWithLeadWon = teamWithLeadAbbrev == teamWinner,
       # Binary outcome: did they blow the lead (lose)?
-      blewLead = !teamWithLeadWon
+      blewLead = !teamWithLeadWon,
+      # Rest days for the team with the lead
+      leadTeamRestDays = if_else(teamWithLead == "home", home_rest_days, away_rest_days),
+      # Rest advantage (positive = lead team more rested)
+      restAdvantage = if_else(
+        teamWithLead == "home",
+        home_rest_days - away_rest_days,
+        away_rest_days - home_rest_days
+      )
     )
 }
 
 # ------------------------------------------------------------------------------
-# 6. Main pipeline function
+# 7. Main pipeline function
 # ------------------------------------------------------------------------------
 
 build_lead_dataset <- function(seasons = 2024,
@@ -280,7 +338,11 @@ build_lead_dataset <- function(seasons = 2024,
   game_ids <- unique(schedule$game_id)
   message(sprintf("Found %d completed games", length(game_ids)))
 
-  message("\nStep 2: Loading play-by-play data...")
+  message("\nStep 2: Calculating rest days...")
+  rest_data <- calculate_rest_days(schedule)
+  message(sprintf("Calculated rest days for %d games", nrow(rest_data)))
+
+  message("\nStep 3: Loading play-by-play data...")
   pbp_raw <- get_pbp_data(seasons)
 
   # Filter to games in our schedule
@@ -288,18 +350,18 @@ build_lead_dataset <- function(seasons = 2024,
     filter(game_id %in% game_ids)
   message(sprintf("Filtered to %d play-by-play records for selected games", nrow(pbp_raw)))
 
-  message("\nStep 3: Parsing scores and calculating margins...")
+  message("\nStep 4: Parsing scores and calculating margins...")
   pbp_parsed <- parse_scores(pbp_raw)
 
-  message("\nStep 4: Calculating largest leads...")
+  message("\nStep 5: Calculating largest leads...")
   largest_leads <- calculate_largest_leads(pbp_parsed)
 
-  message("\nStep 5: Adding game outcomes...")
-  final_data <- add_game_outcomes(largest_leads, schedule)
+  message("\nStep 6: Adding game outcomes and rest data...")
+  final_data <- add_game_outcomes(largest_leads, schedule, rest_data)
 
   # Write to database if enabled
   if (write_to_db) {
-    message("\nStep 6: Writing to database...")
+    message("\nStep 7: Writing to database...")
     conn <- init_database(db_path)
     write_to_database(final_data, conn)
     close_database(conn)
@@ -311,7 +373,7 @@ build_lead_dataset <- function(seasons = 2024,
 }
 
 # ------------------------------------------------------------------------------
-# 7. Run the pipeline (adjust seasons as needed)
+# 8. Run the pipeline (adjust seasons as needed)
 # ------------------------------------------------------------------------------
 
 # Example: Pull data for 2023-24 season (Regular Season)
@@ -332,7 +394,7 @@ build_lead_dataset <- function(seasons = 2024,
 #   )
 
 # ------------------------------------------------------------------------------
-# 8. Prepare data for modeling
+# 9. Prepare data for modeling
 # ------------------------------------------------------------------------------
 
 prepare_model_data <- function(lead_data) {
@@ -345,7 +407,9 @@ prepare_model_data <- function(lead_data) {
       minutesElapsedAtLead,
       periodAtLead,
       teamWithLead,
-      blewLead
+      blewLead,
+      leadTeamRestDays,
+      restAdvantage
     ) %>%
     mutate(
       blewLead = factor(blewLead, levels = c(FALSE, TRUE),
