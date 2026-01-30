@@ -52,7 +52,7 @@ KalshiPredictor <- R6::R6Class(
     #' @param adjustment_weight Weight for blown lead adjustment (0-1)
     initialize = function(wp_model_path = "win_probability_model.rds",
                           blown_lead_model_path = "blown_lead_model.rds",
-                          adjustment_weight = 0.5) {
+                          adjustment_weight = 1.0) {
 
       message("Loading Win Probability model...")
       self$wp_model <- load_wp_model(wp_model_path)
