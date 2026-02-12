@@ -1,5 +1,5 @@
 # Kalshi API Client
-# Handles authentication and order execution with Kalshi
+# Handles RSA-PSS API key authentication and API calls to Kalshi
 
 library(R6)
 library(httr2)
@@ -8,108 +8,115 @@ library(tidyverse)
 
 # Kalshi API endpoints
 KALSHI_API_BASE <- "https://trading-api.kalshi.com/trade-api/v2"
-KALSHI_DEMO_BASE <- "https://demo-api.kalshi.co/trade-api/v2"
+
+#' Sign a message using RSA-PSS SHA-256 via the openssl CLI
+#' The R openssl package only supports PKCS#1 v1.5, so we shell out.
+#' @param message_string The message to sign (timestamp_ms + METHOD + path)
+#' @param private_key_path Path to PEM private key file
+#' @return Base64-encoded signature string
+sign_rsa_pss <- function(message_string, private_key_path) {
+  msg_file <- tempfile(fileext = ".bin")
+  sig_file <- tempfile(fileext = ".sig")
+  on.exit(unlink(c(msg_file, sig_file)), add = TRUE)
+
+  writeBin(charToRaw(message_string), msg_file)
+
+  exit_code <- system2(
+    "openssl", c(
+      "dgst", "-sha256",
+      "-sigopt", "rsa_padding_mode:pss",
+      "-sigopt", "rsa_pss_saltlen:32",
+      "-sign", shQuote(private_key_path),
+      "-out", shQuote(sig_file),
+      shQuote(msg_file)
+    ),
+    stdout = FALSE, stderr = FALSE
+  )
+
+  if (exit_code != 0 || !file.exists(sig_file)) {
+    stop("openssl RSA-PSS signing failed (exit code ", exit_code, ")")
+  }
+
+  sig_bytes <- readBin(sig_file, "raw", file.info(sig_file)$size)
+  openssl::base64_encode(sig_bytes)
+}
 
 #' KalshiClient R6 Class
-#' Handles authentication and API calls to Kalshi
+#' Handles RSA-PSS per-request signing and API calls to Kalshi
 KalshiClient <- R6::R6Class(
   "KalshiClient",
 
   public = list(
     api_base = NULL,
-    email = NULL,
-    password = NULL,
-    token = NULL,
-    token_expires = NULL,
-    member_id = NULL,
+    api_key_id = NULL,
+    private_key_path = NULL,
     logger = NULL,
-    demo_mode = NULL,
 
     #' Initialize the Kalshi client
-    #' @param email Kalshi account email
-    #' @param password Kalshi account password
-    #' @param demo_mode Use demo API (default TRUE for safety)
+    #' @param api_key_id Kalshi API key ID
+    #' @param private_key_path Path to RSA private key PEM file
     #' @param logger Logger instance
-    initialize = function(email = NULL, password = NULL, demo_mode = TRUE,
+    initialize = function(api_key_id = NULL, private_key_path = NULL,
                          logger = NULL) {
-      self$email <- email
-      self$password <- password
-      self$demo_mode <- demo_mode
+      self$api_key_id <- api_key_id
+      self$private_key_path <- private_key_path
       self$logger <- logger
-
-      self$api_base <- if (demo_mode) KALSHI_DEMO_BASE else KALSHI_API_BASE
+      self$api_base <- KALSHI_API_BASE
 
       if (!is.null(logger)) {
-        logger$info(sprintf("KalshiClient initialized (%s mode)",
-                           if (demo_mode) "DEMO" else "LIVE"))
+        logger$info("KalshiClient initialized (RSA-PSS auth)")
       }
     },
 
-    #' Authenticate with Kalshi
-    #' @return TRUE if successful
-    authenticate = function() {
-      if (is.null(self$email) || is.null(self$password)) {
-        if (!is.null(self$logger)) {
-          self$logger$error("Missing credentials for Kalshi authentication")
-        }
-        return(FALSE)
-      }
-
-      response <- tryCatch({
-        request(paste0(self$api_base, "/login")) %>%
-          req_method("POST") %>%
-          req_headers("Content-Type" = "application/json") %>%
-          req_body_json(list(
-            email = self$email,
-            password = self$password
-          )) %>%
-          req_perform() %>%
-          resp_body_json()
-      }, error = function(e) {
-        if (!is.null(self$logger)) {
-          self$logger$error(sprintf("Authentication failed: %s", e$message))
-        }
-        return(NULL)
-      })
-
-      if (is.null(response) || is.null(response$token)) {
-        return(FALSE)
-      }
-
-      self$token <- response$token
-      self$member_id <- response$member_id
-
-      if (!is.null(self$logger)) {
-        self$logger$info("Kalshi authentication successful",
-                        member_id = self$member_id)
-      }
-
-      TRUE
-    },
-
-    #' Check if authenticated
+    #' Check if client is ready (API key and private key file exist)
     is_authenticated = function() {
-      !is.null(self$token)
+      !is.null(self$api_key_id) && nzchar(self$api_key_id) &&
+        !is.null(self$private_key_path) && nzchar(self$private_key_path) &&
+        file.exists(self$private_key_path)
     },
 
-    #' Make authenticated API request
-    #' @param endpoint API endpoint (without base)
+    #' Make authenticated API request (each request is individually signed)
+    #' @param endpoint API endpoint (without base), may include query params
     #' @param method HTTP method
     #' @param body Request body (for POST/PUT)
     #' @return Response data
     api_request = function(endpoint, method = "GET", body = NULL) {
       if (!self$is_authenticated()) {
-        if (!self$authenticate()) {
-          return(NULL)
+        if (!is.null(self$logger)) {
+          self$logger$error("Kalshi client not configured (missing API key or private key file)")
         }
+        return(NULL)
       }
+
+      # Strip query params from path for signing
+      path_no_query <- sub("\\?.*$", "", endpoint)
+
+      # Timestamp in milliseconds
+      timestamp_ms <- as.character(as.integer(as.numeric(Sys.time()) * 1000))
+
+      # Build message: timestamp_ms + METHOD + path (no query)
+      message_string <- paste0(timestamp_ms, toupper(method), "/trade-api/v2", path_no_query)
+
+      # Sign the message
+      signature <- tryCatch({
+        sign_rsa_pss(message_string, self$private_key_path)
+      }, error = function(e) {
+        if (!is.null(self$logger)) {
+          self$logger$error(sprintf("RSA-PSS signing failed: %s", e$message))
+        }
+        return(NULL)
+      })
+
+      if (is.null(signature)) return(NULL)
 
       url <- paste0(self$api_base, endpoint)
 
       req <- request(url) %>%
         req_method(method) %>%
         req_headers(
-          "Authorization" = paste("Bearer", self$token),
+          "KALSHI-ACCESS-KEY" = self$api_key_id,
+          "KALSHI-ACCESS-TIMESTAMP" = timestamp_ms,
+          "KALSHI-ACCESS-SIGNATURE" = signature,
           "Content-Type" = "application/json"
         )
 
@@ -522,38 +529,35 @@ KalshiClient <- R6::R6Class(
 
 #' Create a Kalshi client from config
 #' @param config_path Path to config file
-#' @param demo_mode Use demo API
 #' @param logger Logger instance
 #' @return KalshiClient instance
 create_kalshi_client <- function(config_path = "config/config.yml",
-                                  demo_mode = TRUE,
                                   logger = NULL) {
-  email <- NULL
-  password <- NULL
+  api_key_id <- NULL
+  private_key_path <- NULL
 
   # Try config file first
   if (file.exists(config_path)) {
     config <- yaml::read_yaml(config_path)
-    email <- config$kalshi$email
-    password <- config$kalshi$password
+    api_key_id <- config$kalshi$api_key_id
+    private_key_path <- config$kalshi$private_key_path
   }
 
   # Fall back to env vars if config fields are empty
-  if (is.null(email) || !nzchar(email)) {
-    email <- Sys.getenv("KALSHI_EMAIL", unset = "")
+  if (is.null(api_key_id) || !nzchar(api_key_id)) {
+    api_key_id <- Sys.getenv("KALSHI_API_KEY_ID", unset = "")
   }
-  if (is.null(password) || !nzchar(password)) {
-    password <- Sys.getenv("KALSHI_PASSWORD", unset = "")
+  if (is.null(private_key_path) || !nzchar(private_key_path)) {
+    private_key_path <- Sys.getenv("KALSHI_PRIVATE_KEY_PATH", unset = "")
   }
 
-  # Return NULL-safe: empty strings -> NULL so authenticate() knows creds are missing
-  if (!nzchar(email)) email <- NULL
-  if (!nzchar(password)) password <- NULL
+  # Empty strings -> NULL so is_authenticated() knows creds are missing
+  if (!nzchar(api_key_id)) api_key_id <- NULL
+  if (!nzchar(private_key_path)) private_key_path <- NULL
 
   KalshiClient$new(
-    email = email,
-    password = password,
-    demo_mode = demo_mode,
+    api_key_id = api_key_id,
+    private_key_path = private_key_path,
     logger = logger
   )
 }

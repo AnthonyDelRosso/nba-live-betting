@@ -160,23 +160,23 @@ server <- function(input, output, session) {
   price_client <- tryCatch({
     client <- create_kalshi_client(
       config_path = file.path(APP_DIR, "config/config.yml"),
-      demo_mode = FALSE,  # Production API — demo has no real NBA markets
       logger = logger
     )
-    if (!is.null(client$email) && !is.null(client$password)) {
-      auth_ok <- client$authenticate()
-      if (auth_ok) {
-        message("[KALSHI] Kalshi client authenticated for real price data")
-        logger$info("Kalshi client authenticated for real price data")
+    if (client$is_authenticated()) {
+      # Test connectivity with a lightweight API call
+      test_markets <- client$get_nba_markets()
+      if (!is.null(test_markets)) {
+        message("[KALSHI] Kalshi client connected for real price data")
+        logger$info("Kalshi client connected for real price data")
         client
       } else {
-        message("[KALSHI] WARNING: Authentication failed — falling back to simulated prices")
-        logger$warn("Kalshi authentication failed, using simulated prices")
+        message("[KALSHI] WARNING: API call failed — falling back to simulated prices")
+        logger$warn("Kalshi API test failed, using simulated prices")
         NULL
       }
     } else {
-      message("[KALSHI] No credentials found — using simulated prices")
-      message("[KALSHI] Set KALSHI_EMAIL / KALSHI_PASSWORD env vars or fill config/config.yml")
+      message("[KALSHI] No API key configured — using simulated prices")
+      message("[KALSHI] Set KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH env vars or fill config/config.yml")
       NULL
     }
   }, error = function(e) {
