@@ -1,0 +1,32 @@
+# NBA Live Betting Platform Configuration
+# Copy this file and customize for your environment
+
+# Paper Trading Settings
+paper_balance: 1000          # Starting paper balance in dollars
+poll_interval: 30            # Seconds between ESPN polls
+
+# Kalshi API — credentials for real market price data
+# Option 1: Fill in email/password below
+# Option 2: Set env vars KALSHI_EMAIL and KALSHI_PASSWORD (takes precedence if config is empty)
+# If no credentials are provided, the app falls back to simulated prices automatically.
+kalshi:
+  email: ""                  # Your Kalshi email
+  password: ""               # Your Kalshi password
+  demo_mode: true            # Only used for live order execution (not price data)
+
+# Kalshi Fee
+kalshi_fee: 0.07             # 7% fee on winning contracts
+
+# Logging
+log_level: "INFO"            # DEBUG, INFO, WARN, ERROR
+
+# Strategy Limits (override defaults from kalshi_predictor.R)
+# max_fade_per_game: 10
+# max_wl_per_game: 1
+# min_minutes_between_fades: 2
+
+# Bet Sizing (as fraction of balance)
+# bet_size_tier1: 0.05       # MAX tier
+# bet_size_tier2: 0.04       # LARGE tier
+# bet_size_tier3: 0.03       # MEDIUM tier
+# bet_size_tier4: 0.02       # STANDARD tier
