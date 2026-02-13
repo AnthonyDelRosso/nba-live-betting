@@ -124,8 +124,8 @@ KalshiClient <- R6::R6Class(
       # Strip query params from path for signing
       path_no_query <- sub("\\?.*$", "", endpoint)
 
-      # Timestamp in milliseconds
-      timestamp_ms <- as.character(as.integer(as.numeric(Sys.time()) * 1000))
+      # Timestamp in milliseconds (use sprintf to avoid 32-bit integer overflow)
+      timestamp_ms <- sprintf("%.0f", as.numeric(Sys.time()) * 1000)
 
       # Build message: timestamp_ms + METHOD + path (no query)
       message_string <- paste0(timestamp_ms, toupper(method), "/trade-api/v2", path_no_query)
