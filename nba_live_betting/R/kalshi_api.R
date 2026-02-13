@@ -9,12 +9,45 @@ library(tidyverse)
 # Kalshi API endpoints
 KALSHI_API_BASE <- "https://trading-api.kalshi.com/trade-api/v2"
 
+#' Find the openssl CLI binary
+#' Checks PATH first, then common Windows install locations (Git for Windows, etc.)
+#' @return Path to openssl binary, or stops with an error
+find_openssl_binary <- function() {
+  # Check PATH first
+  openssl_path <- Sys.which("openssl")
+  if (nzchar(openssl_path)) return(as.character(openssl_path))
+
+  # Common Windows locations (Git for Windows bundles openssl)
+  candidates <- c(
+    "C:/Program Files/Git/usr/bin/openssl.exe",
+    "C:/Program Files (x86)/Git/usr/bin/openssl.exe",
+    "C:/Program Files/OpenSSL-Win64/bin/openssl.exe",
+    "C:/Program Files/OpenSSL/bin/openssl.exe",
+    "C:/msys64/usr/bin/openssl.exe"
+  )
+
+  for (path in candidates) {
+    if (file.exists(path)) return(path)
+  }
+
+  stop("openssl CLI not found. Install Git for Windows or OpenSSL for Windows and ensure it is on your PATH.")
+}
+
+# Cache the openssl path so we only search once
+.openssl_bin <- NULL
+
 #' Sign a message using RSA-PSS SHA-256 via the openssl CLI
 #' The R openssl package only supports PKCS#1 v1.5, so we shell out.
 #' @param message_string The message to sign (timestamp_ms + METHOD + path)
 #' @param private_key_path Path to PEM private key file
 #' @return Base64-encoded signature string
 sign_rsa_pss <- function(message_string, private_key_path) {
+  # Find openssl binary (cached after first lookup)
+  if (is.null(.openssl_bin)) {
+    .openssl_bin <<- find_openssl_binary()
+    message(sprintf("[KALSHI] Using openssl at: %s", .openssl_bin))
+  }
+
   msg_file <- tempfile(fileext = ".bin")
   sig_file <- tempfile(fileext = ".sig")
   on.exit(unlink(c(msg_file, sig_file)), add = TRUE)
@@ -22,7 +55,7 @@ sign_rsa_pss <- function(message_string, private_key_path) {
   writeBin(charToRaw(message_string), msg_file)
 
   exit_code <- system2(
-    "openssl", c(
+    .openssl_bin, c(
       "dgst", "-sha256",
       "-sigopt", "rsa_padding_mode:pss",
       "-sigopt", "rsa_pss_saltlen:32",
