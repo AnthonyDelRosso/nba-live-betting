@@ -7,7 +7,7 @@ library(jsonlite)
 library(tidyverse)
 
 # Kalshi API endpoints
-KALSHI_API_BASE <- "https://trading-api.kalshi.com/trade-api/v2"
+KALSHI_API_BASE <- "https://api.kalshi.com/trade-api/v2"
 
 #' Find the openssl CLI binary
 #' Checks PATH first, then common Windows install locations (Git for Windows, etc.)
@@ -46,28 +46,54 @@ sign_rsa_pss <- function(message_string, private_key_path) {
   if (is.null(.openssl_bin)) {
     .openssl_bin <<- find_openssl_binary()
     message(sprintf("[KALSHI] Using openssl at: %s", .openssl_bin))
+    # Log openssl version for debugging
+    ver <- tryCatch(
+      system2(.openssl_bin, "version", stdout = TRUE, stderr = TRUE),
+      error = function(e) "unknown"
+    )
+    message(sprintf("[KALSHI] openssl version: %s", paste(ver, collapse = " ")))
   }
 
   msg_file <- tempfile(fileext = ".bin")
+  hash_file <- tempfile(fileext = ".hash")
   sig_file <- tempfile(fileext = ".sig")
-  on.exit(unlink(c(msg_file, sig_file)), add = TRUE)
+  on.exit(unlink(c(msg_file, hash_file, sig_file)), add = TRUE)
 
   writeBin(charToRaw(message_string), msg_file)
 
-  exit_code <- system2(
+  # Step 1: Hash the message with SHA-256
+  exit_hash <- system2(
     .openssl_bin, c(
-      "dgst", "-sha256",
-      "-sigopt", "rsa_padding_mode:pss",
-      "-sigopt", "rsa_pss_saltlen:32",
-      "-sign", shQuote(private_key_path),
-      "-out", shQuote(sig_file),
+      "dgst", "-sha256", "-binary",
+      "-out", shQuote(hash_file),
       shQuote(msg_file)
     ),
-    stdout = FALSE, stderr = FALSE
+    stdout = FALSE, stderr = TRUE
   )
 
+  if (!is.null(attr(exit_hash, "status")) || !file.exists(hash_file)) {
+    stderr_msg <- paste(exit_hash, collapse = "\n")
+    stop("SHA-256 hash failed: ", stderr_msg)
+  }
+
+  # Step 2: Sign the hash with RSA-PSS using pkeyutl
+  stderr_out <- system2(
+    .openssl_bin, c(
+      "pkeyutl", "-sign",
+      "-inkey", shQuote(private_key_path),
+      "-in", shQuote(hash_file),
+      "-out", shQuote(sig_file),
+      "-pkeyopt", "rsa_padding_mode:pss",
+      "-pkeyopt", "rsa_pss_saltlen:-1",
+      "-pkeyopt", "digest:sha256"
+    ),
+    stdout = FALSE, stderr = TRUE
+  )
+
+  exit_code <- attr(stderr_out, "status") %||% 0L
   if (exit_code != 0 || !file.exists(sig_file)) {
-    stop("openssl RSA-PSS signing failed (exit code ", exit_code, ")")
+    stderr_msg <- paste(stderr_out, collapse = "\n")
+    stop("openssl RSA-PSS signing failed (exit code ", exit_code, "): ", stderr_msg)
   }
 
   sig_bytes <- readBin(sig_file, "raw", file.info(sig_file)$size)
@@ -129,6 +155,13 @@ KalshiClient <- R6::R6Class(
 
       # Build message: timestamp_ms + METHOD + path (no query)
       message_string <- paste0(timestamp_ms, toupper(method), "/trade-api/v2", path_no_query)
+
+      if (!is.null(self$logger)) {
+        self$logger$debug(sprintf("[AUTH] Signing: %s...%s (ts=%s)",
+                                  substr(message_string, 1, 20),
+                                  substr(message_string, nchar(message_string) - 30, nchar(message_string)),
+                                  timestamp_ms))
+      }
 
       # Sign the message
       signature <- tryCatch({
