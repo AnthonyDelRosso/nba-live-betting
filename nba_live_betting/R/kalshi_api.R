@@ -1,13 +1,36 @@
 # Kalshi API Client
-# Handles RSA-PSS API key authentication and API calls to Kalshi
+# Handles public market data reads and RSA-PSS authenticated requests
 
 library(R6)
 library(httr2)
 library(jsonlite)
 library(tidyverse)
 
-# Kalshi API endpoints
-KALSHI_API_BASE <- "https://api.kalshi.com/trade-api/v2"
+# Kalshi API endpoint — api.kalshi.com is deprecated, elections domain is current
+KALSHI_API_BASE <- "https://api.elections.kalshi.com/trade-api/v2"
+
+# NBA game winner markets use the KXNBAGAME series
+KALSHI_NBA_SERIES <- "KXNBAGAME"
+
+# ESPN → Kalshi team abbreviation mapping
+# ESPN's API uses shortened abbreviations for some teams that differ from Kalshi tickers
+ESPN_TO_KALSHI_ABBREV <- c(
+  "GS"   = "GSW",   # Golden State Warriors
+  "NY"   = "NYK",   # New York Knicks
+  "WSH"  = "WAS",   # Washington Wizards
+  "UTAH" = "UTA",   # Utah Jazz
+  "SA"   = "SAS",   # San Antonio Spurs
+  "NO"   = "NOP"    # New Orleans Pelicans
+)
+
+#' Normalize ESPN team abbreviation to Kalshi format
+#' @param espn_abbrev ESPN team abbreviation
+#' @return Kalshi-compatible abbreviation
+normalize_team_abbrev <- function(espn_abbrev) {
+  abbrev <- toupper(espn_abbrev)
+  mapped <- ESPN_TO_KALSHI_ABBREV[abbrev]
+  if (!is.na(mapped)) mapped else abbrev
+}
 
 #' Find the openssl CLI binary
 #' Checks PATH first, then common Windows install locations (Git for Windows, etc.)
@@ -37,7 +60,6 @@ find_openssl_binary <- function() {
 .openssl_bin <- NULL
 
 #' Sign a message using RSA-PSS SHA-256 via the openssl CLI
-#' The R openssl package only supports PKCS#1 v1.5, so we shell out.
 #' @param message_string The message to sign (timestamp_ms + METHOD + path)
 #' @param private_key_path Path to PEM private key file
 #' @return Base64-encoded signature string
@@ -46,7 +68,6 @@ sign_rsa_pss <- function(message_string, private_key_path) {
   if (is.null(.openssl_bin)) {
     .openssl_bin <<- find_openssl_binary()
     message(sprintf("[KALSHI] Using openssl at: %s", .openssl_bin))
-    # Log openssl version for debugging
     ver <- tryCatch(
       system2(.openssl_bin, "version", stdout = TRUE, stderr = TRUE),
       error = function(e) "unknown"
@@ -101,7 +122,7 @@ sign_rsa_pss <- function(message_string, private_key_path) {
 }
 
 #' KalshiClient R6 Class
-#' Handles RSA-PSS per-request signing and API calls to Kalshi
+#' Handles public market reads and RSA-PSS authenticated API calls
 KalshiClient <- R6::R6Class(
   "KalshiClient",
 
@@ -111,9 +132,14 @@ KalshiClient <- R6::R6Class(
     private_key_path = NULL,
     logger = NULL,
 
+    # Cache of market listing data (refreshed by get_nba_markets)
+    market_cache = NULL,
+    market_cache_time = NULL,
+    market_cache_ttl = 30,  # Seconds before cache expires
+
     #' Initialize the Kalshi client
-    #' @param api_key_id Kalshi API key ID
-    #' @param private_key_path Path to RSA private key PEM file
+    #' @param api_key_id Kalshi API key ID (optional, only needed for orders)
+    #' @param private_key_path Path to RSA private key PEM file (optional)
     #' @param logger Logger instance
     initialize = function(api_key_id = NULL, private_key_path = NULL,
                          logger = NULL) {
@@ -121,20 +147,47 @@ KalshiClient <- R6::R6Class(
       self$private_key_path <- private_key_path
       self$logger <- logger
       self$api_base <- KALSHI_API_BASE
+      self$market_cache <- list()
+      self$market_cache_time <- NULL
 
       if (!is.null(logger)) {
-        logger$info("KalshiClient initialized (RSA-PSS auth)")
+        logger$info("KalshiClient initialized",
+                    api_base = self$api_base,
+                    has_auth = self$is_authenticated())
       }
     },
 
-    #' Check if client is ready (API key and private key file exist)
+    #' Check if client has auth credentials (for portfolio/order endpoints)
     is_authenticated = function() {
       !is.null(self$api_key_id) && nzchar(self$api_key_id) &&
         !is.null(self$private_key_path) && nzchar(self$private_key_path) &&
         file.exists(self$private_key_path)
     },
 
-    #' Make authenticated API request (each request is individually signed)
+    #' Make a public (unauthenticated) GET request
+    #' Market data endpoints on api.elections.kalshi.com don't require auth
+    #' @param endpoint API endpoint (without base), may include query params
+    #' @return Response data or NULL on error
+    public_request = function(endpoint) {
+      url <- paste0(self$api_base, endpoint)
+
+      tryCatch({
+        resp <- request(url) %>%
+          req_headers(
+            "Accept" = "application/json"
+          ) %>%
+          req_perform()
+        resp_body_json(resp)
+      }, error = function(e) {
+        if (!is.null(self$logger)) {
+          self$logger$error(sprintf("Public API request failed: %s", e$message),
+                           endpoint = endpoint)
+        }
+        NULL
+      })
+    },
+
+    #' Make authenticated API request (for portfolio/order endpoints)
     #' @param endpoint API endpoint (without base), may include query params
     #' @param method HTTP method
     #' @param body Request body (for POST/PUT)
@@ -150,7 +203,7 @@ KalshiClient <- R6::R6Class(
       # Strip query params from path for signing
       path_no_query <- sub("\\?.*$", "", endpoint)
 
-      # Timestamp in milliseconds (use sprintf to avoid 32-bit integer overflow)
+      # Timestamp in milliseconds
       timestamp_ms <- sprintf("%.0f", as.numeric(Sys.time()) * 1000)
 
       # Build message: timestamp_ms + METHOD + path (no query)
@@ -202,116 +255,103 @@ KalshiClient <- R6::R6Class(
       })
     },
 
-    #' Get account balance
+    #' Test API connectivity with a lightweight public call
+    #' @return TRUE if the API is reachable and returning data
+    test_connectivity = function() {
+      tryCatch({
+        response <- self$public_request(
+          sprintf("/markets?limit=1&series_ticker=%s", KALSHI_NBA_SERIES)
+        )
+        !is.null(response) && is.list(response$markets)
+      }, error = function(e) {
+        FALSE
+      })
+    },
+
+    #' Get account balance (requires auth)
     #' @return Balance in dollars
     get_balance = function() {
       response <- self$api_request("/portfolio/balance")
-
-      if (is.null(response)) {
-        return(NULL)
-      }
-
-      # Balance is in cents
+      if (is.null(response)) return(NULL)
       response$balance / 100
     },
 
-    #' Search for NBA markets (handles pagination)
-    #' @param status Market status filter ("open", "closed", etc.)
-    #' @return List of NBA markets
+    #' Fetch NBA game winner markets (public, no auth needed)
+    #' @param status Market status filter ("open", "settled", etc.)
+    #' @return List of NBA game markets with bid/ask data
     get_nba_markets = function(status = "open") {
+      # Return cache if still fresh
+      if (!is.null(self$market_cache_time) &&
+          as.numeric(difftime(Sys.time(), self$market_cache_time, units = "secs")) < self$market_cache_ttl &&
+          length(self$market_cache) > 0) {
+        return(self$market_cache)
+      }
+
       all_markets <- list()
       cursor <- NULL
 
       repeat {
-        endpoint <- sprintf("/markets?status=%s&series_ticker=NBA&limit=200", status)
+        endpoint <- sprintf("/markets?status=%s&series_ticker=%s&limit=200",
+                           status, KALSHI_NBA_SERIES)
         if (!is.null(cursor) && nzchar(cursor)) {
           endpoint <- paste0(endpoint, "&cursor=", cursor)
         }
 
-        response <- self$api_request(endpoint)
+        response <- self$public_request(endpoint)
 
         if (is.null(response)) break
 
         page_markets <- response$markets %||% list()
         all_markets <- c(all_markets, page_markets)
 
-        # Check for next page
         cursor <- response$cursor %||% ""
         if (!nzchar(cursor)) break
+      }
+
+      # Update cache
+      self$market_cache <- all_markets
+      self$market_cache_time <- Sys.time()
+
+      if (!is.null(self$logger) && length(all_markets) > 0) {
+        self$logger$info(sprintf("[MARKET] Fetched %d NBA game markets", length(all_markets)))
       }
 
       all_markets
     },
 
-    #' Get specific market by ticker
+    #' Get specific market by ticker (public, no auth needed)
     #' @param ticker Market ticker
     #' @return Market details
     get_market = function(ticker) {
-      self$api_request(sprintf("/markets/%s", ticker))
+      self$public_request(sprintf("/markets/%s", ticker))
     },
 
-    #' Get market orderbook
+    #' Get market orderbook (public, no auth needed)
+    #' New API format: arrays of [price_cents, quantity] pairs
     #' @param ticker Market ticker
-    #' @return Orderbook with bids and asks
+    #' @return Orderbook data
     get_orderbook = function(ticker) {
-      self$api_request(sprintf("/markets/%s/orderbook", ticker))
+      self$public_request(sprintf("/markets/%s/orderbook", ticker))
     },
 
-    #' Get best available price for a side
+    #' Get fresh spread data bypassing cache (for trade execution)
+    #' Calls get_market(ticker) directly for a live /markets/{ticker} response.
     #' @param ticker Market ticker
-    #' @param side "yes" or "no"
-    #' @return Best price and quantity
-    get_best_price = function(ticker, side = "yes") {
-      orderbook <- self$get_orderbook(ticker)
+    #' @return List with bid, ask, mid, spread info, source = "kalshi_fresh"
+    get_fresh_spread_data = function(ticker) {
+      resp <- self$get_market(ticker)
+      if (is.null(resp) || !is.list(resp)) return(NULL)
+      market_data <- resp$market %||% resp
 
-      if (is.null(orderbook)) {
-        return(NULL)
-      }
+      if (is.null(market_data) || !is.list(market_data)) return(NULL)
 
-      if (side == "yes") {
-        # Best ask for buying YES
-        asks <- orderbook$asks %||% list()
-        if (length(asks) > 0) {
-          # Price is in cents
-          return(list(
-            price = asks[[1]]$price / 100,
-            quantity = asks[[1]]$quantity
-          ))
-        }
-      } else {
-        # Best bid for selling YES (buying NO)
-        bids <- orderbook$bids %||% list()
-        if (length(bids) > 0) {
-          return(list(
-            price = (100 - bids[[1]]$price) / 100,  # NO price
-            quantity = bids[[1]]$quantity
-          ))
-        }
-      }
+      # Extract bid/ask from market listing (already in cents)
+      yes_bid <- market_data$yes_bid %||% NA
+      yes_ask <- market_data$yes_ask %||% NA
 
-      NULL
-    },
-
-    #' Get full bid-ask spread data
-    #' @param ticker Market ticker
-    #' @return List with bid, ask, mid, spread, and depth info
-    get_spread_data = function(ticker) {
-      orderbook <- self$get_orderbook(ticker)
-
-      if (is.null(orderbook)) {
-        return(NULL)
-      }
-
-      bids <- orderbook$bids %||% list()
-      asks <- orderbook$asks %||% list()
-
-      # Best bid (highest buy order for YES)
-      best_bid <- if (length(bids) > 0) bids[[1]]$price / 100 else NA
-      best_bid_qty <- if (length(bids) > 0) bids[[1]]$quantity else 0
-
-      # Best ask (lowest sell order for YES)
-      best_ask <- if (length(asks) > 0) asks[[1]]$price / 100 else NA
-      best_ask_qty <- if (length(asks) > 0) asks[[1]]$quantity else 0
+      # Convert cents to dollars
+      best_bid <- if (!is.null(yes_bid) && !is.na(yes_bid)) yes_bid / 100 else NA
+      best_ask <- if (!is.null(yes_ask) && !is.na(yes_ask)) yes_ask / 100 else NA
 
       # Calculate mid price and spread
       mid_price <- if (!is.na(best_bid) && !is.na(best_ask)) {
@@ -321,7 +361,8 @@ KalshiClient <- R6::R6Class(
       } else if (!is.na(best_ask)) {
         best_ask
       } else {
-        0.5  # Default
+        lp <- market_data$last_price %||% 50
+        lp / 100
       }
 
       spread <- if (!is.na(best_bid) && !is.na(best_ask)) {
@@ -336,27 +377,116 @@ KalshiClient <- R6::R6Class(
         NA
       }
 
-      # Calculate total depth at top 3 levels
-      bid_depth <- sum(sapply(head(bids, 3), function(x) x$quantity %||% 0))
-      ask_depth <- sum(sapply(head(asks, 3), function(x) x$quantity %||% 0))
+      list(
+        best_bid = best_bid,
+        best_ask = best_ask,
+        mid_price = mid_price,
+        spread = spread,
+        spread_pct = spread_pct,
+        buy_yes_price = best_ask,
+        buy_no_price = if (!is.na(best_bid)) 1 - best_bid else NA,
+        yes_prob_mid = mid_price,
+        no_prob_mid = 1 - mid_price,
+        source = "kalshi_fresh"
+      )
+    },
+
+    #' Get spread data from market listing (no orderbook call needed)
+    #' Uses the yes_bid/yes_ask fields already present in market data
+    #' @param ticker Market ticker
+    #' @return List with bid, ask, mid, spread, and depth info
+    get_spread_data = function(ticker) {
+      # First, try to find data in cached market listing
+      market_data <- NULL
+      for (m in self$market_cache) {
+        if (!is.list(m)) next
+        if (identical(m$ticker, ticker)) {
+          market_data <- m
+          break
+        }
+      }
+
+      # If not in cache, fetch the individual market
+      if (is.null(market_data)) {
+        resp <- self$get_market(ticker)
+        if (is.null(resp) || !is.list(resp)) return(NULL)
+        market_data <- resp$market %||% resp
+      }
+
+      if (is.null(market_data) || !is.list(market_data)) {
+        return(NULL)
+      }
+
+      # Extract bid/ask from market listing (already in cents)
+      yes_bid <- market_data$yes_bid %||% NA
+      yes_ask <- market_data$yes_ask %||% NA
+      no_bid <- market_data$no_bid %||% NA
+      no_ask <- market_data$no_ask %||% NA
+
+      # Convert cents to dollars
+      best_bid <- if (!is.null(yes_bid) && !is.na(yes_bid)) yes_bid / 100 else NA
+      best_ask <- if (!is.null(yes_ask) && !is.na(yes_ask)) yes_ask / 100 else NA
+
+      # Calculate mid price and spread
+      mid_price <- if (!is.na(best_bid) && !is.na(best_ask)) {
+        (best_bid + best_ask) / 2
+      } else if (!is.na(best_bid)) {
+        best_bid
+      } else if (!is.na(best_ask)) {
+        best_ask
+      } else {
+        # Try last_price as fallback
+        lp <- market_data$last_price %||% 50
+        lp / 100
+      }
+
+      spread <- if (!is.na(best_bid) && !is.na(best_ask)) {
+        best_ask - best_bid
+      } else {
+        NA
+      }
+
+      spread_pct <- if (!is.na(spread) && mid_price > 0) {
+        spread / mid_price * 100
+      } else {
+        NA
+      }
 
       list(
         best_bid = best_bid,
         best_ask = best_ask,
-        best_bid_qty = best_bid_qty,
-        best_ask_qty = best_ask_qty,
         mid_price = mid_price,
         spread = spread,
         spread_pct = spread_pct,
-        bid_depth = bid_depth,
-        ask_depth = ask_depth,
         # Execution prices (what you'd actually pay)
-        buy_yes_price = best_ask,      # To buy YES, you pay the ask
-        buy_no_price = 1 - best_bid,   # To buy NO, you pay 1 - bid
+        buy_yes_price = best_ask,         # To buy YES, you pay the ask
+        buy_no_price = if (!is.na(best_bid)) 1 - best_bid else NA,  # To buy NO
         # Implied probabilities
         yes_prob_mid = mid_price,
-        no_prob_mid = 1 - mid_price
+        no_prob_mid = 1 - mid_price,
+        source = "kalshi"
       )
+    },
+
+    #' Get best available price for a side
+    #' @param ticker Market ticker
+    #' @param side "yes" or "no"
+    #' @return Best price and quantity
+    get_best_price = function(ticker, side = "yes") {
+      spread_data <- self$get_spread_data(ticker)
+      if (is.null(spread_data)) return(NULL)
+
+      if (side == "yes") {
+        if (!is.na(spread_data$best_ask)) {
+          return(list(price = spread_data$best_ask, quantity = NA))
+        }
+      } else {
+        if (!is.na(spread_data$buy_no_price)) {
+          return(list(price = spread_data$buy_no_price, quantity = NA))
+        }
+      }
+
+      NULL
     },
 
     #' Calculate actual edge accounting for bid-ask spread
@@ -378,7 +508,6 @@ KalshiClient <- R6::R6Class(
         ))
       }
 
-      # Get actual execution price (what you'd pay)
       if (side == "yes") {
         execution_price <- spread_data$buy_yes_price
         model_win_prob <- model_prob
@@ -397,24 +526,16 @@ KalshiClient <- R6::R6Class(
         ))
       }
 
-      # Calculate breakeven probability accounting for fee
-      # You pay execution_price, receive $1 * (1 - fee) if you win
-      # Breakeven: execution_price = win_prob * (1 - fee)
-      # So: breakeven_prob = execution_price / (1 - fee)
-      breakeven_prob <- execution_price / (1 - kalshi_fee)
-
-      # Actual edge = model probability - breakeven probability
+      payout_if_win <- 1 - kalshi_fee * (1 - execution_price)
+      breakeven_prob <- execution_price / payout_if_win
       actual_edge <- model_win_prob - breakeven_prob
 
-      # Compare to edge if we used mid price
       mid_execution <- if (side == "yes") spread_data$mid_price else (1 - spread_data$mid_price)
-      mid_breakeven <- mid_execution / (1 - kalshi_fee)
+      mid_payout <- 1 - kalshi_fee * (1 - mid_execution)
+      mid_breakeven <- mid_execution / mid_payout
       mid_edge <- model_win_prob - mid_breakeven
-
-      # Edge lost to spread
       edge_lost_to_spread <- mid_edge - actual_edge
 
-      # Recommendation
       recommendation <- if (actual_edge >= 0.05) {
         "STRONG_BET"
       } else if (actual_edge >= 0.02) {
@@ -435,13 +556,11 @@ KalshiClient <- R6::R6Class(
         spread_pct = spread_data$spread_pct,
         breakeven_prob = breakeven_prob,
         model_prob = model_win_prob,
-        bid_depth = spread_data$bid_depth,
-        ask_depth = spread_data$ask_depth,
         recommendation = recommendation
       )
     },
 
-    #' Place an order
+    #' Place an order (requires auth)
     #' @param ticker Market ticker
     #' @param side "yes" or "no"
     #' @param action "buy" or "sell"
@@ -449,7 +568,6 @@ KalshiClient <- R6::R6Class(
     #' @param price Limit price (in dollars, 0-1)
     #' @return Order response
     place_order = function(ticker, side, action, count, price) {
-      # Convert price to cents
       price_cents <- round(price * 100)
 
       body <- list(
@@ -462,46 +580,37 @@ KalshiClient <- R6::R6Class(
         no_price = if (side == "no") price_cents else NULL
       )
 
-      # Remove NULL fields
       body <- body[!sapply(body, is.null)]
 
       response <- self$api_request("/portfolio/orders", method = "POST", body = body)
 
       if (!is.null(self$logger) && !is.null(response)) {
         self$logger$info("Order placed",
-                        ticker = ticker,
-                        side = side,
-                        count = count,
-                        price = price)
+                        ticker = ticker, side = side,
+                        count = count, price = price)
       }
 
       response
     },
 
-    #' Cancel an order
-    #' @param order_id Order ID to cancel
-    #' @return Cancellation response
+    #' Cancel an order (requires auth)
     cancel_order = function(order_id) {
       self$api_request(sprintf("/portfolio/orders/%s", order_id), method = "DELETE")
     },
 
-    #' Get open orders
-    #' @return List of open orders
+    #' Get open orders (requires auth)
     get_open_orders = function() {
       response <- self$api_request("/portfolio/orders?status=resting")
       response$orders %||% list()
     },
 
-    #' Get positions
-    #' @return List of positions
+    #' Get positions (requires auth)
     get_positions = function() {
       response <- self$api_request("/portfolio/positions")
       response$market_positions %||% list()
     },
 
-    #' Get fills (executed trades)
-    #' @param ticker Optional market ticker filter
-    #' @return List of fills
+    #' Get fills (requires auth)
     get_fills = function(ticker = NULL) {
       endpoint <- "/portfolio/fills"
       if (!is.null(ticker)) {
@@ -511,11 +620,12 @@ KalshiClient <- R6::R6Class(
       response$fills %||% list()
     },
 
-    #' Find NBA game market ticker
-    #' Maps game_id to Kalshi market ticker
+    #' Find NBA game market tickers for a game
+    #' Ticker format: KXNBAGAME-{YY}{MON}{DD}{AWAY}{HOME}-{TEAM}
+    #' Returns the HOME team's ticker (YES = home wins)
     #' @param game_id ESPN game ID
-    #' @param home_team Home team abbreviation
-    #' @param away_team Away team abbreviation
+    #' @param home_team Home team abbreviation (ESPN format)
+    #' @param away_team Away team abbreviation (ESPN format)
     #' @param game_date Game date
     #' @return Market ticker or NULL
     find_game_market = function(game_id, home_team, away_team, game_date) {
@@ -523,70 +633,58 @@ KalshiClient <- R6::R6Class(
 
       if (length(markets) == 0) {
         if (!is.null(self$logger)) {
-          self$logger$info("[MARKET] No open NBA markets found on Kalshi")
+          self$logger$info("[MARKET] No open NBA game markets found on Kalshi")
         }
         return(NULL)
       }
 
-      # Kalshi tickers typically look like: KXNBA-26JAN15-DET or NBA-DET-26JAN15
-      # Build date patterns to match against ticker
+      # Normalize ESPN abbreviations to Kalshi format
+      kalshi_home <- normalize_team_abbrev(home_team)
+      kalshi_away <- normalize_team_abbrev(away_team)
+
+      # Build expected date portion: YY + MON + DD (e.g., "26FEB22")
       game_dt <- as.Date(game_date)
-      date_str_upper <- toupper(format(game_dt, "%d%b%y"))   # e.g. "15JAN26"
-      date_str_ymd <- format(game_dt, "%y%b%d")              # e.g. "26JAN15"
-      date_iso <- format(game_dt, "%Y-%m-%d")                # for title matching
+      date_str <- toupper(format(game_dt, "%y%b%d"))  # e.g. "26FEB22"
 
-      # First pass: match team AND date (strongest match)
+      # Strategy 1: Build expected ticker directly
+      # Format: KXNBAGAME-{date}{away}{home}-{home}
+      expected_home_ticker <- sprintf("KXNBAGAME-%s%s%s-%s",
+                                      date_str, kalshi_away, kalshi_home, kalshi_home)
+
       for (market in markets) {
-        ticker <- toupper(market$ticker %||% "")
-        title <- market$title %||% ""
-
-        has_team <- grepl(toupper(home_team), ticker) || grepl(toupper(away_team), ticker)
-        has_date <- grepl(date_str_upper, ticker) || grepl(date_str_ymd, ticker)
-
-        if (has_team && has_date) {
+        if (toupper(market$ticker %||% "") == expected_home_ticker) {
           if (!is.null(self$logger)) {
-            self$logger$info(sprintf("[MARKET] Matched %s vs %s -> %s (team+date)",
+            self$logger$info(sprintf("[MARKET] Exact match: %s vs %s -> %s",
                                     away_team, home_team, market$ticker))
           }
           return(market$ticker)
         }
       }
 
-      # Second pass: match team in ticker + date in title/subtitle
+      # Strategy 2: Fuzzy match — look for date AND both teams in ticker
       for (market in markets) {
         ticker <- toupper(market$ticker %||% "")
-        title <- market$title %||% ""
-        subtitle <- market$subtitle %||% ""
+        has_date <- grepl(date_str, ticker)
+        has_home <- grepl(kalshi_home, ticker)
+        has_away <- grepl(kalshi_away, ticker)
 
-        has_team <- grepl(toupper(home_team), ticker) || grepl(toupper(away_team), ticker)
-        has_date_title <- grepl(date_iso, title) || grepl(date_iso, subtitle) ||
-                          grepl(format(game_dt, "%b %d"), title, ignore.case = TRUE)
-
-        if (has_team && has_date_title) {
+        # Match: has date, has both teams, and ends with home team (home winner market)
+        if (has_date && has_home && has_away && grepl(paste0(kalshi_home, "$"), ticker)) {
           if (!is.null(self$logger)) {
-            self$logger$info(sprintf("[MARKET] Matched %s vs %s -> %s (team+title date)",
+            self$logger$info(sprintf("[MARKET] Fuzzy match: %s vs %s -> %s",
                                     away_team, home_team, market$ticker))
           }
           return(market$ticker)
         }
       }
 
-      # Third pass: team-only fallback (less reliable, may match wrong date)
-      for (market in markets) {
-        ticker <- toupper(market$ticker %||% "")
-
-        if (grepl(toupper(home_team), ticker) || grepl(toupper(away_team), ticker)) {
-          if (!is.null(self$logger)) {
-            self$logger$warn(sprintf("[MARKET] Weak match %s vs %s -> %s (team only, no date confirm)",
-                                     away_team, home_team, market$ticker))
-          }
-          return(market$ticker)
-        }
-      }
+      # No Strategy 3 — matching on date+home alone produces false positives
+      # (e.g., BOS@LAL matching ORL@LAL). Require both teams to match.
 
       if (!is.null(self$logger)) {
-        self$logger$info(sprintf("[MARKET] No market found for %s vs %s on %s",
-                                away_team, home_team, as.character(game_date)))
+        self$logger$info(sprintf("[MARKET] No market found for %s @ %s on %s (searched %d markets, expected: %s)",
+                                kalshi_away, kalshi_home, as.character(game_date),
+                                length(markets), expected_home_ticker))
       }
       NULL
     }

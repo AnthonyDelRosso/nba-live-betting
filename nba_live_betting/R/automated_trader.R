@@ -423,7 +423,9 @@ AutomatedTrader <- R6::R6Class(
                 away_net_rating = as.numeric(raw_game_state$away_net_rating %||% 0),
                 home_rating_advantage = as.numeric(raw_game_state$home_rating_advantage %||% 0),
                 rest_advantage = as.numeric(raw_game_state$rest_advantage %||% 0),
-                net_rating_advantage = as.numeric(raw_game_state$net_rating_advantage %||% 0)
+                net_rating_advantage = as.numeric(raw_game_state$net_rating_advantage %||% 0),
+                home_team_abbrev = as.character(raw_game_state$home_team_abbrev %||% ""),
+                away_team_abbrev = as.character(raw_game_state$away_team_abbrev %||% "")
               )
             }
           }, error = function(e) {
@@ -554,21 +556,42 @@ AutomatedTrader <- R6::R6Class(
             next
           }
 
-          # Process with_leader signal (with explicit type checks)
+          # Check actual open positions in TradingState (source of truth)
+          open_wl <- 0
+          open_fade <- 0
+          tryCatch({
+            game_open <- self$state$get_game_positions(game_id, status = "open")
+            if (is.data.frame(game_open) && nrow(game_open) > 0) {
+              open_wl <- sum(game_open$strategy == "with_leader")
+              open_fade <- sum(game_open$strategy == "fade")
+            }
+          }, error = function(e) {
+            # On error, allow trading (don't block on state query failure)
+          })
+
+          # Process with_leader signal (max 1 open per game)
           wl_signal_data <- signal$with_leader
           if (is.list(wl_signal_data) && !is.null(wl_signal_data$signal)) {
             wl_signal <- as.character(wl_signal_data$signal)
             if (length(wl_signal) == 1 && !is.na(wl_signal) && wl_signal != "HOLD") {
-              self$execute_signal(game_id, "with_leader", wl_signal_data, game_state)
+              if (open_wl >= 1) {
+                message(sprintf("[SIGNAL] BLOCKED: game %s already has %d open with_leader position(s)", game_id, open_wl))
+              } else {
+                self$execute_signal(game_id, "with_leader", wl_signal_data, game_state)
+              }
             }
           }
 
-          # Process fade signal (with explicit type checks)
+          # Process fade signal (max 1 open per game)
           fade_signal_data <- signal$fade
           if (is.list(fade_signal_data) && !is.null(fade_signal_data$signal)) {
             fade_signal <- as.character(fade_signal_data$signal)
             if (length(fade_signal) == 1 && !is.na(fade_signal) && fade_signal != "HOLD") {
-              self$execute_signal(game_id, "fade", fade_signal_data, game_state)
+              if (open_fade >= 1) {
+                message(sprintf("[SIGNAL] BLOCKED: game %s already has %d open fade position(s)", game_id, open_fade))
+              } else {
+                self$execute_signal(game_id, "fade", fade_signal_data, game_state)
+              }
             }
           }
 
@@ -660,6 +683,36 @@ AutomatedTrader <- R6::R6Class(
       })
     },
 
+    #' Refresh game state with a fresh ESPN fetch
+    #' @param game_id Game identifier
+    #' @return Fresh game state, or existing state on error
+    refresh_game_state = function(game_id) {
+      tryCatch({
+        fresh_states <- get_live_game_states(
+          date = Sys.Date(),
+          team_ratings = self$team_ratings
+        )
+
+        if (is.list(fresh_states) && !is.null(fresh_states[[as.character(game_id)]])) {
+          fresh_state <- fresh_states[[as.character(game_id)]]
+          # Update stored state with fresh data
+          self$state$update_game_state(as.character(game_id), fresh_state)
+          message(sprintf("[EXEC] Fresh ESPN data for game %s: margin=%d, period=%d, sec=%d",
+                         game_id,
+                         fresh_state$home_margin %||% 0,
+                         fresh_state$period %||% 0,
+                         fresh_state$seconds_remaining %||% 0))
+          return(fresh_state)
+        }
+
+        message(sprintf("[EXEC] Fresh ESPN fetch found no data for game %s, using cached state", game_id))
+        self$state$game_states[[as.character(game_id)]]
+      }, error = function(e) {
+        message(sprintf("[EXEC] Fresh ESPN fetch failed: %s, using cached state", e$message))
+        self$state$game_states[[as.character(game_id)]]
+      })
+    },
+
     #' Execute a trading signal
     #' @param game_id Game identifier
     #' @param strategy "with_leader" or "fade"
@@ -683,6 +736,94 @@ AutomatedTrader <- R6::R6Class(
         }
 
         message(sprintf("[EXEC] Signal valid: %s at price %.2f", signal$signal, signal$entry_price))
+
+        # --- Fresh data re-validation before committing trade ---
+        fresh_validation_passed <- TRUE
+        tryCatch({
+          # 1. Fresh ESPN fetch
+          fresh_game_state <- self$refresh_game_state(game_id)
+
+          if (!is.null(fresh_game_state) && is.list(fresh_game_state)) {
+            # Validate fresh game state
+            fresh_game_state <- tryCatch({
+              if (exists("validate_game_state", envir = globalenv())) {
+                get("validate_game_state", envir = globalenv())(fresh_game_state)
+              } else {
+                fresh_game_state
+              }
+            }, error = function(e) {
+              fresh_game_state
+            })
+
+            # 2. Fresh Kalshi fetch (bypasses cache)
+            fresh_market_price <- NULL
+            if (self$mode == "paper" && !is.null(self$paper_engine)) {
+              fresh_spread <- tryCatch({
+                self$paper_engine$get_fresh_spread_data(game_id, fresh_game_state)
+              }, error = function(e) {
+                message(sprintf("[EXEC] Fresh Kalshi fetch failed: %s", e$message))
+                NULL
+              })
+
+              if (!is.null(fresh_spread) && !is.na(fresh_spread$mid_price)) {
+                fresh_market_price <- fresh_spread$mid_price
+                message(sprintf("[EXEC] Fresh Kalshi price: %.3f (source: %s)",
+                               fresh_market_price, fresh_spread$source %||% "unknown"))
+              }
+            }
+
+            # Fall back to regular market price if fresh Kalshi unavailable
+            if (is.null(fresh_market_price)) {
+              fresh_market_price <- tryCatch({
+                self$get_market_price(game_id, fresh_game_state)
+              }, error = function(e) { NULL })
+            }
+
+            # 3. Re-generate signal with fresh data
+            if (!is.null(fresh_market_price) && is.numeric(fresh_market_price)) {
+              fresh_market_price <- max(0.01, min(0.99, fresh_market_price))
+
+              fresh_signal <- tryCatch({
+                self$predictor$get_signal(
+                  game_id = as.character(game_id),
+                  game_state = fresh_game_state,
+                  market_price = fresh_market_price
+                )
+              }, error = function(e) {
+                message(sprintf("[EXEC] Fresh signal generation failed: %s", e$message))
+                NULL
+              })
+
+              # 4. Check if this strategy's signal is still active
+              if (!is.null(fresh_signal) && is.list(fresh_signal)) {
+                fresh_strategy_signal <- fresh_signal[[strategy]]
+                if (is.list(fresh_strategy_signal) && !is.null(fresh_strategy_signal$signal)) {
+                  fresh_sig_val <- as.character(fresh_strategy_signal$signal)
+                  if (fresh_sig_val == "HOLD") {
+                    message(sprintf("[EXEC] Fresh re-validation FAILED: %s signal is now HOLD (was %s)",
+                                   strategy, signal$signal))
+                    fresh_validation_passed <- FALSE
+                  } else {
+                    message(sprintf("[EXEC] Fresh re-validation PASSED: %s signal still %s",
+                                   strategy, fresh_sig_val))
+                    # Use fresh signal + fresh game_state for trade execution
+                    signal <- fresh_strategy_signal
+                    game_state <- fresh_game_state
+                  }
+                }
+              }
+            }
+          }
+        }, error = function(e) {
+          message(sprintf("[EXEC] Fresh re-validation error (proceeding with cached data): %s", e$message))
+          # Graceful degradation: proceed with original data
+        })
+
+        if (!fresh_validation_passed) {
+          message(sprintf("[EXEC] Trade ABORTED for %s/%s: fresh data invalidated signal", game_id, strategy))
+          return(invisible(NULL))
+        }
+        # --- End fresh data re-validation ---
 
         # Create a copy of signal to avoid modifying the original
         signal_copy <- as.list(signal)
