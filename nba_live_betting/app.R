@@ -157,26 +157,21 @@ server <- function(input, output, session) {
 
   message("[DEBUG] 5b. Creating Kalshi price client...")
   # Create Kalshi client for real market price data (paper execution stays simulated)
+  # Market data reads are public (no auth needed) on api.elections.kalshi.com
   price_client <- tryCatch({
     client <- create_kalshi_client(
       config_path = file.path(APP_DIR, "config/config.yml"),
       logger = logger
     )
-    if (client$is_authenticated()) {
-      # Test connectivity with a lightweight API call
+    # Test connectivity with a lightweight public API call
+    if (client$test_connectivity()) {
       test_markets <- client$get_nba_markets()
-      if (!is.null(test_markets)) {
-        message("[KALSHI] Kalshi client connected for real price data")
-        logger$info("Kalshi client connected for real price data")
-        client
-      } else {
-        message("[KALSHI] WARNING: API call failed — falling back to simulated prices")
-        logger$warn("Kalshi API test failed, using simulated prices")
-        NULL
-      }
+      message(sprintf("[KALSHI] Connected! Found %d NBA game markets", length(test_markets)))
+      logger$info(sprintf("Kalshi client connected — %d NBA markets available", length(test_markets)))
+      client
     } else {
-      message("[KALSHI] No API key configured — using simulated prices")
-      message("[KALSHI] Set KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH env vars or fill config/config.yml")
+      message("[KALSHI] WARNING: API unreachable — falling back to simulated prices")
+      logger$warn("Kalshi API connectivity test failed, using simulated prices")
       NULL
     }
   }, error = function(e) {
@@ -270,10 +265,19 @@ server <- function(input, output, session) {
 
   message("[DEBUG] 13. Setting up auto-refresh timer...")
   # Auto-refresh state every 5 seconds for UI updates
+  # NOTE: R6 objects use reference semantics, so trading_state(state) with the
+
+  # same object won't trigger Shiny's reactive invalidation (since Shiny 1.6.0
+  # uses identical() which is TRUE for the same R6 reference). We use a version
+  # counter to force invalidation.
   auto_refresh_timer <- reactiveTimer(5000)
+  state_version <- reactiveVal(0L)
 
   shiny::observe({
     auto_refresh_timer()
+    # Increment version counter to force reactive invalidation in modules
+    state_version(isolate(state_version()) + 1L)
+    # Also re-set state (for initial propagation)
     trading_state(state)
   })
 
@@ -294,19 +298,19 @@ server <- function(input, output, session) {
   message("[DEBUG] 15. Calling module servers...")
   # Module servers
   message("[DEBUG] 15a. controlsServer...")
-  controlsServer("controls", trading_state, automated_trader, logger, paper_engine)
+  controlsServer("controls", trading_state, automated_trader, logger, paper_engine, state_version)
   message("[DEBUG] 15b. liveGamesServer (dashboard)...")
-  liveGamesServer("games_dashboard", trading_state, predictor, team_ratings_data)
+  liveGamesServer("games_dashboard", trading_state, predictor, team_ratings_data, state_version)
   message("[DEBUG] 15c. liveGamesServer (full)...")
-  liveGamesServer("games_full", trading_state, predictor, team_ratings_data)
+  liveGamesServer("games_full", trading_state, predictor, team_ratings_data, state_version)
   message("[DEBUG] 15d. positionsServer...")
-  positionsServer("positions", trading_state)
+  positionsServer("positions", trading_state, state_version)
   message("[DEBUG] 15e. tradeLogServer...")
-  tradeLogServer("trade_log", trading_state)
+  tradeLogServer("trade_log", trading_state, state_version)
   message("[DEBUG] 15f. performanceServer...")
-  performanceServer("performance", trading_state)
+  performanceServer("performance", trading_state, state_version)
   message("[DEBUG] 15g. performanceServer (full)...")
-  performanceServer("performance_full", trading_state)
+  performanceServer("performance_full", trading_state, state_version)
   message("[DEBUG] 16. Server initialization complete!")
 }
 

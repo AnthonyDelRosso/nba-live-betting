@@ -1,0 +1,412 @@
+[2026-02-01 10:57:48] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:11:56] [INFO] Application started 
+[2026-02-01 17:11:56] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:12:01] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:12:02] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:12:02] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:12:12] [INFO] Trading loop started 
+[2026-02-01 17:12:13] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:12:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:20:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:25:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:26:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:27:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:28:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:37:10] [INFO] Trading loop stopped 
+[2026-02-01 17:37:10] [INFO] Trading stopped by user 
+[2026-02-01 17:37:11] [INFO] Trading loop started 
+[2026-02-01 17:37:11] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:37:14] [INFO] Trading loop stopped 
+[2026-02-01 17:37:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:37:14] [INFO] Session ended, state saved 
+[2026-02-01 17:37:20] [INFO] Application started 
+[2026-02-01 17:37:20] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:37:20] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=1000 
+[2026-02-01 17:37:20] [INFO] Loaded saved state 
+[2026-02-01 17:37:24] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:37:25] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:37:25] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:37:27] [INFO] Trading loop started 
+[2026-02-01 17:37:27] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:38:58] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:39:29] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:39:59] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:40:29] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:40:32] [INFO] Trading loop stopped 
+[2026-02-01 17:40:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:40:32] [INFO] Session ended, state saved 
+[2026-02-01 17:40:35] [INFO] Application started 
+[2026-02-01 17:40:35] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:40:35] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=850.85 
+[2026-02-01 17:40:35] [INFO] Loaded saved state 
+[2026-02-01 17:40:39] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:40:41] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:40:41] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:40:42] [INFO] Trading loop started 
+[2026-02-01 17:40:43] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:40:43] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:41:13] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:41:43] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:42:14] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:42:44] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:43:14] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:43:45] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:44:45] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:44:58] [INFO] Trading loop stopped 
+[2026-02-01 17:44:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:44:58] [INFO] Session ended, state saved 
+[2026-02-01 17:45:01] [INFO] Application started 
+[2026-02-01 17:45:01] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:45:01] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=616.816766245099 
+[2026-02-01 17:45:01] [INFO] Loaded saved state 
+[2026-02-01 17:45:05] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:45:07] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:45:07] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:45:09] [INFO] Trading loop started 
+[2026-02-01 17:45:09] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:45:09] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:46:10] [INFO] Trading loop stopped 
+[2026-02-01 17:46:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:46:10] [INFO] Session ended, state saved 
+[2026-02-01 17:46:15] [INFO] Application started 
+[2026-02-01 17:46:15] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:46:15] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=592.353658485257 
+[2026-02-01 17:46:15] [INFO] Loaded saved state 
+[2026-02-01 17:46:19] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:46:20] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:46:20] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:46:22] [INFO] Trading loop started 
+[2026-02-01 17:46:23] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:46:53] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:47:24] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:47:54] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:48:24] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:48:54] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:49:25] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:49:55] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:50:25] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:50:55] [ERROR] Poll error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:51:25] [INFO] Trading loop stopped 
+[2026-02-01 17:51:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:51:25] [INFO] Session ended, state saved 
+[2026-02-01 17:51:30] [INFO] Application started 
+[2026-02-01 17:51:30] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 17:51:30] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=412.949211089747 
+[2026-02-01 17:51:30] [INFO] Loaded saved state 
+[2026-02-01 17:51:34] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 17:51:35] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 17:51:35] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 17:51:37] [INFO] Trading loop started 
+[2026-02-01 17:51:38] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:51:38] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:52:08] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:52:38] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:53:09] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:53:39] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:53:56] [INFO] Trading loop stopped 
+[2026-02-01 17:53:57] [INFO] State reset | balance=1000 
+[2026-02-01 17:54:16] [INFO] Trading loop started 
+[2026-02-01 17:54:16] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:54:16] [INFO] Trading started by user in paper mode 
+[2026-02-01 17:54:46] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:55:17] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:55:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:55:47] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:55:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:56:17] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:56:48] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:57:18] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:57:48] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:58:18] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:58:49] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 17:58:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 17:59:19] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:00:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:02:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:06:24] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:06:54] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:07:55] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:08:26] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:08:56] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:08:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:09:26] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:09:57] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:09:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:10:27] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:10:57] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:10:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:11:28] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:11:58] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:12:28] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:12:59] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:13:29] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:14:00] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:14:30] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:15:00] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:15:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:15:31] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:16:01] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:16:04] [INFO] Trading loop stopped 
+[2026-02-01 18:16:04] [INFO] Trading stopped by user 
+[2026-02-01 18:16:06] [INFO] Trading loop started 
+[2026-02-01 18:16:06] [ERROR] Process games error: $ operator is invalid for atomic vectors 
+[2026-02-01 18:16:06] [INFO] Trading started by user in paper mode 
+[2026-02-01 18:16:10] [INFO] Trading loop stopped 
+[2026-02-01 18:16:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:16:10] [INFO] Session ended, state saved 
+[2026-02-01 18:16:15] [INFO] Application started 
+[2026-02-01 18:16:15] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 18:16:15] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=290.35 
+[2026-02-01 18:16:15] [INFO] Loaded saved state 
+[2026-02-01 18:16:19] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 18:16:21] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 18:16:21] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 18:16:23] [INFO] Trading loop started 
+[2026-02-01 18:16:24] [INFO] Trading started by user in paper mode 
+[2026-02-01 18:17:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:22:12] [INFO] Trading loop stopped 
+[2026-02-01 18:22:12] [INFO] State reset | balance=1000 
+[2026-02-01 18:22:24] [INFO] State reset | balance=1000 
+[2026-02-01 18:23:13] [INFO] Trading loop started 
+[2026-02-01 18:23:14] [INFO] Trading started by user in paper mode 
+[2026-02-01 18:23:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:26:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:27:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:28:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:30:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:38:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:41:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:44:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:48:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:53:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:56:11] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:56:11] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:56:41] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:56:41] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:57:11] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:57:12] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:57:42] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:57:42] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:57:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:58:12] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:58:12] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:58:42] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:58:43] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:58:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 18:59:13] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:59:13] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 18:59:43] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 18:59:43] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:00:13] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:00:13] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:00:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:00:44] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:00:44] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:01:14] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:01:14] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:01:44] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:01:45] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:02:15] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:02:15] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:02:45] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:02:45] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:03:16] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:03:16] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:03:46] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:03:46] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:04:17] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:04:17] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:04:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:04:47] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:04:47] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:05:18] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:05:18] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:05:48] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:05:48] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:06:19] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:06:19] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:06:49] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:06:49] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:07:19] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:07:19] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:07:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:07:50] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:07:50] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:08:20] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:08:20] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:08:51] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:08:51] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:09:21] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:09:21] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:09:51] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:09:51] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:10:22] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:10:22] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:10:52] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:10:52] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:11:23] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:11:23] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:11:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:11:53] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:11:53] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:12:23] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:12:23] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:12:54] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:12:54] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:13:24] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:13:24] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:13:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:13:55] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:13:55] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:14:25] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:14:25] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:14:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:14:56] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:14:56] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:15:26] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:15:26] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:15:57] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:15:57] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:16:27] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:16:27] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:16:58] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:16:58] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:17:28] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:17:28] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:17:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:17:58] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:17:58] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:18:29] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:18:29] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:18:54] [INFO] Trading loop stopped 
+[2026-02-01 19:18:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:18:54] [INFO] Session ended, state saved 
+[2026-02-01 19:18:59] [INFO] Application started 
+[2026-02-01 19:18:59] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 19:18:59] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.691066161787202 
+[2026-02-01 19:18:59] [INFO] Loaded saved state 
+[2026-02-01 19:19:03] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 19:19:04] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 19:19:04] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 19:19:05] [INFO] Trading loop started 
+[2026-02-01 19:19:06] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:19:06] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:19:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:19:06] [INFO] Trading started by user in paper mode 
+[2026-02-01 19:19:37] [WARN] Insufficient balance for trade | game_id=401810559, strategy=with_leader, required=0.95 
+[2026-02-01 19:19:37] [WARN] Insufficient balance for trade | game_id=401810560, strategy=with_leader, required=0.95 
+[2026-02-01 19:19:51] [INFO] Trading loop stopped 
+[2026-02-01 19:19:51] [INFO] State reset | balance=1000 
+[2026-02-01 19:19:51] [INFO] Session reset by user | balance=1000 
+[2026-02-01 19:19:54] [INFO] Trading loop started 
+[2026-02-01 19:19:55] [INFO] Trading started by user in paper mode 
+[2026-02-01 19:20:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:20:21] [INFO] Trading loop stopped 
+[2026-02-01 19:20:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:20:21] [INFO] Session ended, state saved 
+[2026-02-01 19:20:27] [INFO] Application started 
+[2026-02-01 19:20:27] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 19:20:27] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=815.7 
+[2026-02-01 19:20:27] [INFO] Loaded saved state 
+[2026-02-01 19:20:31] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 19:20:32] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 19:20:32] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 19:20:34] [INFO] Trading loop started 
+[2026-02-01 19:20:35] [INFO] Trading started by user in paper mode 
+[2026-02-01 19:24:26] [INFO] Trading loop stopped 
+[2026-02-01 19:24:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:24:26] [INFO] Session ended, state saved 
+[2026-02-01 19:24:28] [INFO] Application started 
+[2026-02-01 19:24:28] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-01 19:24:28] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=544.95 
+[2026-02-01 19:24:28] [INFO] Loaded saved state 
+[2026-02-01 19:24:32] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-01 19:24:33] [INFO] Team ratings updated | n_teams=30 
+[2026-02-01 19:24:33] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-01 19:24:35] [INFO] Trading loop started 
+[2026-02-01 19:24:36] [INFO] Trading started by user in paper mode 
+[2026-02-01 19:25:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:25:59] [INFO] Trading loop stopped 
+[2026-02-01 19:25:59] [INFO] State reset | balance=1000 
+[2026-02-01 19:25:59] [INFO] Session reset by user | balance=1000 
+[2026-02-01 19:27:16] [INFO] Trading loop started 
+[2026-02-01 19:27:16] [INFO] Trading started by user in paper mode 
+[2026-02-01 19:28:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:33:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:34:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:36:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:38:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:42:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:45:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:52:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:55:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:57:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 19:57:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:06:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:08:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:16:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:19:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:20:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:26:12] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:37:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:38:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:53:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:55:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:56:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 20:57:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:02:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:06:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:09:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:19:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:29:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:33:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:35:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:40:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:46:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:49:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:50:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 21:52:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:01:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:21:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:28:31] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.94617279504333 
+[2026-02-01 22:29:01] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.94617279504333 
+[2026-02-01 22:29:31] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.94617279504333 
+[2026-02-01 22:30:02] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.94617279504333 
+[2026-02-01 22:30:33] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:31:03] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:31:34] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:32:04] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:32:35] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:33:05] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:33:36] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:34:37] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:35:07] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:36:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:36:39] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:37:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:41:43] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:42:14] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:42:44] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:43:14] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:43:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:44:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:47:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:48:19] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:48:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 22:51:21] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:51:52] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:52:22] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:52:53] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:53:24] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:53:54] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:54:25] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:54:55] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:55:25] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:55:56] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:56:26] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:56:57] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:57:27] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 22:57:57] [WARN] Insufficient balance for trade | game_id=401810566, strategy=with_leader, required=0.95 
+[2026-02-01 23:17:35] [INFO] Trading loop stopped 
+[2026-02-01 23:17:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-01 23:17:35] [INFO] Session ended, state saved 

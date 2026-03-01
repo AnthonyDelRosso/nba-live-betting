@@ -1,0 +1,98 @@
+[2026-02-03 21:42:28] [INFO] Application started 
+[2026-02-03 21:42:28] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-03 21:42:28] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=1000 
+[2026-02-03 21:42:28] [INFO] Loaded saved state 
+[2026-02-03 21:42:33] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-03 21:42:35] [INFO] Team ratings updated | n_teams=30 
+[2026-02-03 21:42:35] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-03 21:42:36] [INFO] Trading loop started 
+[2026-02-03 21:42:37] [INFO] Trade skipped - edge negative after spread: -4.7% | game_id=401810579, strategy=fade 
+[2026-02-03 21:42:37] [INFO] Trading started by user in paper mode 
+[2026-02-03 21:43:08] [INFO] Trade skipped - edge negative after spread: -4.7% | game_id=401810579, strategy=fade 
+[2026-02-03 21:43:38] [INFO] Trade skipped - edge negative after spread: -4.7% | game_id=401810579, strategy=fade 
+[2026-02-03 21:44:09] [INFO] Trade skipped - edge negative after spread: -4.7% | game_id=401810579, strategy=fade 
+[2026-02-03 21:44:39] [INFO] Trade skipped - edge negative after spread: -4.6% | game_id=401810579, strategy=fade 
+[2026-02-03 21:45:09] [INFO] Trade skipped - edge negative after spread: -4.0% | game_id=401810579, strategy=fade 
+[2026-02-03 21:45:39] [INFO] Trade skipped - edge negative after spread: -3.7% | game_id=401810579, strategy=fade 
+[2026-02-03 21:46:10] [INFO] Trade skipped - edge negative after spread: -4.2% | game_id=401810579, strategy=fade 
+[2026-02-03 21:55:15] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810579, strategy=fade 
+[2026-02-03 21:55:45] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810579, strategy=fade 
+[2026-02-03 21:55:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 21:57:47] [INFO] Trade skipped - edge negative after spread: -4.0% | game_id=401810579, strategy=fade 
+[2026-02-03 22:04:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:12:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:14:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:15:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:16:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:17:59] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:18:30] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:18:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:19:00] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:19:30] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:20:01] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:20:31] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:21:01] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:21:31] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401810580, strategy=fade 
+[2026-02-03 22:22:02] [INFO] Trade skipped - edge negative after spread: -3.9% | game_id=401810580, strategy=fade 
+[2026-02-03 22:22:32] [INFO] Trade skipped - edge negative after spread: -3.9% | game_id=401810580, strategy=fade 
+[2026-02-03 22:23:03] [INFO] Trade skipped - edge negative after spread: -3.9% | game_id=401810580, strategy=fade 
+[2026-02-03 22:23:33] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:24:04] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:25:04] [INFO] Trade skipped - edge negative after spread: -3.8% | game_id=401810580, strategy=fade 
+[2026-02-03 22:26:35] [INFO] Trade skipped - edge negative after spread: -3.8% | game_id=401810579, strategy=fade 
+[2026-02-03 22:27:06] [INFO] Trade skipped - edge negative after spread: -3.7% | game_id=401810579, strategy=fade 
+[2026-02-03 22:36:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:41:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:42:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 22:47:23] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:47:53] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:48:24] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:48:54] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:49:25] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:49:55] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:50:25] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:50:56] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:51:26] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:51:57] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401810580, strategy=fade 
+[2026-02-03 22:54:59] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 22:56:30] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 22:57:00] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:02:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:04:36] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:05:06] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:05:37] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:05:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:06:07] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:06:38] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:07:08] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:07:39] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:08:09] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:08:39] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:09:10] [INFO] Trade skipped - edge negative after spread: -8.2% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:09:40] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:10:10] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:10:41] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:11:11] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:11:41] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:12:12] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:12:42] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:13:12] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:13:43] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:14:13] [INFO] Trade skipped - edge negative after spread: -8.8% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:14:43] [INFO] Trade skipped - edge negative after spread: -8.3% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:15:14] [INFO] Trade skipped - edge negative after spread: -8.3% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:15:44] [INFO] Trade skipped - edge negative after spread: -8.3% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:15:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:16:14] [INFO] Trade skipped - edge negative after spread: -8.3% | game_id=401810579, strategy=with_leader 
+[2026-02-03 23:16:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:17:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:24:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:26:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:26:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:28:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:36:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:42:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:58:51] [INFO] Trading loop stopped 
+[2026-02-03 23:58:51] [INFO] Trading stopped by user 
+[2026-02-03 23:58:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-03 23:58:52] [INFO] Session ended, state saved 

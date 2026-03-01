@@ -100,7 +100,8 @@ controlsUI <- function(id) {
 #' @param id Module namespace id
 #' @param state Reactive TradingState object
 #' @param trader Reactive AutomatedTrader object
-controlsServer <- function(id, state, trader, logger, paper_engine = NULL) {
+#' @param state_version Reactive counter for forcing UI refresh
+controlsServer <- function(id, state, trader, logger, paper_engine = NULL, state_version = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -291,6 +292,7 @@ controlsServer <- function(id, state, trader, logger, paper_engine = NULL) {
 
     # Status indicator
     output$status_indicator <- renderUI({
+      if (!is.null(state_version)) state_version()
       status_class <- if (is_running()) "text-success" else "text-muted"
       status_icon <- if (is_running()) "circle" else "circle"
       status_text <- if (is_running()) "Trading Active" else "Stopped"
@@ -312,6 +314,8 @@ controlsServer <- function(id, state, trader, logger, paper_engine = NULL) {
 
     # Account summary
     output$account_summary <- renderUI({
+      # Force periodic refresh for R6 state object
+      if (!is.null(state_version)) state_version()
       req(state())
       s <- state()
 

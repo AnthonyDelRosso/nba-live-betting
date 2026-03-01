@@ -615,6 +615,46 @@ predict_blown_lead <- function(model = NULL,
   pred$.pred_blown
 }
 
+#' Predict blown lead probability using v2 model (trained on game states)
+#' @param model Trained v2 model
+#' @param lead Size of the lead in points
+#' @param minutes_elapsed Minutes into the game
+#' @param period Quarter/period (1-4)
+#' @param is_home Whether the team with the lead is the home team
+#' @param net_rating_advantage Net rating advantage (positive = better team)
+#' @return Probability of blowing the lead (0-1)
+predict_blown_lead_v2 <- function(model = NULL,
+                                   lead,
+                                   minutes_elapsed,
+                                   period = 1,
+                                   is_home = TRUE,
+                                   net_rating_advantage = 0) {
+  library(tidymodels)
+
+  # Load model if not provided
+  if (is.null(model)) {
+    model <- readRDS("blown_lead_model_v2.rds")
+  }
+
+  # Cap period at 4 (v2 model only trained on regulation)
+  period <- min(period, 4)
+
+  # Create prediction data frame matching v2 model structure
+  new_data <- tibble(
+    lead = lead,
+    minutes_elapsed = minutes_elapsed,
+    period = factor(period, levels = 1:4),
+    is_home_leading = factor(ifelse(is_home, "home", "away"), levels = c("away", "home")),
+    net_rating_advantage = net_rating_advantage
+  )
+
+  # Predict
+  pred <- predict(model, new_data, type = "prob")
+
+  # Return probability of blowing lead
+  pred$.pred_blown
+}
+
 #' Predict for multiple scenarios at once
 #' @param model Trained model (or NULL to load from disk)
 #' @param scenarios Data frame with columns: largest_lead, minutes_elapsed,

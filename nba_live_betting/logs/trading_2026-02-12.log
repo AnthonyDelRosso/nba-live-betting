@@ -1,0 +1,652 @@
+[2026-02-12 09:12:09] [INFO] Application started 
+[2026-02-12 09:12:09] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 09:12:09] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.0454999999995679 
+[2026-02-12 09:12:09] [INFO] Loaded saved state 
+[2026-02-12 09:12:09] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 09:12:13] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 09:12:14] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 09:12:14] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 09:18:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 09:18:54] [INFO] Session ended, state saved 
+[2026-02-12 09:18:55] [INFO] Application started 
+[2026-02-12 09:18:55] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 09:18:55] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.0454999999995679 
+[2026-02-12 09:18:55] [INFO] Loaded saved state 
+[2026-02-12 09:18:55] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 09:18:55] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 09:18:55] [INFO] Kalshi client connected for real price data 
+[2026-02-12 09:18:59] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 09:18:59] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 09:18:59] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 09:18:59] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 10:20:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 10:20:43] [INFO] Session ended, state saved 
+[2026-02-12 18:49:33] [INFO] Application started 
+[2026-02-12 18:49:33] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 18:49:33] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.0454999999995679 
+[2026-02-12 18:49:33] [INFO] Loaded saved state 
+[2026-02-12 18:49:33] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 18:49:33] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:33] [INFO] Kalshi client connected for real price data 
+[2026-02-12 18:49:38] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 18:49:38] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 18:49:38] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 18:49:38] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 18:49:39] [INFO] Trading loop started 
+[2026-02-12 18:49:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:40] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:41] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:41] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:49:41] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:41] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:42] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:42] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:42] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:42] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:43] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:43] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:43] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:49:43] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:49:44] [INFO] Trading started by user in paper mode 
+[2026-02-12 18:50:14] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:14] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:15] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:50:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:16] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:16] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:16] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:16] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:16] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:16] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:16] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:16] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:17] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:17] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:47] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:47] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:47] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:47] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:48] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:50:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:49] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:49] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:49] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:49] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:50:50] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:50:50] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:20] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:20] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:20] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:20] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:21] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:21] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:51:21] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:21] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:21] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:21] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:22] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:22] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:22] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:22] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:22] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:22] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:22] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:22] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:52] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:52] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:53] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:53] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:53] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:53] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:53] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:51:53] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:53] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:53] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:53] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:54] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:54] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:54] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:55] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:55] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:55] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:55] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:51:56] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:51:56] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:26] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:26] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:26] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:26] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:52:26] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:27] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:27] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:27] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:27] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:27] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:27] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:28] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:28] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:28] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:28] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:28] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:28] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:29] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:29] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:59] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:59] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:52:59] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:52:59] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:00] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:00] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:00] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:53:00] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:00] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:00] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:00] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:00] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:00] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:01] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:01] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:01] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:01] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:01] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:01] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:02] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:02] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:02] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:02] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 18:53:22] [INFO] Trading loop stopped 
+[2026-02-12 18:53:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 18:53:22] [INFO] Session ended, state saved 
+[2026-02-12 18:53:22] [INFO] Application started 
+[2026-02-12 18:53:23] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 18:53:23] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.0454999999995679 
+[2026-02-12 18:53:23] [INFO] Loaded saved state 
+[2026-02-12 18:53:23] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 18:53:23] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:23] [INFO] Kalshi client connected for real price data 
+[2026-02-12 18:53:27] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 18:53:27] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 18:53:29] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 18:53:29] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 18:53:38] [INFO] Trading loop started 
+[2026-02-12 18:53:38] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:38] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:39] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:53:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:39] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:40] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:40] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:41] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:41] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:53:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:53:41] [INFO] Trading started by user in paper mode 
+[2026-02-12 18:54:12] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:12] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:12] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:12] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:54:12] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:12] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:13] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:13] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:13] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:13] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:14] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:14] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:15] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:45] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:46] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:46] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:46] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:46] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:46] [WARN] Insufficient balance for trade | game_id=401810636, strategy=with_leader, required=0.0600000000000001 
+[2026-02-12 18:54:46] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:46] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:46] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:47] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:47] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:47] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:48] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:54:49] [ERROR] RSA-PSS signing failed: openssl RSA-PSS signing failed (exit code 127) 
+[2026-02-12 18:54:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:55:02] [INFO] Trading loop stopped 
+[2026-02-12 18:55:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 18:55:02] [INFO] Session ended, state saved 
+[2026-02-12 18:55:06] [INFO] Application started 
+[2026-02-12 18:55:06] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 18:55:06] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=0.0454999999995679 
+[2026-02-12 18:55:06] [INFO] Loaded saved state 
+[2026-02-12 18:55:06] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 18:55:06] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:55:06] [INFO] Kalshi client connected for real price data 
+[2026-02-12 18:55:11] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 18:55:11] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 18:55:11] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 18:55:11] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 18:55:38] [INFO] State reset | balance=1000 
+[2026-02-12 18:55:38] [INFO] Session reset by user | balance=1000 
+[2026-02-12 18:55:43] [INFO] Trading loop started 
+[2026-02-12 18:55:43] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:55:43] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:55:43] [INFO] Trading started by user in paper mode 
+[2026-02-12 18:56:13] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:56:13] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:56:44] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:56:44] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:57:14] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:57:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:57:44] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:57:44] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:58:14] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:58:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:58:45] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:58:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:59:15] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:59:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 18:59:45] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 18:59:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:00:02] [INFO] Trading loop stopped 
+[2026-02-12 19:00:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:00:02] [INFO] Session ended, state saved 
+[2026-02-12 19:00:26] [INFO] Application started 
+[2026-02-12 19:00:26] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 19:00:26] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=1000 
+[2026-02-12 19:00:26] [INFO] Loaded saved state 
+[2026-02-12 19:00:26] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 19:00:26] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:00:26] [INFO] Kalshi client connected for real price data 
+[2026-02-12 19:00:30] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 19:00:31] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 19:00:33] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 19:00:33] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 19:00:39] [INFO] Trading loop started 
+[2026-02-12 19:00:39] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:00:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:00:39] [INFO] Trading started by user in paper mode 
+[2026-02-12 19:00:51] [INFO] Trading loop stopped 
+[2026-02-12 19:00:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:00:51] [INFO] Session ended, state saved 
+[2026-02-12 19:00:51] [INFO] Application started 
+[2026-02-12 19:00:51] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 19:00:51] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=1000 
+[2026-02-12 19:00:51] [INFO] Loaded saved state 
+[2026-02-12 19:00:51] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 19:00:51] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:00:51] [INFO] Kalshi client connected for real price data 
+[2026-02-12 19:00:56] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 19:00:56] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 19:00:56] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 19:00:56] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 19:01:05] [INFO] Trading loop started 
+[2026-02-12 19:01:06] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:01:06] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:01:06] [INFO] Trading started by user in paper mode 
+[2026-02-12 19:01:36] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:01:36] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:02:07] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:02:07] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:02:37] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:02:37] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:03:07] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:03:07] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:03:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:03:37] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:03:37] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:04:08] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:04:08] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:04:38] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:04:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:05:09] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:05:09] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:05:39] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:05:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:06:09] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:06:09] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:06:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:06:40] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:06:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:06:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:07:10] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:07:10] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:07:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:07:40] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:07:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:08:11] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:08:11] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:08:41] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:08:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:09:11] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:09:11] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:09:41] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:09:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:10:12] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:10:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:10:42] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:10:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:11:12] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:11:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:11:43] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:11:43] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:12:13] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:12:13] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:12:45] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:12:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:13:15] [ERROR] API request failed: HTTP 401 Unauthorized. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:13:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:13:16] [INFO] Trading loop stopped 
+[2026-02-12 19:13:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:13:16] [INFO] Session ended, state saved 
+[2026-02-12 19:13:20] [INFO] Application started 
+[2026-02-12 19:13:20] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-02-12 19:13:20] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=0, balance=1000 
+[2026-02-12 19:13:20] [INFO] Loaded saved state 
+[2026-02-12 19:13:20] [INFO] KalshiClient initialized (RSA-PSS auth) 
+[2026-02-12 19:13:32] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:13:32] [INFO] Kalshi client connected for real price data 
+[2026-02-12 19:13:36] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-02-12 19:13:36] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-02-12 19:13:37] [INFO] Team ratings updated | n_teams=30 
+[2026-02-12 19:13:37] [INFO] Loaded team ratings | n_teams=30 
+[2026-02-12 19:13:47] [INFO] Trading loop started 
+[2026-02-12 19:13:58] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:13:58] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:13:59] [INFO] Trading started by user in paper mode 
+[2026-02-12 19:14:41] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:14:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:15:22] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:15:22] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:16:04] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:16:04] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:16:45] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:16:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:16:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:17:27] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:17:27] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:18:08] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:18:08] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:18:50] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:18:50] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:19:31] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:19:31] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:19:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:20:13] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:20:13] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:20:54] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:20:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:21:35] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:21:35] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:21:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:22:17] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:22:17] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:22:58] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:22:58] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:23:40] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:23:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:24:21] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:24:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:25:03] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:25:03] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:25:44] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:25:44] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:26:26] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:26:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:26:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:27:08] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:27:08] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:27:49] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:27:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:28:31] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:28:31] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:29:12] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:29:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:29:54] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:29:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:30:35] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:30:35] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:30:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:31:17] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:31:17] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:31:58] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:31:58] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:32:40] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:32:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:33:21] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:33:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:34:03] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:34:03] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:34:45] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:34:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:35:26] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:35:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:35:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:36:08] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:36:08] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:36:49] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:36:49] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:37:31] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:37:31] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:38:12] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:38:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:38:54] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:38:54] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:39:35] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:39:35] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:40:17] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:40:17] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:40:58] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:40:58] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:41:10] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:41:10] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:41:51] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:41:51] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:42:33] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:42:33] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:43:14] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:43:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:43:26] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:43:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:44:07] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:44:07] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:44:18] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:44:18] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:45:00] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:45:00] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:45:11] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:45:11] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:45:53] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:45:53] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:46:04] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:46:04] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:46:45] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:46:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:46:57] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:46:57] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:47:38] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:47:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:47:50] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:47:50] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:47:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:48:31] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:48:31] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:48:42] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:48:42] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:49:24] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:49:24] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:49:35] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:49:35] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:50:17] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:50:17] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:50:28] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:50:28] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:51:09] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:51:09] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:51:21] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:51:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:52:02] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:52:02] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:52:14] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:52:14] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:52:55] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:52:55] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:53:06] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:53:06] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:53:48] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:53:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:53:59] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:53:59] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:54:41] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:54:41] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:54:52] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:54:52] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:55:33] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:55:33] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:55:45] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:55:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:56:26] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:56:26] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:56:38] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:56:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:57:19] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:57:19] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:57:31] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:57:31] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:57:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 19:58:12] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:58:12] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:58:24] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:58:24] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:59:05] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:59:05] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:59:16] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:59:16] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 19:59:58] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 19:59:58] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:00:39] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:00:39] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:01:21] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:01:21] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:02:02] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:02:02] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:02:44] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:02:44] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:02:55] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:02:55] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:03:37] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:03:37] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:03:48] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:03:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:04:29] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:04:29] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:05:11] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:05:11] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:05:52] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:05:52] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:06:34] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:06:34] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:07:15] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:07:15] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:07:57] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:07:57] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:08:38] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:08:38] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:09:20] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:09:20] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:10:01] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:10:01] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:10:43] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:10:43] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:11:24] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:11:24] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:12:06] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:12:06] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:12:48] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:12:48] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:12:59] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:12:59] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:13:40] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:13:40] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:13:52] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:13:52] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:14:03] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:14:03] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:14:45] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:14:45] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:14:56] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:14:56] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:14:56] [ERROR] API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=NBA&limit=200 
+[2026-02-12 20:14:56] [INFO] [MARKET] No open NBA markets found on Kalshi 
+[2026-02-12 20:21:57] [INFO] Trading loop stopped 
+[2026-02-12 20:21:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-02-12 20:21:57] [INFO] Session ended, state saved 
