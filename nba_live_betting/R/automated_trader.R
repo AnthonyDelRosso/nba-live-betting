@@ -462,6 +462,43 @@ AutomatedTrader <- R6::R6Class(
             # Ignore state update errors
           })
 
+          # Fetch volume/liquidity data from spread data (if using real Kalshi prices)
+          spread_data_for_signal <- NULL
+          tryCatch({
+            if (!is.null(self$paper_engine) && isTRUE(self$paper_engine$use_real_prices)) {
+              spread_data_for_signal <- self$paper_engine$get_real_spread_data(game_id, game_state)
+            } else if (!is.null(self$kalshi_client)) {
+              ticker <- self$kalshi_client$find_game_market(
+                game_id = as.character(game_id),
+                home_team = as.character(game_state$home_team_abbrev %||% ""),
+                away_team = as.character(game_state$away_team_abbrev %||% ""),
+                game_date = Sys.Date()
+              )
+              if (!is.null(ticker)) {
+                spread_data_for_signal <- self$kalshi_client$get_spread_data(ticker)
+              }
+            }
+
+            # Log volume metrics when available
+            if (!is.null(spread_data_for_signal) && is.list(spread_data_for_signal)) {
+              vol24 <- spread_data_for_signal$volume_24h %||% NA
+              oi <- spread_data_for_signal$open_interest %||% NA
+              bid_depth <- spread_data_for_signal$yes_bid_size %||% NA
+              ask_depth <- spread_data_for_signal$yes_ask_size %||% NA
+              sp_pct <- spread_data_for_signal$spread_pct %||% NA
+
+              message(sprintf("[VOLUME] Game %s: vol_24h=%s, open_interest=%s, bid_depth=%s, ask_depth=%s, spread=%.1f%%",
+                             game_id,
+                             if (is.na(vol24)) "N/A" else as.character(vol24),
+                             if (is.na(oi)) "N/A" else as.character(oi),
+                             if (is.na(bid_depth)) "N/A" else as.character(as.integer(bid_depth)),
+                             if (is.na(ask_depth)) "N/A" else as.character(as.integer(ask_depth)),
+                             if (is.na(sp_pct)) 0 else sp_pct))
+            }
+          }, error = function(e) {
+            # Ignore volume data errors — non-critical
+          })
+
           # Calculate trailer price for in-game adjustments
           home_leading <- (game_state$home_margin %||% 0) > 0
           trailer_price <- if (home_leading) (1 - market_price) else market_price
@@ -537,12 +574,13 @@ AutomatedTrader <- R6::R6Class(
 
           # Get signal from predictor with live_data for in-game adjustments
           signal <- tryCatch({
-            # Direct call with live_data for in-game adjustments
+            # Direct call with live_data + spread_data for in-game adjustments & liquidity gates
             self$predictor$get_signal(
               game_id = as.character(game_id),
               game_state = game_state,
               market_price = market_price,
-              live_data = live_data  # Pass in-game adjustment data
+              live_data = live_data,  # Pass in-game adjustment data
+              spread_data = spread_data_for_signal  # Pass volume/liquidity data
             )
           }, error = function(e) {
             if (!is.null(self$logger)) {
@@ -757,6 +795,7 @@ AutomatedTrader <- R6::R6Class(
 
             # 2. Fresh Kalshi fetch (bypasses cache)
             fresh_market_price <- NULL
+            fresh_spread <- NULL
             if (self$mode == "paper" && !is.null(self$paper_engine)) {
               fresh_spread <- tryCatch({
                 self$paper_engine$get_fresh_spread_data(game_id, fresh_game_state)
@@ -769,8 +808,50 @@ AutomatedTrader <- R6::R6Class(
                 fresh_market_price <- fresh_spread$mid_price
                 message(sprintf("[EXEC] Fresh Kalshi price: %.3f (source: %s)",
                                fresh_market_price, fresh_spread$source %||% "unknown"))
+
+                # Log fresh volume data at trade execution time
+                message(sprintf("[EXEC][VOLUME] vol_24h=%s, open_interest=%s, ask_depth=%s",
+                               if (is.na(fresh_spread$volume_24h %||% NA)) "N/A" else as.character(fresh_spread$volume_24h),
+                               if (is.na(fresh_spread$open_interest %||% NA)) "N/A" else as.character(fresh_spread$open_interest),
+                               if (is.na(fresh_spread$yes_ask_size %||% NA)) "N/A" else as.character(as.integer(fresh_spread$yes_ask_size))))
               }
             }
+
+            # 2b. Fetch orderbook depth for volume-adjusted sizing (1 extra API call per trade)
+            orderbook_depth <- NULL
+            tryCatch({
+              # Get the Kalshi client (from paper_engine or direct)
+              ob_client <- if (!is.null(self$paper_engine)) self$paper_engine$kalshi_client else self$kalshi_client
+              if (!is.null(ob_client)) {
+                ticker <- NULL
+                if (!is.null(self$paper_engine)) {
+                  ticker <- self$paper_engine$get_market_ticker(game_id, fresh_game_state)
+                } else if (!is.null(self$kalshi_client)) {
+                  ticker <- self$kalshi_client$find_game_market(
+                    game_id = as.character(game_id),
+                    home_team = as.character(fresh_game_state$home_team_abbrev %||% ""),
+                    away_team = as.character(fresh_game_state$away_team_abbrev %||% ""),
+                    game_date = Sys.Date()
+                  )
+                }
+
+                if (!is.null(ticker)) {
+                  exec_price <- signal$entry_price %||% NULL
+                  orderbook_depth <- ob_client$get_orderbook_depth(
+                    ticker, side = "yes", near_price = exec_price, range_cents = 3
+                  )
+                  if (!is.null(orderbook_depth)) {
+                    message(sprintf("[EXEC][DEPTH] Orderbook depth near %.2fc: %d contracts, $%.2f across %d levels",
+                                   (exec_price %||% 0) * 100,
+                                   orderbook_depth$total_contracts,
+                                   orderbook_depth$total_dollars,
+                                   orderbook_depth$levels))
+                  }
+                }
+              }
+            }, error = function(e) {
+              message(sprintf("[EXEC] Orderbook depth fetch failed: %s", e$message))
+            })
 
             # Fall back to regular market price if fresh Kalshi unavailable
             if (is.null(fresh_market_price)) {
@@ -787,7 +868,8 @@ AutomatedTrader <- R6::R6Class(
                 self$predictor$get_signal(
                   game_id = as.character(game_id),
                   game_state = fresh_game_state,
-                  market_price = fresh_market_price
+                  market_price = fresh_market_price,
+                  spread_data = fresh_spread  # Pass fresh volume data for liquidity gates
                 )
               }, error = function(e) {
                 message(sprintf("[EXEC] Fresh signal generation failed: %s", e$message))
@@ -827,6 +909,11 @@ AutomatedTrader <- R6::R6Class(
 
         # Create a copy of signal to avoid modifying the original
         signal_copy <- as.list(signal)
+
+        # Attach orderbook depth for volume-adjusted sizing downstream
+        if (exists("orderbook_depth", inherits = FALSE) && !is.null(orderbook_depth)) {
+          signal_copy$liquidity <- orderbook_depth
+        }
 
         # Add game state info to signal for record-keeping (safely)
         if (is.list(game_state)) {

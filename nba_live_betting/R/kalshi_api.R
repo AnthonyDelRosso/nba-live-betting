@@ -334,6 +334,62 @@ KalshiClient <- R6::R6Class(
       self$public_request(sprintf("/markets/%s/orderbook", ticker))
     },
 
+    #' Get orderbook depth near a price
+    #' Calls get_orderbook() and sums available contracts within a price range.
+    #' @param ticker Market ticker
+    #' @param side "yes" or "no" — which side's book to read
+    #' @param near_price Target price in dollars (0-1). If NULL, uses best price.
+    #' @param range_cents How many cents around near_price to include (default 3)
+    #' @return List with total_contracts, total_dollars, levels, or NULL on error
+    get_orderbook_depth = function(ticker, side = "yes", near_price = NULL, range_cents = 3) {
+      ob <- tryCatch({
+        self$get_orderbook(ticker)
+      }, error = function(e) {
+        if (!is.null(self$logger)) {
+          self$logger$debug(sprintf("Orderbook fetch failed for %s: %s", ticker, e$message))
+        }
+        NULL
+      })
+
+      if (is.null(ob) || !is.list(ob)) return(NULL)
+
+      # The orderbook response has orderbook_fp with yes_dollars and no_dollars
+      # Each is an array of [price_cents, quantity] pairs
+      ob_data <- ob$orderbook_fp %||% ob$orderbook %||% ob
+      book_key <- if (side == "yes") "yes_dollars" else "no_dollars"
+      levels <- ob_data[[book_key]]
+
+      if (is.null(levels) || length(levels) == 0) {
+        return(list(total_contracts = 0, total_dollars = 0, levels = 0))
+      }
+
+      total_contracts <- 0
+      total_dollars <- 0
+      level_count <- 0
+
+      for (level in levels) {
+        if (!is.numeric(level) || length(level) < 2) next
+        price_cents <- level[1]
+        quantity <- level[2]
+        price_dollars <- price_cents / 100
+
+        # If near_price specified, only count levels within range
+        if (!is.null(near_price)) {
+          if (abs(price_dollars - near_price) > (range_cents / 100)) next
+        }
+
+        total_contracts <- total_contracts + quantity
+        total_dollars <- total_dollars + (quantity * price_dollars)
+        level_count <- level_count + 1
+      }
+
+      list(
+        total_contracts = total_contracts,
+        total_dollars = total_dollars,
+        levels = level_count
+      )
+    },
+
     #' Get fresh spread data bypassing cache (for trade execution)
     #' Calls get_market(ticker) directly for a live /markets/{ticker} response.
     #' @param ticker Market ticker
@@ -387,6 +443,11 @@ KalshiClient <- R6::R6Class(
         buy_no_price = if (!is.na(best_bid)) 1 - best_bid else NA,
         yes_prob_mid = mid_price,
         no_prob_mid = 1 - mid_price,
+        # Volume/liquidity fields (already in market response)
+        volume_24h = market_data$volume_24h %||% NA,
+        open_interest = market_data$open_interest %||% NA,
+        yes_bid_size = as.numeric(market_data$yes_bid_size_fp %||% NA),
+        yes_ask_size = as.numeric(market_data$yes_ask_size_fp %||% NA),
         source = "kalshi_fresh"
       )
     },
@@ -464,6 +525,11 @@ KalshiClient <- R6::R6Class(
         # Implied probabilities
         yes_prob_mid = mid_price,
         no_prob_mid = 1 - mid_price,
+        # Volume/liquidity fields (already in market response)
+        volume_24h = market_data$volume_24h %||% NA,
+        open_interest = market_data$open_interest %||% NA,
+        yes_bid_size = as.numeric(market_data$yes_bid_size_fp %||% NA),
+        yes_ask_size = as.numeric(market_data$yes_ask_size_fp %||% NA),
         source = "kalshi"
       )
     },

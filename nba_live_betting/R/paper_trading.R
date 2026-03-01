@@ -406,6 +406,20 @@ PaperTradingEngine <- R6::R6Class(
                      game_id, strategy, signal$signal, market_mid, model_win_prob * 100, execution_price,
                      spread_pct %||% 0, spread_source, actual_edge * 100))
 
+      # Log volume/liquidity fields when available from real Kalshi data
+      if (spread_source %in% c("kalshi", "kalshi_fresh")) {
+        vol24 <- spread_data$volume_24h %||% NA
+        oi <- spread_data$open_interest %||% NA
+        bid_sz <- spread_data$yes_bid_size %||% NA
+        ask_sz <- spread_data$yes_ask_size %||% NA
+        message(sprintf("[TRADE][VOLUME] %s: vol_24h=%s, open_interest=%s, bid_depth=%s, ask_depth=%s",
+                       game_id,
+                       if (is.na(vol24)) "N/A" else as.character(vol24),
+                       if (is.na(oi)) "N/A" else as.character(oi),
+                       if (is.na(bid_sz)) "N/A" else as.character(as.integer(bid_sz)),
+                       if (is.na(ask_sz)) "N/A" else as.character(as.integer(ask_sz))))
+      }
+
       # Check if edge is still positive after spread
       if (actual_edge < 0) {
         message(sprintf("[TRADE] SKIPPED: Edge negative after spread (%.1f%%)", actual_edge * 100))
