@@ -315,7 +315,7 @@ PaperTradingEngine <- R6::R6Class(
     #' @param signal Signal details from predictor
     #' @param game_state Current game state for spread simulation (optional)
     #' @return Position ID if successful, NULL otherwise
-    execute_trade = function(game_id, strategy, signal, game_state = NULL) {
+    execute_trade = function(game_id, strategy, signal, game_state = NULL, fresh_spread = NULL) {
       if (is.null(signal) || !is.list(signal)) {
         message(sprintf("[TRADE] Invalid signal for %s", game_id))
         return(NULL)
@@ -355,9 +355,14 @@ PaperTradingEngine <- R6::R6Class(
         message(sprintf("[TRADE] WARNING: No model probability in signal, using market price"))
       }
 
-      # Get spread data (tries real Kalshi first, falls back to simulated)
-      # model_entry_price is the leader/trailer's price from the signal
-      spread_data <- self$get_spread_data(game_id, model_entry_price, game_state)
+      # Get spread data — use fresh_spread if provided (bypasses stale cache),
+      # otherwise fall back to cached/simulated spread
+      if (!is.null(fresh_spread) && is.list(fresh_spread) && !is.na(fresh_spread$mid_price %||% NA)) {
+        spread_data <- fresh_spread
+        message(sprintf("[TRADE] Using FRESH spread data (source: %s)", fresh_spread$source %||% "fresh"))
+      } else {
+        spread_data <- self$get_spread_data(game_id, model_entry_price, game_state)
+      }
 
       # Guard: ensure spread_data is a proper list
       if (!is.list(spread_data)) {

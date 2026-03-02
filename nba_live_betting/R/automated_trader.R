@@ -777,6 +777,7 @@ AutomatedTrader <- R6::R6Class(
 
         # --- Fresh data re-validation before committing trade ---
         fresh_validation_passed <- TRUE
+        fresh_spread <- NULL  # Will hold fresh Kalshi spread data for execute_trade
         tryCatch({
           # 1. Fresh ESPN fetch
           fresh_game_state <- self$refresh_game_state(game_id)
@@ -795,7 +796,6 @@ AutomatedTrader <- R6::R6Class(
 
             # 2. Fresh Kalshi fetch (bypasses cache)
             fresh_market_price <- NULL
-            fresh_spread <- NULL
             if (self$mode == "paper" && !is.null(self$paper_engine)) {
               fresh_spread <- tryCatch({
                 self$paper_engine$get_fresh_spread_data(game_id, fresh_game_state)
@@ -933,9 +933,9 @@ AutomatedTrader <- R6::R6Class(
             return(invisible(NULL))
           }
 
-          # Paper trade - pass game_state for spread simulation
+          # Paper trade - pass fresh_spread to avoid stale cache prices
           position_id <- tryCatch({
-            self$paper_engine$execute_trade(game_id, strategy, signal_copy, game_state)
+            self$paper_engine$execute_trade(game_id, strategy, signal_copy, game_state, fresh_spread = fresh_spread)
           }, error = function(e) {
             message(sprintf("[EXEC] Paper trade error: %s", e$message))
             NULL
