@@ -86,9 +86,13 @@ apply_spread_to_trade <- function(market_mid_price, model_win_prob, side, game_s
     mid_execution <- 1 - market_mid_price
   }
 
-  # Calculate breakeven probabilities
-  breakeven_with_spread <- execution_price / (1 - KALSHI_FEE)
-  breakeven_at_mid <- mid_execution / (1 - KALSHI_FEE)
+  # Calculate breakeven probabilities using fee-on-profit model:
+  #   payout_if_win = 1 - KALSHI_FEE * (1 - price)
+  #   breakeven     = price / payout_if_win
+  # This matches paper_trading.R. The old formula (price / (1 - fee)) incorrectly
+  # applied the fee to the full $1 payout rather than only the profit.
+  breakeven_with_spread <- execution_price / (1 - KALSHI_FEE * (1 - execution_price))
+  breakeven_at_mid <- mid_execution / (1 - KALSHI_FEE * (1 - mid_execution))
 
   # Edge calculations
   edge_at_mid <- model_win_prob - breakeven_at_mid
@@ -115,6 +119,7 @@ apply_spread_to_trade <- function(market_mid_price, model_win_prob, side, game_s
 
 message("Initializing KalshiPredictor...")
 predictor <- KalshiPredictor$new()
+predictor_spread <- KalshiPredictor$new()  # Independent predictor for spread scenario
 
 # ------------------------------------------------------------------------------
 # Load Data
@@ -253,9 +258,11 @@ for (g in 1:nrow(unique_games)) {
 
   games_processed <- games_processed + 1
 
-  # Reset predictor for this game
+  # Reset predictors for this game
   predictor$game_positions[[game_id]] <- NULL
   predictor$open_fades[[game_id]] <- NULL
+  predictor_spread$game_positions[[game_id]] <- NULL
+  predictor_spread$open_fades[[game_id]] <- NULL
 
   # Process each Kalshi observation
   for (i in 1:nrow(game_kalshi)) {
@@ -347,16 +354,21 @@ for (g in 1:nrow(unique_games)) {
     }
 
     # ========== WITH SPREAD SCENARIO ==========
-    # Use the same signal as no-spread scenario, but apply spread to execution
-    if (!is.null(signal_no_spread)) {
+    # Generate independent signal using predictor_spread's own position tracking.
+    # This ensures position limits (max fades, min time between entries, max 1 WL)
+    # reflect only trades actually taken in the spread scenario, not the no-spread scenario.
+    signal_spread <- tryCatch({
+      predictor_spread$get_signal(game_id, game_state, kalshi_price, kalshi_ts)
+    }, error = function(e) NULL)
+
+    if (!is.null(signal_spread)) {
       # Process fade with spread
-      if (signal_no_spread$fade$signal != "HOLD") {
-        fade_side <- signal_no_spread$fade$signal  # BUY_YES or BUY_NO
+      if (signal_spread$fade$signal != "HOLD") {
+        fade_side <- signal_spread$fade$signal  # BUY_YES or BUY_NO
 
         # For fade: we're betting on the trailer
-        # Market mid price for trailer is the entry_price from signal
-        market_mid_trailer <- signal_no_spread$fade$entry_price
-        model_trailer_win_prob <- signal_no_spread$fade$blown_rate
+        market_mid_trailer <- signal_spread$fade$entry_price
+        model_trailer_win_prob <- signal_spread$fade$blown_rate
 
         # Apply spread to the trade
         spread_info <- apply_spread_to_trade(
@@ -395,24 +407,21 @@ for (g in 1:nrow(unique_games)) {
                          -spread_info$execution_price * BET_SIZE * 1000)
           )
 
-          # Record in separate predictor for position tracking
-          adjusted_signal <- signal_no_spread$fade
+          adjusted_signal <- signal_spread$fade
           adjusted_signal$entry_price <- spread_info$execution_price
-          # Position tracking not needed for backtest evaluation
-          # predictor_spread$record_position(game_id, "fade", adjusted_signal, kalshi_ts)
+          predictor_spread$record_position(game_id, "fade", adjusted_signal, kalshi_ts)
         } else {
           fade_skipped_due_to_spread <- fade_skipped_due_to_spread + 1
         }
       }
 
       # Process with_leader with spread
-      if (signal_no_spread$with_leader$signal != "HOLD") {
-        wl_side <- signal_no_spread$with_leader$signal  # BUY_YES or BUY_NO
+      if (signal_spread$with_leader$signal != "HOLD") {
+        wl_side <- signal_spread$with_leader$signal  # BUY_YES or BUY_NO
 
         # For with_leader: we're betting on the leader
-        # Market mid price for leader is the entry_price from signal
-        market_mid_leader <- signal_no_spread$with_leader$entry_price
-        model_leader_win_prob <- signal_no_spread$with_leader$hold_rate
+        market_mid_leader <- signal_spread$with_leader$entry_price
+        model_leader_win_prob <- signal_spread$with_leader$hold_rate
 
         # Apply spread to the trade
         spread_info <- apply_spread_to_trade(
@@ -443,14 +452,13 @@ for (g in 1:nrow(unique_games)) {
             edge_after_spread = spread_info$edge_after_spread,
             wl_won = wl_won,
             pnl = ifelse(wl_won,
-                         (1 - spread_info$execution_price) * 0.93 * signal_no_spread$with_leader$bet_size * 1000,
-                         -spread_info$execution_price * signal_no_spread$with_leader$bet_size * 1000)
+                         (1 - spread_info$execution_price) * 0.93 * signal_spread$with_leader$bet_size * 1000,
+                         -spread_info$execution_price * signal_spread$with_leader$bet_size * 1000)
           )
 
-          adjusted_signal <- signal_no_spread$with_leader
+          adjusted_signal <- signal_spread$with_leader
           adjusted_signal$entry_price <- spread_info$execution_price
-          # Position tracking not needed for backtest evaluation
-          # predictor_spread$record_position(game_id, "with_leader", adjusted_signal, kalshi_ts)
+          predictor_spread$record_position(game_id, "with_leader", adjusted_signal, kalshi_ts)
         } else {
           wl_skipped_due_to_spread <- wl_skipped_due_to_spread + 1
         }
