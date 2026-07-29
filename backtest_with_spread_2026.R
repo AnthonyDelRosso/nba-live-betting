@@ -178,8 +178,15 @@ team_ratings <- team_box %>%
 # Process Games - WITH and WITHOUT spread
 # ------------------------------------------------------------------------------
 
-BET_SIZE <- 0.02  # 2% of bankroll per bet
+# Tier-based fade bet sizing (matches kalshi_predictor.R and backtest_ingame_adjustments_2026.R)
+FADE_BET_SIZE_35_40 <- 0.03   # 3% for 35-40c tier (best risk/reward, all periods)
+FADE_BET_SIZE_40_45 <- 0.02   # 2% for 40-45c tier (Q3/Q4 only)
 STARTING_BALANCE <- 1000
+
+#' Return the tier-appropriate fade bet size given the trailer's entry price
+get_fade_bet_size <- function(entry_price) {
+  if (entry_price < 0.40) FADE_BET_SIZE_35_40 else FADE_BET_SIZE_40_45
+}
 
 # Tracking for NO SPREAD scenario
 no_spread_fade_positions <- list()
@@ -305,6 +312,8 @@ for (g in 1:nrow(unique_games)) {
         leader_at_entry_won <- (home_leading & home_won) | (!home_leading & !home_won)
         fade_won <- !leader_at_entry_won
 
+        fade_bet_size_ns <- get_fade_bet_size(signal_no_spread$fade$entry_price)
+
         no_spread_fade_positions[[length(no_spread_fade_positions) + 1]] <- tibble(
           position_id = fade_count_no_spread,
           game_date = game_info$game_date,
@@ -313,6 +322,7 @@ for (g in 1:nrow(unique_games)) {
           lead = lead,
           home_leading = home_leading,
           entry_price = signal_no_spread$fade$entry_price,
+          bet_size = fade_bet_size_ns,
           trailer_win_prob = signal_no_spread$fade$blown_rate,
           breakeven = signal_no_spread$fade$breakeven,
           edge = signal_no_spread$fade$edge,
@@ -320,8 +330,8 @@ for (g in 1:nrow(unique_games)) {
           edge_after_spread = signal_no_spread$fade$edge,
           fade_won = fade_won,
           pnl = ifelse(fade_won,
-                       (1 - signal_no_spread$fade$entry_price) * 0.93 * BET_SIZE * 1000,
-                       -signal_no_spread$fade$entry_price * BET_SIZE * 1000)
+                       (1 - signal_no_spread$fade$entry_price) * 0.93 * fade_bet_size_ns * 1000,
+                       -signal_no_spread$fade$entry_price * fade_bet_size_ns * 1000)
         )
 
         predictor$record_position(game_id, "fade", signal_no_spread$fade, kalshi_ts)
@@ -385,6 +395,9 @@ for (g in 1:nrow(unique_games)) {
           leader_at_entry_won <- (home_leading & home_won) | (!home_leading & !home_won)
           fade_won <- !leader_at_entry_won
 
+          # Use the pre-spread mid price to determine the tier, not the execution price
+          fade_bet_size_sp <- get_fade_bet_size(market_mid_trailer)
+
           spread_fade_positions[[length(spread_fade_positions) + 1]] <- tibble(
             position_id = fade_count_spread,
             game_date = game_info$game_date,
@@ -394,6 +407,7 @@ for (g in 1:nrow(unique_games)) {
             home_leading = home_leading,
             entry_price = spread_info$execution_price,
             mid_price = spread_info$mid_execution,
+            bet_size = fade_bet_size_sp,
             trailer_win_prob = model_trailer_win_prob,
             breakeven = spread_info$breakeven_with_spread,
             edge = spread_info$edge_at_mid,
@@ -403,8 +417,8 @@ for (g in 1:nrow(unique_games)) {
             edge_lost = spread_info$edge_lost,
             fade_won = fade_won,
             pnl = ifelse(fade_won,
-                         (1 - spread_info$execution_price) * 0.93 * BET_SIZE * 1000,
-                         -spread_info$execution_price * BET_SIZE * 1000)
+                         (1 - spread_info$execution_price) * 0.93 * fade_bet_size_sp * 1000,
+                         -spread_info$execution_price * fade_bet_size_sp * 1000)
           )
 
           adjusted_signal <- signal_spread$fade
