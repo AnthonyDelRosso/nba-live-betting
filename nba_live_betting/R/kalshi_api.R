@@ -32,6 +32,32 @@ normalize_team_abbrev <- function(espn_abbrev) {
   if (!is.na(mapped)) mapped else abbrev
 }
 
+#' Extract a price (0-1 dollars) from a Kalshi market object
+#' Kalshi's market listing/detail endpoints now report prices as dollar-denominated
+#' strings (e.g. yes_bid_dollars = "0.24") rather than the older cents-denominated
+#' integers (e.g. yes_bid = 24). Try the dollar field first, fall back to the cents
+#' field for resilience if the API reverts. Uses exact=TRUE to avoid R's `[[`
+#' partial name matching silently grabbing the wrong (and wrongly-scaled) field.
+#' @param market_data Market list from the Kalshi API
+#' @param dollar_field Field name for the dollar-denominated value
+#' @param cents_field Field name for the legacy cents-denominated value
+#' @return Numeric price in dollars (0-1), or NA if neither field is usable
+extract_kalshi_price <- function(market_data, dollar_field, cents_field) {
+  val <- market_data[[dollar_field, exact = TRUE]]
+  if (!is.null(val) && length(val) == 1 && !is.na(val) && nzchar(as.character(val))) {
+    num <- suppressWarnings(as.numeric(val))
+    if (!is.na(num)) return(num)
+  }
+
+  val <- market_data[[cents_field, exact = TRUE]]
+  if (!is.null(val) && length(val) == 1 && !is.na(val)) {
+    num <- suppressWarnings(as.numeric(val))
+    if (!is.na(num)) return(num / 100)
+  }
+
+  NA_real_
+}
+
 #' Find the openssl CLI binary
 #' Checks PATH first, then common Windows install locations (Git for Windows, etc.)
 #' @return Path to openssl binary, or stops with an error
@@ -401,13 +427,9 @@ KalshiClient <- R6::R6Class(
 
       if (is.null(market_data) || !is.list(market_data)) return(NULL)
 
-      # Extract bid/ask from market listing (already in cents)
-      yes_bid <- market_data$yes_bid %||% NA
-      yes_ask <- market_data$yes_ask %||% NA
-
-      # Convert cents to dollars
-      best_bid <- if (!is.null(yes_bid) && !is.na(yes_bid)) yes_bid / 100 else NA
-      best_ask <- if (!is.null(yes_ask) && !is.na(yes_ask)) yes_ask / 100 else NA
+      # Extract bid/ask (dollar-string fields on current API, cents fields as legacy fallback)
+      best_bid <- extract_kalshi_price(market_data, "yes_bid_dollars", "yes_bid")
+      best_ask <- extract_kalshi_price(market_data, "yes_ask_dollars", "yes_ask")
 
       # Calculate mid price and spread
       mid_price <- if (!is.na(best_bid) && !is.na(best_ask)) {
@@ -417,8 +439,8 @@ KalshiClient <- R6::R6Class(
       } else if (!is.na(best_ask)) {
         best_ask
       } else {
-        lp <- market_data$last_price %||% 50
-        lp / 100
+        lp <- extract_kalshi_price(market_data, "last_price_dollars", "last_price")
+        if (is.na(lp)) 0.50 else lp
       }
 
       spread <- if (!is.na(best_bid) && !is.na(best_ask)) {
@@ -478,15 +500,9 @@ KalshiClient <- R6::R6Class(
         return(NULL)
       }
 
-      # Extract bid/ask from market listing (already in cents)
-      yes_bid <- market_data$yes_bid %||% NA
-      yes_ask <- market_data$yes_ask %||% NA
-      no_bid <- market_data$no_bid %||% NA
-      no_ask <- market_data$no_ask %||% NA
-
-      # Convert cents to dollars
-      best_bid <- if (!is.null(yes_bid) && !is.na(yes_bid)) yes_bid / 100 else NA
-      best_ask <- if (!is.null(yes_ask) && !is.na(yes_ask)) yes_ask / 100 else NA
+      # Extract bid/ask (dollar-string fields on current API, cents fields as legacy fallback)
+      best_bid <- extract_kalshi_price(market_data, "yes_bid_dollars", "yes_bid")
+      best_ask <- extract_kalshi_price(market_data, "yes_ask_dollars", "yes_ask")
 
       # Calculate mid price and spread
       mid_price <- if (!is.na(best_bid) && !is.na(best_ask)) {
@@ -497,8 +513,8 @@ KalshiClient <- R6::R6Class(
         best_ask
       } else {
         # Try last_price as fallback
-        lp <- market_data$last_price %||% 50
-        lp / 100
+        lp <- extract_kalshi_price(market_data, "last_price_dollars", "last_price")
+        if (is.na(lp)) 0.50 else lp
       }
 
       spread <- if (!is.na(best_bid) && !is.na(best_ask)) {
