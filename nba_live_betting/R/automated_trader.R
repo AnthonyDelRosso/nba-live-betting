@@ -258,6 +258,29 @@ AutomatedTrader <- R6::R6Class(
 
       self$games_today <- scoreboard$games %||% list()
 
+      # Prune game_states to only today's slate. Without this, a game whose
+      # cached state never got marked is_final (e.g. app closed mid-game)
+      # lingers in state$game_states indefinitely and gets reprocessed by
+      # process_live_games() as if it were still live, even months later —
+      # and since it's no longer "today", check_settlements() can never
+      # find it to close it out.
+      todays_ids <- tryCatch({
+        as.character(sapply(self$games_today, function(g) g$game_id %||% NA))
+      }, error = function(e) character(0))
+      todays_ids <- todays_ids[!is.na(todays_ids)]
+
+      # Only prune when the scoreboard fetch actually returned games — an
+      # empty result could mean "no games today" (safe to prune) or a
+      # transient ESPN API failure (would otherwise wipe legitimate cached
+      # live games on every retry until the next successful fetch).
+      if (length(todays_ids) > 0) {
+        cached_ids <- names(self$state$game_states)
+        stale_ids <- setdiff(cached_ids, todays_ids)
+        for (sid in stale_ids) {
+          self$state$game_states[[sid]] <- NULL
+        }
+      }
+
       if (!is.null(self$logger)) {
         n_live <- length(live_states)
         n_total <- length(self$games_today)
@@ -286,13 +309,23 @@ AutomatedTrader <- R6::R6Class(
     },
 
     #' Check for ended games and settle positions
+    #' Looks back a few calendar days (not just today) so a late-night game
+    #' that goes final right around local midnight — after Sys.Date() has
+    #' already rolled to the next day — doesn't get permanently orphaned.
     check_settlements = function() {
-      # Get final games with error handling
-      final_games <- tryCatch({
-        get_final_games(Sys.Date())
-      }, error = function(e) {
-        list()
-      })
+      lookback_dates <- Sys.Date() - 0:2
+
+      final_games <- list()
+      for (d in lookback_dates) {
+        day_games <- tryCatch({
+          get_final_games(as.Date(d, origin = "1970-01-01"))
+        }, error = function(e) {
+          list()
+        })
+        if (is.list(day_games) && length(day_games) > 0) {
+          final_games <- c(final_games, day_games)
+        }
+      }
 
       # Safety check - ensure final_games is a list
       if (!is.list(final_games) || length(final_games) == 0) {
