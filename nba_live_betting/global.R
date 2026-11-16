@@ -181,7 +181,7 @@ if (file.exists(config_path)) {
 
 # Model paths (in parent directory)
 MODEL_PATHS <- list(
-  wp_model = file.path(PARENT_DIR, "win_probability_model.rds"),
+  wp_model = file.path(PARENT_DIR, "win_probability_model_v2.rds"),  # probit, margin/sqrt(t) + rating x sqrt(t); wp_residuals/build_v2.R
   blown_lead_model = file.path(PARENT_DIR, "blown_lead_model_v2.rds")
 )
 
