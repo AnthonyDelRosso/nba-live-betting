@@ -157,9 +157,10 @@ CONFIG <- list(
   poll_interval = 30,
   kalshi_fee = 0.07,            # Kalshi fee coefficient: ceil(fee * C * P * (1-P)) per fill
   # with_leader entry floor: skip (and log) when the leader's ask is below this.
-  # A 15+/21+ lead the market prices under ~90c means our data is wrong or the
-  # market knows something the lookup table doesn't.
-  min_leader_ask = 0.90,
+  # Jan 2026 backtest (first trigger per game, no-lookahead score join): entries
+  # at 80-85c held 54-77% vs ~83% breakeven; 85-90c held 100% (n=16-25). An
+  # 85c floor had the best EV per $ staked of 80/85/88/90/93.
+  min_leader_ask = 0.85,
   log_level = "INFO",
   # In-game adjustment settings
   enable_ingame_adjustments = TRUE,

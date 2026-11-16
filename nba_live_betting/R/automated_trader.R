@@ -1153,7 +1153,7 @@ AutomatedTrader <- R6::R6Class(
     #' Execute a live trade on Kalshi
     execute_live_trade = function(game_id, strategy, signal, game_state) {
       floor_px <- if (!is.null(self$paper_engine)) self$paper_engine$min_leader_ask else
-        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.90 else 0.90)
+        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.85 else 0.85)
       if (strategy == "with_leader" && isTRUE(signal$entry_price < floor_px)) {
         self$state$log_skipped_entry(game_id, strategy, signal$signal,
                                      sprintf("leader price %.3f below floor %.2f", signal$entry_price, floor_px),

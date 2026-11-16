@@ -42,7 +42,7 @@ PaperTradingEngine <- R6::R6Class(
       self$logger <- logger
       self$kalshi_fee <- kalshi_fee
       self$min_leader_ask <- min_leader_ask %||%
-        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.90 else 0.90)
+        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.85 else 0.85)
       self$min_contract_value <- min_contract_value
       self$default_bet_size <- 0.02  # 2% default
       self$base_spread <- base_spread
@@ -436,7 +436,7 @@ PaperTradingEngine <- R6::R6Class(
       ctx$fee_per_contract <- fee_per_contract
 
       # Hard entry floor for with_leader. A team up 15+ in the 2H (or 21+) is
-      # almost never priced below ~90c; when it is, either our score/team/side
+      # almost never priced below ~85c; when it is, either our score/team/side
       # is wrong or the market knows something the lookup table doesn't.
       if (strategy == "with_leader" && execution_price < self$min_leader_ask) {
         return(skip(sprintf("leader ask %.3f below floor %.2f", execution_price, self$min_leader_ask)))
