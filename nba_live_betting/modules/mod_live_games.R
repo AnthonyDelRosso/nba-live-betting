@@ -32,7 +32,11 @@ liveGamesUI <- function(id) {
 #' @param predictor KalshiPredictor object
 #' @param team_ratings Reactive team ratings tibble (optional)
 #' @param state_version Reactive counter for forcing UI refresh
-liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_version = NULL) {
+#' @param paper_engine PaperTradingEngine, used to fetch live Kalshi market
+#'   data via the same get_real_spread_data() path the trader itself prices
+#'   off of, so the dashboard shows exactly what the bot sees (optional —
+#'   the market bar is simply omitted if not supplied or unavailable)
+liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_version = NULL, paper_engine = NULL) {
 
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -40,6 +44,7 @@ liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_ver
     # Reactive values for games
     games <- reactiveVal(list())
     last_refresh <- reactiveVal(Sys.time())
+    market_cache <- reactiveVal(list())
 
     # Auto-refresh timer (30 seconds)
     auto_timer <- shiny::reactiveTimer(30000)
@@ -53,6 +58,30 @@ liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_ver
         scoreboard <- get_nba_scoreboard(Sys.Date())
         games(scoreboard$games)
         last_refresh(Sys.time())
+
+        # Market data is independent of whether the trader is actively
+        # running — fetch it here so the dashboard works for passive
+        # monitoring too. Only for in-progress games (no open market worth
+        # showing pregame or post-final), and only when paper_engine was
+        # supplied, to keep this fully optional.
+        if (!is.null(paper_engine)) {
+          live_games <- Filter(function(g) isTRUE(g$is_in_progress), scoreboard$games %||% list())
+          new_cache <- list()
+          for (g in live_games) {
+            gid <- as.character(g$game_id %||% NA)
+            if (is.na(gid)) next
+            md <- tryCatch(
+              paper_engine$get_real_spread_data(
+                gid,
+                list(home_team_abbrev = g$home_team_abbrev %||% "",
+                     away_team_abbrev = g$away_team_abbrev %||% "")
+              ),
+              error = function(e) NULL
+            )
+            if (!is.null(md)) new_cache[[gid]] <- md
+          }
+          market_cache(new_cache)
+        }
       }, error = function(e) {
         shiny::showNotification(
           sprintf("Failed to fetch games: %s", e$message),
@@ -96,15 +125,20 @@ liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_ver
 
       # Get state once (avoid multiple reactive calls inside lapply)
       current_state <- state()
+      current_market_cache <- market_cache()
 
       # Create game cards (2 per row)
       rows <- lapply(seq(1, length(game_list), by = 2), function(i) {
+        gid1 <- as.character(game_list[[i]]$game_id %||% NA)
         cols <- list(
-          column(6, game_card(game_list[[i]], current_state, predictor, ns, ratings))
+          column(6, game_card(game_list[[i]], current_state, predictor, ns, ratings,
+                               market_data = current_market_cache[[gid1]]))
         )
         if (i + 1 <= length(game_list)) {
+          gid2 <- as.character(game_list[[i + 1]]$game_id %||% NA)
           cols <- c(cols, list(
-            column(6, game_card(game_list[[i + 1]], current_state, predictor, ns, ratings))
+            column(6, game_card(game_list[[i + 1]], current_state, predictor, ns, ratings,
+                                 market_data = current_market_cache[[gid2]]))
           ))
         }
         fluidRow(cols)
@@ -125,7 +159,10 @@ liveGamesServer <- function(id, state, predictor, team_ratings = NULL, state_ver
 #' @param predictor KalshiPredictor
 #' @param ns Namespace function
 #' @param team_ratings Team ratings tibble (optional)
-game_card <- function(game, state, predictor, ns, team_ratings = NULL) {
+#' @param market_data Live Kalshi spread data for this game from
+#'   PaperTradingEngine$get_real_spread_data() (best_bid/best_ask/mid_price),
+#'   or NULL if unavailable — the market bar is simply omitted when NULL
+game_card <- function(game, state, predictor, ns, team_ratings = NULL, market_data = NULL) {
   # Determine card style based on status (use isTRUE for safe boolean checks)
   is_live <- isTRUE(game$is_in_progress)
   is_final <- isTRUE(game$is_final)
@@ -198,6 +235,7 @@ game_card <- function(game, state, predictor, ns, team_ratings = NULL) {
 
   # Get win probability
   wp_display <- ""
+  market_display <- ""
   signal_display <- ""
   ratings_display <- ""
 
@@ -325,6 +363,45 @@ game_card <- function(game, state, predictor, ns, team_ratings = NULL) {
                   sprintf("%.0f%%", away_wp * 100))
             )
 
+            # Market-implied probability bar, directly below the model's,
+            # using the same color scheme so the two are visually comparable.
+            # Sourced from the same get_real_spread_data() call the trader
+            # itself prices off of, so this is "what the bot sees" — if
+            # that call returned NULL (no ticker found / Kalshi unreachable),
+            # omit the bar rather than show stale or fabricated data.
+            if (!is.null(market_data) &&
+                !is.null(market_data$best_bid) && !is.null(market_data$best_ask) &&
+                !is.na(market_data$best_bid) && !is.na(market_data$best_ask)) {
+              home_market <- market_data$mid_price %||% ((market_data$best_bid + market_data$best_ask) / 2)
+              home_market <- max(0.01, min(0.99, home_market))
+              away_market <- 1 - home_market
+              edge_pp <- (home_wp - home_market) * 100
+
+              market_display <- div(
+                div(class = "text-muted small", style = "margin-top: 8px;", "Market-Implied Probability"),
+                div(
+                  class = "progress",
+                  style = "height: 20px; margin: 5px 0; opacity: 0.8;",
+                  div(class = "progress-bar",
+                      style = sprintf("width: %.0f%%; background-color: %s;", home_market * 100, home_color),
+                      sprintf("%.0f%%", home_market * 100)),
+                  div(class = "progress-bar",
+                      style = sprintf("width: %.0f%%; background-color: %s;", away_market * 100, away_color),
+                      sprintf("%.0f%%", away_market * 100))
+                ),
+                div(
+                  class = "small",
+                  style = "display: flex; justify-content: space-between;",
+                  span(class = "text-muted",
+                       sprintf("Home bid %.0f¢ / ask %.0f¢",
+                               market_data$best_bid * 100, market_data$best_ask * 100)),
+                  span(style = sprintf("font-weight: bold; color: %s;",
+                                        if (edge_pp >= 0) "#28a745" else "#dc3545"),
+                       sprintf("Model vs Market: %+.1fpp (home)", edge_pp))
+                )
+              )
+            }
+
             # Get signal preview using safe wrapper from global environment
             signal <- tryCatch({
               if (exists("safe_get_signal", envir = globalenv())) {
@@ -446,6 +523,9 @@ game_card <- function(game, state, predictor, ns, team_ratings = NULL) {
 
       # Win probability bar
       wp_display,
+
+      # Market-implied probability bar
+      market_display,
 
       # Signal indicator
       signal_display,

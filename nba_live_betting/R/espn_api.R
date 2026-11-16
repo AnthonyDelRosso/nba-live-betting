@@ -349,7 +349,9 @@ get_live_game_states <- function(date = Sys.Date(), team_ratings = NULL) {
       state$home_team_abbrev <- game$home_team_abbrev %||% "HOM"
       state$away_team_abbrev <- game$away_team_abbrev %||% "AWY"
       state$is_final <- isTRUE(game$is_final)
+      state$is_in_progress <- isTRUE(game$is_in_progress)
       state$status <- game$status %||% "UNKNOWN"
+      state$start_time <- game$start_time %||% NA_character_
 
       state
     }, error = function(e) {

@@ -62,6 +62,7 @@ tradeLogServer <- function(id, state, state_version = NULL) {
           strategy_badge = case_when(
             strategy == "with_leader" ~ '<span class="badge badge-primary">WL</span>',
             strategy == "fade" ~ '<span class="badge badge-warning">FADE</span>',
+            strategy == "pregame_big_fav" ~ '<span class="badge badge-success">PG FAV</span>',
             TRUE ~ strategy
           ),
           # Signal badge

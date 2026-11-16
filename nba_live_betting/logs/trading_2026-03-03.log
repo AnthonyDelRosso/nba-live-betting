@@ -1,0 +1,497 @@
+[2026-03-03 14:52:22] [INFO] Application started 
+[2026-03-03 14:52:23] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-03-03 14:52:23] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=27, balance=1149.1478 
+[2026-03-03 14:52:23] [INFO] Loaded saved state 
+[2026-03-03 14:52:23] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-03-03 14:52:23] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 14:52:23] [INFO] Kalshi client connected — 50 NBA markets available 
+[2026-03-03 14:52:23] [ERROR] Failed to load models: unknown input format 
+[2026-03-03 14:52:23] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-03-03 14:52:23] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-03-03 14:52:24] [INFO] Team ratings updated | n_teams=33 
+[2026-03-03 14:52:24] [INFO] Loaded team ratings | n_teams=33 
+[2026-03-03 15:53:20] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 15:53:20] [INFO] Session ended, state saved 
+[2026-03-03 18:06:44] [INFO] Application started 
+[2026-03-03 18:06:44] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-03-03 18:06:44] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=27, balance=1149.1478 
+[2026-03-03 18:06:44] [INFO] Loaded saved state 
+[2026-03-03 18:06:44] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-03-03 18:06:45] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:06:45] [INFO] Kalshi client connected — 50 NBA markets available 
+[2026-03-03 18:06:53] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-03-03 18:06:53] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-03-03 18:06:54] [INFO] Team ratings updated | n_teams=33 
+[2026-03-03 18:06:54] [INFO] Loaded team ratings | n_teams=33 
+[2026-03-03 18:07:16] [INFO] Trading loop started 
+[2026-03-03 18:07:17] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:07:17] [INFO] [MARKET] No market found for OKC @ DET on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03OKCDET-DET) 
+[2026-03-03 18:07:17] [INFO] [MARKET] No market found for SAS @ TOR on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASTOR-TOR) 
+[2026-03-03 18:07:17] [INFO] [MARKET] No market found for GSW @ MEM on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03GSWMEM-MEM) 
+[2026-03-03 18:07:17] [INFO] [MARKET] No market found for SAC @ HOU on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACHOU-HOU) 
+[2026-03-03 18:07:18] [INFO] [MARKET] No market found for CLE @ MIL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CLEMIL-MIL) 
+[2026-03-03 18:07:18] [INFO] [MARKET] No market found for BOS @ DEN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03BOSDEN-DEN) 
+[2026-03-03 18:07:18] [INFO] [MARKET] No market found for CHA @ IND on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CHAIND-IND) 
+[2026-03-03 18:07:18] [INFO] [MARKET] No market found for MIA @ PHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MIAPHI-PHI) 
+[2026-03-03 18:07:18] [INFO] [MARKET] No market found for WAS @ ATL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03WASATL-ATL) 
+[2026-03-03 18:07:19] [INFO] [MARKET] No market found for SAS @ BKN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASBKN-BKN) 
+[2026-03-03 18:07:19] [INFO] [MARKET] No market found for HOU @ ORL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03HOUORL-ORL) 
+[2026-03-03 18:07:19] [INFO] [MARKET] No market found for POR @ CHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORCHI-CHI) 
+[2026-03-03 18:07:19] [INFO] [MARKET] No market found for SAC @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACDAL-DAL) 
+[2026-03-03 18:07:20] [INFO] [MARKET] No market found for LAL @ PHX on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03LALPHX-PHX) 
+[2026-03-03 18:07:20] [INFO] [MARKET] No market found for NOP @ UTA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPUTA-UTA) 
+[2026-03-03 18:07:20] [INFO] [MARKET] No market found for MIN @ LAC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MINLAC-LAC) 
+[2026-03-03 18:07:20] [INFO] [MARKET] Fuzzy match: CLE vs DET -> KXNBAGAME-26MAR03DETCLE-DET 
+[2026-03-03 18:07:20] [INFO] [MARKET] No market found for BKN @ BOS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03BKNBOS-BOS) 
+[2026-03-03 18:07:20] [INFO] [MARKET] No market found for NYK @ MIL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NYKMIL-MIL) 
+[2026-03-03 18:07:21] [INFO] [MARKET] No market found for MEM @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MEMDAL-DAL) 
+[2026-03-03 18:07:21] [INFO] [MARKET] No market found for DEN @ OKC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03DENOKC-OKC) 
+[2026-03-03 18:07:21] [INFO] [MARKET] No market found for POR @ CHA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORCHA-CHA) 
+[2026-03-03 18:07:21] [INFO] [MARKET] No market found for HOU @ MIA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03HOUMIA-MIA) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for TOR @ WAS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03TORWAS-WAS) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for LAL @ GSW on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03LALGSW-GSW) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for NOP @ UTA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPUTA-UTA) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for SAS @ NYK on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASNYK-NYK) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for MIL @ CHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MILCHI-CHI) 
+[2026-03-03 18:07:22] [INFO] [MARKET] No market found for CLE @ BKN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CLEBKN-BKN) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for MIN @ DEN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MINDEN-DEN) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for MEM @ IND on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MEMIND-IND) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for POR @ ATL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORATL-ATL) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for DET @ ORL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03DETORL-ORL) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for OKC @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03OKCDAL-DAL) 
+[2026-03-03 18:07:23] [INFO] [MARKET] No market found for PHI @ BOS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PHIBOS-BOS) 
+[2026-03-03 18:07:24] [INFO] [MARKET] No market found for NOP @ LAC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPLAC-LAC) 
+[2026-03-03 18:07:24] [INFO] [MARKET] No market found for SAC @ LAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACLAL-LAL) 
+[2026-03-03 18:07:24] [INFO] Trading started by user in paper mode 
+[2026-03-03 18:11:07] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:11:07] [INFO] [MARKET] Exact match: DAL vs CHA -> KXNBAGAME-26MAR03DALCHA-CHA 
+[2026-03-03 18:11:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:11:45] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:11:45] [INFO] [MARKET] Exact match: DET vs CLE -> KXNBAGAME-26MAR03DETCLE-CLE 
+[2026-03-03 18:12:23] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:12:23] [INFO] [MARKET] Exact match: WSH vs ORL -> KXNBAGAME-26MAR03WASORL-ORL 
+[2026-03-03 18:14:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:16:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:26:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:38:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:40:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:42:58] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:42:58] [INFO] [MARKET] Exact match: NY vs TOR -> KXNBAGAME-26MAR03NYKTOR-TOR 
+[2026-03-03 18:42:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 18:43:37] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 18:43:37] [INFO] [MARKET] Exact match: BKN vs MIA -> KXNBAGAME-26MAR03BKNMIA-MIA 
+[2026-03-03 18:53:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:00:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:00:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:02:33] [INFO] Trading loop stopped 
+[2026-03-03 19:02:33] [INFO] Trading stopped by user 
+[2026-03-03 19:02:33] [INFO] Trading loop started 
+[2026-03-03 19:02:39] [INFO] Trading started by user in paper mode 
+[2026-03-03 19:10:54] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 19:10:54] [INFO] [MARKET] Exact match: OKC vs CHI -> KXNBAGAME-26MAR03OKCCHI-CHI 
+[2026-03-03 19:11:30] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 19:11:30] [INFO] [MARKET] Exact match: MEM vs MIN -> KXNBAGAME-26MAR03MEMMIN-MIN 
+[2026-03-03 19:14:32] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 19:14:32] [INFO] [MARKET] Exact match: SA vs PHI -> KXNBAGAME-26MAR03SASPHI-PHI 
+[2026-03-03 19:15:09] [INFO] Application started 
+[2026-03-03 19:15:09] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-03-03 19:15:09] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=27, balance=1149.1478 
+[2026-03-03 19:15:09] [INFO] Loaded saved state 
+[2026-03-03 19:15:09] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-03-03 19:15:09] [INFO] [MARKET] Fetched 50 NBA game markets 
+[2026-03-03 19:15:09] [INFO] Kalshi client connected — 50 NBA markets available 
+[2026-03-03 19:15:12] [INFO] Trading loop stopped 
+[2026-03-03 19:15:12] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:15:12] [INFO] Session ended, state saved 
+[2026-03-03 19:15:14] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-03-03 19:15:14] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-03-03 19:15:15] [INFO] Team ratings updated | n_teams=33 
+[2026-03-03 19:15:15] [INFO] Loaded team ratings | n_teams=33 
+[2026-03-03 19:15:18] [INFO] Trading loop started 
+[2026-03-03 19:15:19] [INFO] [MARKET] No market found for OKC @ DET on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03OKCDET-DET) 
+[2026-03-03 19:15:19] [INFO] [MARKET] No market found for SAS @ TOR on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASTOR-TOR) 
+[2026-03-03 19:15:19] [INFO] [MARKET] No market found for GSW @ MEM on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03GSWMEM-MEM) 
+[2026-03-03 19:15:20] [INFO] [MARKET] No market found for SAC @ HOU on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACHOU-HOU) 
+[2026-03-03 19:15:20] [INFO] [MARKET] No market found for CLE @ MIL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CLEMIL-MIL) 
+[2026-03-03 19:15:20] [INFO] [MARKET] No market found for BOS @ DEN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03BOSDEN-DEN) 
+[2026-03-03 19:15:21] [INFO] [MARKET] No market found for CHA @ IND on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CHAIND-IND) 
+[2026-03-03 19:15:21] [INFO] [MARKET] No market found for MIA @ PHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MIAPHI-PHI) 
+[2026-03-03 19:15:21] [INFO] [MARKET] No market found for WAS @ ATL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03WASATL-ATL) 
+[2026-03-03 19:15:22] [INFO] [MARKET] No market found for SAS @ BKN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASBKN-BKN) 
+[2026-03-03 19:15:22] [INFO] [MARKET] No market found for HOU @ ORL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03HOUORL-ORL) 
+[2026-03-03 19:15:22] [INFO] [MARKET] No market found for POR @ CHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORCHI-CHI) 
+[2026-03-03 19:15:23] [INFO] [MARKET] No market found for SAC @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACDAL-DAL) 
+[2026-03-03 19:15:23] [INFO] [MARKET] No market found for LAL @ PHX on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03LALPHX-PHX) 
+[2026-03-03 19:15:23] [INFO] [MARKET] No market found for NOP @ UTA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPUTA-UTA) 
+[2026-03-03 19:15:24] [INFO] [MARKET] No market found for MIN @ LAC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MINLAC-LAC) 
+[2026-03-03 19:15:24] [INFO] [MARKET] Fuzzy match: CLE vs DET -> KXNBAGAME-26MAR03DETCLE-DET 
+[2026-03-03 19:15:24] [INFO] [MARKET] No market found for BKN @ BOS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03BKNBOS-BOS) 
+[2026-03-03 19:15:25] [INFO] [MARKET] No market found for NYK @ MIL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NYKMIL-MIL) 
+[2026-03-03 19:15:25] [INFO] [MARKET] No market found for MEM @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MEMDAL-DAL) 
+[2026-03-03 19:15:25] [INFO] [MARKET] No market found for DEN @ OKC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03DENOKC-OKC) 
+[2026-03-03 19:15:25] [INFO] [MARKET] No market found for POR @ CHA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORCHA-CHA) 
+[2026-03-03 19:15:26] [INFO] [MARKET] No market found for HOU @ MIA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03HOUMIA-MIA) 
+[2026-03-03 19:15:26] [INFO] [MARKET] No market found for TOR @ WAS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03TORWAS-WAS) 
+[2026-03-03 19:15:26] [INFO] [MARKET] No market found for LAL @ GSW on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03LALGSW-GSW) 
+[2026-03-03 19:15:27] [INFO] [MARKET] No market found for NOP @ UTA on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPUTA-UTA) 
+[2026-03-03 19:15:27] [INFO] [MARKET] No market found for SAS @ NYK on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SASNYK-NYK) 
+[2026-03-03 19:15:27] [INFO] [MARKET] No market found for MIL @ CHI on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MILCHI-CHI) 
+[2026-03-03 19:15:28] [INFO] [MARKET] No market found for CLE @ BKN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03CLEBKN-BKN) 
+[2026-03-03 19:15:28] [INFO] [MARKET] No market found for MIN @ DEN on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MINDEN-DEN) 
+[2026-03-03 19:15:28] [INFO] [MARKET] No market found for MEM @ IND on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03MEMIND-IND) 
+[2026-03-03 19:15:29] [INFO] [MARKET] No market found for POR @ ATL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PORATL-ATL) 
+[2026-03-03 19:15:29] [INFO] [MARKET] No market found for DET @ ORL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03DETORL-ORL) 
+[2026-03-03 19:15:29] [INFO] [MARKET] No market found for OKC @ DAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03OKCDAL-DAL) 
+[2026-03-03 19:15:30] [INFO] [MARKET] No market found for PHI @ BOS on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03PHIBOS-BOS) 
+[2026-03-03 19:15:30] [INFO] [MARKET] No market found for NOP @ LAC on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03NOPLAC-LAC) 
+[2026-03-03 19:15:30] [INFO] [MARKET] No market found for SAC @ LAL on 2026-03-03 (searched 50 markets, expected: KXNBAGAME-26MAR03SACLAL-LAL) 
+[2026-03-03 19:15:31] [INFO] [MARKET] Exact match: DAL vs CHA -> KXNBAGAME-26MAR03DALCHA-CHA 
+[2026-03-03 19:15:31] [INFO] [MARKET] Exact match: DET vs CLE -> KXNBAGAME-26MAR03DETCLE-CLE 
+[2026-03-03 19:15:31] [INFO] [MARKET] Exact match: WSH vs ORL -> KXNBAGAME-26MAR03WASORL-ORL 
+[2026-03-03 19:15:32] [INFO] [MARKET] Exact match: NY vs TOR -> KXNBAGAME-26MAR03NYKTOR-TOR 
+[2026-03-03 19:15:32] [INFO] [MARKET] Exact match: BKN vs MIA -> KXNBAGAME-26MAR03BKNMIA-MIA 
+[2026-03-03 19:15:32] [INFO] [MARKET] Exact match: SA vs PHI -> KXNBAGAME-26MAR03SASPHI-PHI 
+[2026-03-03 19:15:32] [INFO] [MARKET] Exact match: OKC vs CHI -> KXNBAGAME-26MAR03OKCCHI-CHI 
+[2026-03-03 19:15:32] [INFO] [MARKET] Exact match: MEM vs MIN -> KXNBAGAME-26MAR03MEMMIN-MIN 
+[2026-03-03 19:15:32] [INFO] Trading started by user in paper mode 
+[2026-03-03 19:19:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:27:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:34:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:38:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:44:24] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:45:03] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:45:41] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:46:18] [INFO] Trade skipped - edge negative after spread: -3.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:46:56] [INFO] Trade skipped - edge negative after spread: -2.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:46:56] [INFO] Trade skipped - edge negative after spread: -3.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:47:34] [INFO] Trade skipped - edge negative after spread: -2.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:47:35] [INFO] Trade skipped - edge negative after spread: -3.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:48:15] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:48:15] [INFO] Trade skipped - edge negative after spread: -3.0% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:48:53] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:48:54] [INFO] Trade skipped - edge negative after spread: -3.8% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:49:32] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:50:10] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:50:11] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:50:48] [INFO] Trade skipped - edge negative after spread: -3.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:50:49] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:50:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 19:51:37] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:52:15] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:52:15] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:52:54] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:53:32] [INFO] Trade skipped - edge negative after spread: -3.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:53:32] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:54:10] [INFO] Trade skipped - edge negative after spread: -2.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:54:11] [INFO] Trade skipped - edge negative after spread: -2.0% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:54:50] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:54:50] [INFO] Trade skipped - edge negative after spread: -2.0% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:55:29] [INFO] Trade skipped - edge negative after spread: -2.0% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:55:29] [INFO] Trade skipped - edge negative after spread: -2.0% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:56:08] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:56:08] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:56:46] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:56:47] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:57:25] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:57:25] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:58:03] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:58:04] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:58:42] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:58:43] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:59:20] [INFO] Trade skipped - edge negative after spread: -1.1% | game_id=401810738, strategy=with_leader 
+[2026-03-03 19:59:21] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401810740, strategy=with_leader 
+[2026-03-03 19:59:59] [INFO] Trade skipped - edge negative after spread: -1.9% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:00:00] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:00:36] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:00:37] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:01:16] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:01:16] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:01:53] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:01:54] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:01:54] [INFO] Trade skipped - edge negative after spread: -2.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:02:33] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:02:33] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:02:34] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:03:11] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:03:12] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:03:12] [INFO] Trade skipped - edge negative after spread: -3.0% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:03:49] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:03:49] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:03:50] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:03:50] [INFO] Trade skipped - edge negative after spread: -3.7% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:04:27] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:04:28] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:04:28] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:04:29] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:05:06] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:05:07] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:05:07] [INFO] Trade skipped - edge negative after spread: -2.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:05:08] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:05:45] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:05:46] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:05:47] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:05:47] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:06:24] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:06:25] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:06:26] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:07:03] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:07:04] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:07:04] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:07:41] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:07:42] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:07:43] [INFO] Trade skipped - edge negative after spread: -1.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:08:21] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:08:21] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:08:22] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:09:00] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:09:00] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:09:01] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:09:39] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:09:39] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:09:40] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:09:40] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:10:18] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:10:19] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:10:19] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:10:20] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:11:00] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:11:01] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:11:02] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:11:02] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:11:39] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:11:40] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:11:40] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:11:41] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:12:18] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:12:18] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:12:18] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:12:19] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:12:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:12:56] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:12:56] [INFO] Trade skipped - edge negative after spread: -0.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:12:56] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:12:57] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:13:34] [INFO] Trade skipped - edge negative after spread: -0.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:13:35] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:13:35] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:14:13] [INFO] Trade skipped - edge negative after spread: -0.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:14:13] [INFO] Trade skipped - edge negative after spread: -2.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:14:14] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:14:51] [INFO] Trade skipped - edge negative after spread: -0.7% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:14:52] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:14:52] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:15:29] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:15:29] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:15:30] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:15:30] [INFO] Trade skipped - edge negative after spread: -2.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:16:09] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:16:09] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:16:10] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:16:10] [INFO] Trade skipped - edge negative after spread: -1.9% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:16:50] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:16:51] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:16:51] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:16:52] [INFO] Trade skipped - edge negative after spread: -3.9% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:17:29] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:17:30] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:17:30] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:17:31] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:18:07] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:18:08] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:18:08] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:18:08] [INFO] Trade skipped - edge negative after spread: -3.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:18:46] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:18:46] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:18:46] [INFO] Trade skipped - edge negative after spread: -3.0% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:18:47] [INFO] Trade skipped - edge negative after spread: -1.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:19:23] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:19:23] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:19:24] [INFO] Trade skipped - edge negative after spread: -3.0% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:19:24] [INFO] Trade skipped - edge negative after spread: -1.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:20:02] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:20:02] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:20:03] [INFO] Trade skipped - edge negative after spread: -1.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:20:39] [INFO] Trade skipped - edge negative after spread: -1.0% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:20:39] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:20:40] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:21:18] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:21:19] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:21:19] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:21:57] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:21:58] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:21:58] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:22:39] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:22:39] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:22:40] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:23:17] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:23:17] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:23:17] [INFO] Trade skipped - edge negative after spread: -2.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:23:18] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:23:56] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:23:56] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:23:57] [INFO] Trade skipped - edge negative after spread: -1.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:23:57] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:24:33] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:24:34] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:24:34] [INFO] Trade skipped - edge negative after spread: -2.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:24:35] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:25:11] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:25:11] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401810740, strategy=with_leader 
+[2026-03-03 20:25:12] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:25:12] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:25:47] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:25:48] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:26:25] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:26:26] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:27:02] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:27:03] [INFO] Trade skipped - edge negative after spread: -2.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:27:03] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:27:40] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:27:41] [INFO] Trade skipped - edge negative after spread: -2.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:27:41] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:28:19] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:28:20] [INFO] Trade skipped - edge negative after spread: -2.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:28:20] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:28:57] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810738, strategy=with_leader 
+[2026-03-03 20:28:58] [INFO] Trade skipped - edge negative after spread: -2.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:28:58] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:29:36] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:29:36] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:29:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:30:14] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:30:14] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:30:53] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:30:54] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:31:31] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:31:32] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:31:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:32:09] [INFO] Trade skipped - edge negative after spread: -0.7% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:32:10] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:32:50] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:33:33] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:33:33] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:34:11] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:34:48] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:34:49] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:35:24] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:35:24] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:35:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:36:01] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:36:02] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:36:37] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:36:38] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:37:25] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:37:26] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:38:03] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:38:03] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:38:39] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:38:40] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:39:16] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:39:16] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:39:53] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:39:53] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:40:29] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:40:29] [INFO] Trade skipped - edge negative after spread: -1.7% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:41:06] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:41:06] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:41:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:41:43] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:41:43] [INFO] Trade skipped - edge negative after spread: -1.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:42:20] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:42:21] [INFO] Trade skipped - edge negative after spread: -1.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:42:58] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:42:59] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:43:37] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:43:38] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:44:15] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:44:15] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:44:53] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:44:54] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:45:29] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:45:30] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:46:07] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:46:07] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:46:45] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:46:45] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:47:23] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:47:23] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:48:01] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:48:01] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:48:39] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:48:39] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:49:16] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:49:17] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:49:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:49:57] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:49:58] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:50:34] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:50:34] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:50:34] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:51:11] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:51:11] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:51:50] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:51:51] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:51:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 20:52:29] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:52:29] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:53:06] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:53:07] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:53:44] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:53:44] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:54:21] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:54:22] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:54:59] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:54:59] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:54:59] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401810744, strategy=with_leader 
+[2026-03-03 20:55:37] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:55:37] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:55:37] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810744, strategy=with_leader 
+[2026-03-03 20:56:16] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:56:16] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:56:17] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401810744, strategy=with_leader 
+[2026-03-03 20:56:54] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:56:54] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:57:32] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:57:33] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:58:11] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401810741, strategy=with_leader 
+[2026-03-03 20:58:12] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:58:48] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 20:59:26] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:00:04] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:00:42] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:01:19] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:01:57] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:02:37] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:03:15] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:03:15] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:03:52] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:04:29] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:05:07] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:05:08] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:05:44] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:05:44] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:06:22] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:06:23] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:07:00] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:07:01] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:07:38] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:07:38] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:08:14] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:08:14] [INFO] Trade skipped - edge negative after spread: -1.1% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:08:52] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:08:52] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:09:30] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:09:30] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:10:08] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:10:09] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:10:48] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:10:48] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:11:26] [INFO] Trade skipped - edge negative after spread: -0.0% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:11:26] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:12:05] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:12:05] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:22:44] [INFO] Trade skipped - edge negative after spread: -0.1% | game_id=401810743, strategy=with_leader 
+[2026-03-03 21:22:44] [INFO] Trade skipped - edge negative after spread: -0.9% | game_id=401810744, strategy=with_leader 
+[2026-03-03 21:22:44] [INFO] Trading loop stopped 
+[2026-03-03 21:22:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-03 21:22:44] [INFO] Session ended, state saved 

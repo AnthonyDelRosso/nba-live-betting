@@ -4,6 +4,85 @@
 library(R6)
 library(tidyverse)
 
+# In-game strategies that trade the same moneyline market. At most one open
+# position per game across all of these, so strategies never pay two spreads
+# and two fees to hold offsetting sides of the same market.
+MONEYLINE_STRATEGIES <- c("with_leader", "fade")
+
+#' Kalshi trading fee, charged at execution on every fill (win or lose):
+#' ceil_to_cent(rate * contracts * price * (1 - price)).
+#' The inner round() keeps FP noise (e.g. 1.0000000002) from bumping a cent.
+kalshi_trade_fee <- function(contracts, price, rate = 0.07) {
+  ceiling(round(rate * contracts * price * (1 - price) * 100, 6)) / 100
+}
+
+empty_positions_tbl <- function() {
+  tibble(
+    position_id = character(),
+    game_id = character(),
+    strategy = character(),       # "with_leader", "fade", "pregame_big_fav"
+    signal = character(),         # "BUY_YES" or "BUY_NO"
+    entry_time = as.POSIXct(character()),
+    entry_price = numeric(),
+    bet_size = numeric(),         # Fraction of balance
+    contracts = integer(),        # Number of contracts
+    cost_basis = numeric(),       # contracts * entry_price (excludes fee)
+    fee = numeric(),              # Kalshi fee paid at entry
+    lead_at_entry = integer(),
+    period_at_entry = integer(),
+    edge_at_entry = numeric(),
+    # Entry context, so losses can be traced to bad data vs. an informed market
+    ticker = character(),
+    home_score = integer(),
+    away_score = integer(),
+    clock = character(),
+    model_prob = numeric(),       # lookup-table / model win prob for our side
+    bid = numeric(),              # bid of the side we bought
+    ask = numeric(),              # ask of the side we bought
+    spread_source = character(),
+    status = character(),         # "open", "settled_win", "settled_loss", "void"
+    exit_time = as.POSIXct(character()),
+    exit_price = numeric(),
+    pnl = numeric()               # net of fee
+  )
+}
+
+empty_trade_log_tbl <- function() {
+  tibble(
+    trade_id = character(),
+    position_id = character(),
+    game_id = character(),
+    timestamp = as.POSIXct(character()),
+    action = character(),         # "OPEN", "SETTLE", "VOID", "ADJUST"
+    strategy = character(),
+    signal = character(),
+    price = numeric(),
+    contracts = integer(),
+    amount = numeric(),           # signed cash flow; the ledger
+    balance_after = numeric(),
+    notes = character()
+  )
+}
+
+empty_skipped_tbl <- function() {
+  tibble(
+    timestamp = as.POSIXct(character()),
+    game_id = character(),
+    strategy = character(),
+    signal = character(),
+    reason = character(),
+    ticker = character(),
+    home_score = integer(),
+    away_score = integer(),
+    period = integer(),
+    clock = character(),
+    model_prob = numeric(),
+    bid = numeric(),
+    ask = numeric(),
+    fee_per_contract = numeric()
+  )
+}
+
 #' TradingState R6 Class
 #' Manages all state for the live betting platform including positions,
 #' trade log, game states, and balances
@@ -17,12 +96,14 @@ TradingState <- R6::R6Class(
 
     # State
     positions = NULL,         # Tibble of all positions
-    trade_log = NULL,         # Tibble of all trades
+    trade_log = NULL,         # Tibble of all cash flows (the ledger)
+    skipped_entries = NULL,   # Signals that passed the model but were blocked by a guard
+    fee_rate = 0.07,          # Kalshi fee coefficient
     game_states = NULL,       # List of current game states by game_id
     market_prices = NULL,     # List of current market prices by game_id
 
     # Balances
-    cash_balance = NULL,      # Current cash balance
+    cash_balance = NULL,      # Cache of ledger_balance(); never updated directly
     position_value = NULL,    # Current value of open positions
 
     # Status
@@ -45,40 +126,9 @@ TradingState <- R6::R6Class(
       self$last_update <- Sys.time()
       self$logger <- logger
 
-      # Initialize empty tibbles
-      self$positions <- tibble(
-        position_id = character(),
-        game_id = character(),
-        strategy = character(),       # "with_leader" or "fade"
-        signal = character(),         # "BUY_YES" or "BUY_NO"
-        entry_time = as.POSIXct(character()),
-        entry_price = numeric(),
-        bet_size = numeric(),         # Fraction of balance
-        contracts = integer(),        # Number of contracts
-        cost_basis = numeric(),       # Total cost
-        lead_at_entry = integer(),
-        period_at_entry = integer(),
-        edge_at_entry = numeric(),
-        status = character(),         # "open", "settled_win", "settled_loss"
-        exit_time = as.POSIXct(character()),
-        exit_price = numeric(),
-        pnl = numeric()
-      )
-
-      self$trade_log <- tibble(
-        trade_id = character(),
-        position_id = character(),
-        game_id = character(),
-        timestamp = as.POSIXct(character()),
-        action = character(),         # "OPEN", "CLOSE", "SETTLE"
-        strategy = character(),
-        signal = character(),
-        price = numeric(),
-        contracts = integer(),
-        amount = numeric(),
-        balance_after = numeric(),
-        notes = character()
-      )
+      self$positions <- empty_positions_tbl()
+      self$trade_log <- empty_trade_log_tbl()
+      self$skipped_entries <- empty_skipped_tbl()
 
       self$game_states <- list()
       self$market_prices <- list()
@@ -91,21 +141,21 @@ TradingState <- R6::R6Class(
 
     #' Add a new position
     #' @param game_id Game identifier
-    #' @param strategy "with_leader" or "fade"
-    #' @param signal Signal details from predictor
+    #' @param strategy "with_leader", "fade", or a spread strategy
+    #' @param signal Signal details; may carry entry context (ticker, scores,
+    #'   clock, model_win_prob, bid, ask, spread_source, fee)
     #' @param contracts Number of contracts to buy
     #' @return Position ID
     add_position = function(game_id, strategy, signal, contracts) {
       message(sprintf("[STATE] add_position called: game=%s, strategy=%s, contracts=%d",
                      game_id, strategy, contracts))
 
-      # Hard constraint: max 1 open position per game per strategy
-      existing_open <- tryCatch({
-        self$positions %>%
-          filter(game_id == !!game_id, strategy == !!strategy, status == "open") %>%
-          nrow()
-      }, error = function(e) 0)
+      open_here <- tryCatch(
+        self$positions %>% filter(game_id == !!game_id, status == "open"),
+        error = function(e) self$positions[0, ])
 
+      # Hard constraint: max 1 open position per game per strategy
+      existing_open <- sum(open_here$strategy == strategy)
       if (existing_open >= 1) {
         message(sprintf("[STATE] REJECTED: Already have %d open %s position(s) for game %s",
                        existing_open, strategy, game_id))
@@ -117,40 +167,61 @@ TradingState <- R6::R6Class(
         return(NULL)
       }
 
+      # Hard constraint: max 1 open moneyline position per game across strategies
+      if (strategy %in% MONEYLINE_STRATEGIES) {
+        other <- open_here$strategy[open_here$strategy %in% MONEYLINE_STRATEGIES]
+        if (length(other) > 0) {
+          message(sprintf("[STATE] REJECTED: game %s already has an open %s moneyline position",
+                         game_id, other[1]))
+          if (!is.null(self$logger)) {
+            self$logger$warn(sprintf("Cross-strategy position blocked: %s wanted %s, %s already open",
+                                    strategy, game_id, other[1]), game_id = game_id)
+          }
+          return(NULL)
+        }
+      }
+
       position_id <- paste0(
         game_id, "_", strategy, "_",
         format(Sys.time(), "%H%M%S")
       )
 
-      entry_price <- signal$entry_price
+      entry_price <- as.numeric(signal$entry_price)
       cost_basis <- contracts * entry_price
+      fee <- as.numeric(signal$fee %||% kalshi_trade_fee(contracts, entry_price, self$fee_rate))
+      total_cost <- cost_basis + fee
 
-      message(sprintf("[STATE] entry_price=%.2f, cost_basis=%.2f, current_balance=%.2f",
-                     entry_price, cost_basis, self$cash_balance))
+      message(sprintf("[STATE] entry_price=%.3f, cost_basis=%.2f, fee=%.2f, current_balance=%.2f",
+                     entry_price, cost_basis, fee, self$cash_balance))
 
-      # Check if we have enough balance
-      if (cost_basis > self$cash_balance) {
+      if (total_cost > self$cash_balance) {
         if (!is.null(self$logger)) {
           self$logger$warn("Insufficient balance for trade",
                           game_id = game_id,
-                          required = cost_basis,
+                          required = total_cost,
                           available = self$cash_balance)
         }
         message(sprintf("[STATE] REJECTED: Insufficient balance (need %.2f, have %.2f)",
-                       cost_basis, self$cash_balance))
+                       total_cost, self$cash_balance))
         return(NULL)
       }
 
-      # Build position record FIRST (before touching balance)
-      # This ensures if tibble creation fails, balance is untouched
       # Extract signal fields BEFORE tibble() to avoid column name shadowing
       # (tibble() evaluates sequentially, so a column named "signal" would
       #  shadow the function parameter on subsequent lines)
+      num1 <- function(x) { x <- suppressWarnings(as.numeric(x %||% NA)); if (length(x) == 1) x else NA_real_ }
+      chr1 <- function(x) { x <- as.character(x %||% NA); if (length(x) == 1) x else NA_character_ }
       sig_signal <- as.character(signal$signal %||% "UNKNOWN")
       sig_bet_size <- as.numeric(signal$bet_size %||% 0.02)
       sig_lead <- as.integer(abs(signal$lead %||% 0))
       sig_period <- as.integer(signal$period %||% 0)
-      sig_edge <- as.numeric(signal$edge %||% signal$actual_edge %||% 0)
+      sig_edge <- as.numeric(signal$actual_edge %||% signal$edge %||% 0)
+      ctx <- list(
+        ticker = chr1(signal$ticker), home_score = as.integer(num1(signal$home_score)),
+        away_score = as.integer(num1(signal$away_score)), clock = chr1(signal$clock),
+        model_prob = num1(signal$model_win_prob), bid = num1(signal$side_bid),
+        ask = num1(signal$side_ask), spread_source = chr1(signal$spread_source)
+      )
 
       new_position <- tryCatch({
         tibble(
@@ -159,13 +230,22 @@ TradingState <- R6::R6Class(
           strategy = as.character(strategy),
           signal = sig_signal,
           entry_time = Sys.time(),
-          entry_price = as.numeric(entry_price),
+          entry_price = entry_price,
           bet_size = sig_bet_size,
           contracts = as.integer(contracts),
           cost_basis = as.numeric(cost_basis),
+          fee = fee,
           lead_at_entry = sig_lead,
           period_at_entry = sig_period,
           edge_at_entry = sig_edge,
+          ticker = ctx$ticker,
+          home_score = ctx$home_score,
+          away_score = ctx$away_score,
+          clock = ctx$clock,
+          model_prob = ctx$model_prob,
+          bid = ctx$bid,
+          ask = ctx$ask,
+          spread_source = ctx$spread_source,
           status = "open",
           exit_time = as.POSIXct(NA),
           exit_price = NA_real_,
@@ -179,70 +259,60 @@ TradingState <- R6::R6Class(
         }
         NULL
       })
+      if (is.null(new_position)) return(NULL)
 
-      if (is.null(new_position)) {
-        return(NULL)
-      }
-
-      # Add to positions tibble BEFORE deducting balance
-      positions_before <- nrow(self$positions)
-      updated_positions <- tryCatch({
-        bind_rows(self$positions, new_position)
-      }, error = function(e) {
-        message(sprintf("[STATE] ERROR in bind_rows: %s", e$message))
-        if (!is.null(self$logger)) {
-          self$logger$error(sprintf("bind_rows failed: %s", e$message),
-                           game_id = game_id)
-        }
-        NULL
-      })
-
-      if (is.null(updated_positions)) {
-        return(NULL)
-      }
-
-      # Only NOW deduct balance (position is safely recorded)
-      self$positions <- updated_positions
-      self$cash_balance <- self$cash_balance - cost_basis
-
-      if (!is.null(self$logger)) {
-        self$logger$info(sprintf("BALANCE: $%.2f -> $%.2f (-%s %.2f)",
-                                self$cash_balance + cost_basis, self$cash_balance,
-                                strategy, cost_basis),
-                        game_id = game_id)
-      }
-      message(sprintf("[STATE] Balance: $%.2f -> $%.2f | Positions: %d -> %d (added %s)",
-                     self$cash_balance + cost_basis, self$cash_balance,
-                     positions_before, nrow(self$positions), position_id))
-
-      # Log trade (non-critical, errors won't corrupt balance)
-      tryCatch({
+      positions_before <- self$positions
+      balance_before <- self$cash_balance
+      ok <- tryCatch({
+        self$positions <- bind_rows(self$positions, new_position)
+        # The ledger row IS the balance change; if it fails, roll back the position
         self$log_trade(
           position_id = position_id,
           game_id = game_id,
           action = "OPEN",
           strategy = strategy,
-          signal = as.character(signal$signal %||% "UNKNOWN"),
+          signal = sig_signal,
           price = entry_price,
           contracts = contracts,
-          amount = -cost_basis,
-          notes = sprintf("Edge: %.1f%%, Lead: %d",
-                         (signal$edge %||% 0) * 100,
-                         abs(signal$lead %||% 0))
+          amount = -total_cost,
+          notes = sprintf(paste0("Edge %.1f%% | lead %d Q%d %s | score %s-%s | model %.1f%% | ",
+                                 "bid %.3f ask %.3f | fee $%.2f | %s %s"),
+                          sig_edge * 100, sig_lead, sig_period, ctx$clock %||% "?",
+                          ctx$home_score, ctx$away_score, ctx$model_prob * 100,
+                          ctx$bid, ctx$ask, fee, ctx$ticker, ctx$spread_source)
         )
+        TRUE
       }, error = function(e) {
-        message(sprintf("[STATE] WARNING: log_trade failed: %s", e$message))
+        message(sprintf("[STATE] ERROR recording position, rolled back: %s", e$message))
+        if (!is.null(self$logger)) {
+          self$logger$error(sprintf("add_position rolled back: %s", e$message), game_id = game_id)
+        }
+        FALSE
       })
+      if (!ok) {
+        self$positions <- positions_before
+        self$cash_balance <- self$ledger_balance()
+        return(NULL)
+      }
+
+      if (!is.null(self$logger)) {
+        self$logger$info(sprintf("BALANCE: $%.2f -> $%.2f (-%s %.2f incl. fee %.2f)",
+                                balance_before, self$cash_balance, strategy, total_cost, fee),
+                        game_id = game_id)
+      }
+      message(sprintf("[STATE] Balance: $%.2f -> $%.2f | Positions: %d -> %d (added %s)",
+                     balance_before, self$cash_balance,
+                     nrow(positions_before), nrow(self$positions), position_id))
 
       self$last_update <- Sys.time()
-
       position_id
     },
 
     #' Settle a position
     #' @param position_id Position to settle
     #' @param won Whether the position won
-    #' @param kalshi_fee Fee rate on wins (default 7%)
+    #' @param kalshi_fee Only used for legacy positions opened before fees were
+    #'   charged at entry (fee column NA): applies the old fee-on-profit model.
     settle_position = function(position_id, won, kalshi_fee = 0.07) {
       idx <- which(self$positions$position_id == position_id)
 
@@ -265,32 +335,25 @@ TradingState <- R6::R6Class(
         return(NULL)
       }
 
-      # Calculate payout
+      entry_fee <- if ("fee" %in% names(pos)) pos$fee else NA_real_
       if (won) {
-        # Win: receive $1 per contract, fee applies only to profit
-        gross_payout <- pos$contracts * 1.0
-        profit <- gross_payout - pos$cost_basis
-        fee_amount <- if (profit > 0) kalshi_fee * profit else 0
-        payout <- gross_payout - fee_amount
-        pnl <- payout - pos$cost_basis
+        payout <- pos$contracts * 1.0
+        if (is.na(entry_fee)) {
+          # Legacy position: fee was never charged at entry
+          payout <- payout - kalshi_fee * max(0, payout - pos$cost_basis)
+        }
         status <- "settled_win"
       } else {
-        # Loss: lose entire cost basis
         payout <- 0
-        pnl <- -pos$cost_basis
         status <- "settled_loss"
       }
+      pnl <- payout - pos$cost_basis - (if (is.na(entry_fee)) 0 else entry_fee)
 
-      # Update balance
-      self$cash_balance <- self$cash_balance + payout
-
-      # Update position
       self$positions$status[idx] <- status
       self$positions$exit_time[idx] <- Sys.time()
       self$positions$exit_price[idx] <- if (won) 1 else 0
       self$positions$pnl[idx] <- pnl
 
-      # Log settlement
       self$log_trade(
         position_id = position_id,
         game_id = pos$game_id,
@@ -317,28 +380,92 @@ TradingState <- R6::R6Class(
       invisible(pnl)
     },
 
-    #' Log a trade event
+    #' Void an open position (market cancelled/voided): refund cost basis and
+    #' fee, P&L 0
+    #' @param position_id Position to void
+    #' @param reason Short note for the trade log
+    #' @return 0 (P&L) invisibly, or NULL if not found / not open
+    void_position = function(position_id, reason = "market voided") {
+      idx <- which(self$positions$position_id == position_id)
+      if (length(idx) == 0 || self$positions$status[idx] != "open") {
+        if (!is.null(self$logger)) {
+          self$logger$warn("Position not open for void", position_id = position_id)
+        }
+        return(NULL)
+      }
+      pos <- self$positions[idx, ]
+      refund <- pos$cost_basis + (if ("fee" %in% names(pos) && !is.na(pos$fee)) pos$fee else 0)
+      self$positions$status[idx] <- "void"
+      self$positions$exit_time[idx] <- Sys.time()
+      self$positions$exit_price[idx] <- pos$entry_price
+      self$positions$pnl[idx] <- 0
+      self$log_trade(
+        position_id = position_id, game_id = pos$game_id, action = "VOID",
+        strategy = pos$strategy, signal = pos$signal, price = pos$entry_price,
+        contracts = pos$contracts, amount = refund,
+        notes = sprintf("VOID (%s): refunded $%.2f", reason, refund)
+      )
+      self$last_update <- Sys.time()
+      invisible(0)
+    },
+
+    #' Balance implied by the ledger: starting balance + every cash flow.
+    #' This is the source of truth; cash_balance is a cache of it.
+    ledger_balance = function() {
+      amt <- self$trade_log$amount
+      (self$paper_balance %||% 0) + sum(amt[!is.na(amt)])
+    },
+
+    #' Log a ledger entry and refresh cash_balance from the ledger.
+    #' This is the only place the balance changes.
     log_trade = function(position_id, game_id, action, strategy, signal,
                          price, contracts, amount, notes = "") {
       trade_id <- paste0("T", format(Sys.time(), "%Y%m%d%H%M%S"),
                         sprintf("%04d", nrow(self$trade_log) + 1))
 
+      balance_after <- self$ledger_balance() + amount
+
       new_log <- tibble(
         trade_id = trade_id,
         position_id = position_id,
-        game_id = game_id,
+        game_id = as.character(game_id),
         timestamp = Sys.time(),
         action = action,
         strategy = strategy,
         signal = signal,
-        price = price,
-        contracts = contracts,
-        amount = amount,
-        balance_after = self$cash_balance,
+        price = as.numeric(price),
+        contracts = as.integer(contracts),
+        amount = as.numeric(amount),
+        balance_after = balance_after,
         notes = notes
       )
 
       self$trade_log <- bind_rows(self$trade_log, new_log)
+      self$cash_balance <- self$ledger_balance()
+    },
+
+    #' Record a signal that a guard blocked, with its full entry context
+    log_skipped_entry = function(game_id, strategy, signal, reason, ctx = list()) {
+      num1 <- function(x) { x <- suppressWarnings(as.numeric(x %||% NA)); if (length(x) == 1) x else NA_real_ }
+      chr1 <- function(x) { x <- as.character(x %||% NA); if (length(x) == 1) x else NA_character_ }
+      row <- tibble(
+        timestamp = Sys.time(), game_id = as.character(game_id),
+        strategy = as.character(strategy), signal = chr1(signal), reason = as.character(reason),
+        ticker = chr1(ctx$ticker), home_score = as.integer(num1(ctx$home_score)),
+        away_score = as.integer(num1(ctx$away_score)), period = as.integer(num1(ctx$period)),
+        clock = chr1(ctx$clock), model_prob = num1(ctx$model_prob),
+        bid = num1(ctx$bid), ask = num1(ctx$ask), fee_per_contract = num1(ctx$fee_per_contract)
+      )
+      self$skipped_entries <- bind_rows(self$skipped_entries %||% empty_skipped_tbl(), row)
+      if (!is.null(self$logger)) {
+        self$logger$info(sprintf("SKIP %s %s: %s", strategy, row$signal, reason),
+                        game_id = game_id, ticker = row$ticker,
+                        score = sprintf("%s-%s", row$home_score, row$away_score),
+                        period = row$period, clock = row$clock,
+                        model_prob = round(row$model_prob, 4),
+                        bid = row$bid, ask = row$ask, fee = row$fee_per_contract)
+      }
+      invisible(row)
     },
 
     #' Update game state
@@ -431,45 +558,53 @@ TradingState <- R6::R6Class(
         )
     },
 
-    #' Save state to file
-    #' @param path File path (defaults to data/trading_state.rds)
-    save_state = function(path = NULL) {
+    #' Resolve the state file path. There is exactly one state file: the
+    #' absolute STATE_FILE defined in global.R. No relative-path fallback, so an
+    #' ad-hoc script run from another working directory can't silently read or
+    #' write a different copy.
+    resolve_state_path = function(path = NULL) {
       if (is.null(path)) {
-        # Use DATA_DIR if available, otherwise default relative path
-        path <- if (exists("DATA_DIR")) {
-          file.path(DATA_DIR, "trading_state.rds")
-        } else {
-          "data/trading_state.rds"
+        if (!exists("STATE_FILE")) {
+          stop("No state path given and STATE_FILE is not defined (source global.R first)")
         }
+        path <- get("STATE_FILE")
       }
+      normalizePath(path, mustWork = FALSE)
+    },
+
+    #' Save state to file
+    #' @param path File path (defaults to STATE_FILE)
+    save_state = function(path = NULL) {
+      path <- self$resolve_state_path(path)
       state <- list(
         mode = self$mode,
         paper_balance = self$paper_balance,
-        cash_balance = self$cash_balance,
+        cash_balance = self$ledger_balance(),
         positions = self$positions,
         trade_log = self$trade_log,
-        game_states = self$game_states,
+        skipped_entries = self$skipped_entries,
         market_prices = self$market_prices,
         saved_at = Sys.time()
       )
 
-      saveRDS(state, path)
+      # Write-then-rename so a crash mid-save can't truncate the only copy
+      tmp <- paste0(path, ".tmp")
+      saveRDS(state, tmp)
+      if (!file.rename(tmp, path)) {
+        file.copy(tmp, path, overwrite = TRUE)
+        unlink(tmp)
+      }
 
       if (!is.null(self$logger)) {
         self$logger$info("State saved", path = path)
       }
     },
 
-    #' Load state from file
-    #' @param path File path
+    #' Load state from file. The balance is rebuilt from the trade ledger; the
+    #' stored cash_balance is only compared against it.
+    #' @param path File path (defaults to STATE_FILE)
     load_state = function(path = NULL) {
-      if (is.null(path)) {
-        path <- if (exists("DATA_DIR")) {
-          file.path(DATA_DIR, "trading_state.rds")
-        } else {
-          "data/trading_state.rds"
-        }
-      }
+      path <- self$resolve_state_path(path)
       if (!file.exists(path)) {
         if (!is.null(self$logger)) {
           self$logger$warn("State file not found", path = path)
@@ -481,11 +616,23 @@ TradingState <- R6::R6Class(
 
       self$mode <- state$mode
       self$paper_balance <- state$paper_balance
-      self$cash_balance <- state$cash_balance
-      self$positions <- state$positions
-      self$trade_log <- state$trade_log
-      self$game_states <- state$game_states %||% list()
+      # bind_rows onto the empty schema adds any newer columns (fee, ticker, ...) as NA
+      self$positions <- bind_rows(empty_positions_tbl(), state$positions)
+      self$trade_log <- bind_rows(empty_trade_log_tbl(), state$trade_log)
+      self$skipped_entries <- bind_rows(empty_skipped_tbl(), state$skipped_entries %||% empty_skipped_tbl())
+      # Game states are never restored: anything saved is stale by definition,
+      # and stale states are what let last season's games trade on Nov 2.
+      self$game_states <- list()
       self$market_prices <- state$market_prices %||% list()
+
+      self$cash_balance <- self$ledger_balance()
+      stored <- as.numeric(state$cash_balance %||% NA)
+      if (!is.na(stored) && abs(stored - self$cash_balance) > 0.005) {
+        msg <- sprintf("Stored balance $%.2f disagrees with ledger $%.2f (diff $%.2f); using ledger",
+                       stored, self$cash_balance, stored - self$cash_balance)
+        message(sprintf("[STATE] WARNING: %s", msg))
+        if (!is.null(self$logger)) self$logger$warn(msg, path = path)
+      }
 
       if (!is.null(self$logger)) {
         self$logger$info("State loaded",
@@ -508,39 +655,9 @@ TradingState <- R6::R6Class(
       self$position_value <- 0
       self$is_running <- FALSE
 
-      self$positions <- tibble(
-        position_id = character(),
-        game_id = character(),
-        strategy = character(),
-        signal = character(),
-        entry_time = as.POSIXct(character()),
-        entry_price = numeric(),
-        bet_size = numeric(),
-        contracts = integer(),
-        cost_basis = numeric(),
-        lead_at_entry = integer(),
-        period_at_entry = integer(),
-        edge_at_entry = numeric(),
-        status = character(),
-        exit_time = as.POSIXct(character()),
-        exit_price = numeric(),
-        pnl = numeric()
-      )
-
-      self$trade_log <- tibble(
-        trade_id = character(),
-        position_id = character(),
-        game_id = character(),
-        timestamp = as.POSIXct(character()),
-        action = character(),
-        strategy = character(),
-        signal = character(),
-        price = numeric(),
-        contracts = integer(),
-        amount = numeric(),
-        balance_after = numeric(),
-        notes = character()
-      )
+      self$positions <- empty_positions_tbl()
+      self$trade_log <- empty_trade_log_tbl()
+      self$skipped_entries <- empty_skipped_tbl()
 
       self$game_states <- list()
       self$market_prices <- list()

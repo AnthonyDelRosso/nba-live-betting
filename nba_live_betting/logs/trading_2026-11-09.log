@@ -1,0 +1,464 @@
+[2026-11-09 10:46:47] [INFO] Application started 
+[2026-11-09 10:46:47] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-11-09 10:46:47] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=42, balance=1214.8485 
+[2026-11-09 10:46:47] [INFO] Loaded saved state 
+[2026-11-09 10:46:47] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-11-09 10:46:47] [INFO] [MARKET] Fetched 64 NBA game markets 
+[2026-11-09 10:46:47] [INFO] Kalshi client connected — 64 NBA markets available 
+[2026-11-09 10:46:52] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-11-09 10:46:52] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-11-09 10:46:52] [INFO] Team ratings updated | n_teams=33 
+[2026-11-09 10:46:52] [INFO] Loaded team ratings | n_teams=33 
+[2026-11-09 17:47:39] [INFO] Trading loop started 
+[2026-11-09 17:47:39] [INFO] Trading started by user in paper mode 
+[2026-11-09 17:51:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 17:54:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 17:57:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:02:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:07:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:10:27] [INFO] [MARKET] Fetched 70 NBA game markets 
+[2026-11-09 18:10:27] [INFO] [MARKET] Exact match: CLE vs CHA -> KXNBAGAME-26NOV09CLECHA-CHA 
+[2026-11-09 18:10:58] [INFO] [MARKET] Fetched 70 NBA game markets 
+[2026-11-09 18:10:58] [INFO] [MARKET] Exact match: LAL vs ATL -> KXNBAGAME-26NOV09LALATL-ATL 
+[2026-11-09 18:11:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:11:59] [INFO] [MARKET] Fetched 70 NBA game markets 
+[2026-11-09 18:11:59] [INFO] [MARKET] Exact match: WSH vs DET -> KXNBAGAME-26NOV09WASDET-DET 
+[2026-11-09 18:30:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:38:12] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:39:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:42:54] [INFO] [MARKET] Fetched 70 NBA game markets 
+[2026-11-09 18:42:54] [INFO] [MARKET] Exact match: MEM vs TOR -> KXNBAGAME-26NOV09MEMTOR-TOR 
+[2026-11-09 18:51:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:53:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 18:57:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 19:11:50] [INFO] [MARKET] Fetched 80 NBA game markets 
+[2026-11-09 19:11:50] [INFO] [MARKET] Exact match: IND vs DAL -> KXNBAGAME-26NOV09INDDAL-DAL 
+[2026-11-09 19:22:19] [ERROR] Public API request failed: Failed to perform HTTP request. | endpoint=/markets/KXNBAGAME-26NOV09CLECHA-CHA 
+[2026-11-09 19:22:29] [ERROR] Public API request failed: Failed to perform HTTP request. | endpoint=/markets/KXNBAGAME-26NOV09CLECHA-CHA/orderbook 
+[2026-11-09 19:22:29] [INFO] BALANCE: $1214.85 -> $1178.64 (-with_leader 36.21) | game_id=401909953 
+[2026-11-09 19:22:29] [INFO] TRADE: with_leader BUY_YES | game_id=401909953, price=0.71, size=51 
+[2026-11-09 19:22:29] [INFO] TRADE: with_leader BUY_YES | game_id=401909953, price=0.705, size=0.03 
+[2026-11-09 19:47:35] [ERROR] Public API request failed: Failed to perform HTTP request. | endpoint=/markets/KXNBAGAME-26NOV09WASDET-DET 
+[2026-11-09 19:47:45] [ERROR] Public API request failed: Failed to perform HTTP request. | endpoint=/markets/KXNBAGAME-26NOV09WASDET-DET/orderbook 
+[2026-11-09 19:47:46] [INFO] BALANCE: $1178.64 -> $1143.44 (-with_leader 35.20) | game_id=401909954 
+[2026-11-09 19:47:46] [INFO] TRADE: with_leader BUY_YES | game_id=401909954, price=0.88, size=40 
+[2026-11-09 19:47:46] [INFO] TRADE: with_leader BUY_YES | game_id=401909954, price=0.875, size=0.03 
+[2026-11-09 19:48:16] [ERROR] Public API request failed: Failed to perform HTTP request. | endpoint=/markets?status=open&series_ticker=KXNBAGAME&limit=200 
+[2026-11-09 19:48:16] [INFO] [MARKET] No open NBA game markets found on Kalshi 
+[2026-11-09 19:53:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 19:56:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 19:58:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 19:58:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:01:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:03:42] [INFO] BALANCE: $1143.44 -> $1109.24 (-fade 34.20) | game_id=401909956 
+[2026-11-09 20:03:42] [INFO] TRADE: fade BUY_YES | game_id=401909956, price=0.38, size=90 
+[2026-11-09 20:03:42] [INFO] TRADE: fade BUY_YES | game_id=401909956, price=0.375, size=0.03 
+[2026-11-09 20:05:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:06:52] [INFO] Trade skipped - edge negative after spread: -19.4% | game_id=401909957, strategy=fade 
+[2026-11-09 20:11:34] [INFO] [MARKET] Fetched 82 NBA game markets 
+[2026-11-09 20:11:34] [INFO] [MARKET] Exact match: SA vs PHX -> KXNBAGAME-26NOV09SASPHX-PHX 
+[2026-11-09 20:19:55] [INFO] SETTLEMENT: 401909953_with_leader_192229 WIN | game_id=401909953, pnl=13.75 
+[2026-11-09 20:19:55] [INFO] Settled 1 positions for game 401909953 | total_pnl=13.75 
+[2026-11-09 20:19:55] [INFO] Settled game 401909953: Charlotte Hornets won 
+[2026-11-09 20:22:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:29:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:30:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:34:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:43:17] [INFO] SETTLEMENT: 401909954_with_leader_194746 WIN | game_id=401909954, pnl=4.46 
+[2026-11-09 20:43:17] [INFO] Settled 1 positions for game 401909954 | total_pnl=4.46 
+[2026-11-09 20:43:17] [INFO] Settled game 401909954: Detroit Pistons won 
+[2026-11-09 20:46:25] [INFO] Trade skipped - edge negative after spread: -4.6% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:46:57] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:47:28] [INFO] Trade skipped - edge negative after spread: -4.4% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:47:59] [INFO] Trade skipped - edge negative after spread: -4.4% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:48:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:48:31] [INFO] Trade skipped - edge negative after spread: -4.4% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:48:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:49:02] [INFO] Trade skipped - edge negative after spread: -4.4% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:49:34] [INFO] Trade skipped - edge negative after spread: -4.4% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:50:06] [INFO] Trade skipped - edge negative after spread: -4.3% | game_id=401909955, strategy=with_leader 
+[2026-11-09 20:50:06] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909957, strategy=with_leader 
+[2026-11-09 20:51:39] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401909957, strategy=with_leader 
+[2026-11-09 20:52:11] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401909957, strategy=with_leader 
+[2026-11-09 20:52:42] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401909957, strategy=with_leader 
+[2026-11-09 20:53:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:54:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 20:57:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:09:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:11:54] [INFO] [MARKET] Fetched 74 NBA game markets 
+[2026-11-09 21:11:54] [INFO] [MARKET] Exact match: NO vs GS -> KXNBAGAME-26NOV09NOPGSW-GSW 
+[2026-11-09 21:12:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:15:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:20:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:26:08] [INFO] Trade skipped - edge negative after spread: -5.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:26:40] [INFO] Trade skipped - edge negative after spread: -5.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:34:35] [INFO] Trade skipped - edge negative after spread: -3.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:35:07] [INFO] Trade skipped - edge negative after spread: -4.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:35:39] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:36:10] [INFO] Trade skipped - edge negative after spread: -4.1% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:36:42] [INFO] Trade skipped - edge negative after spread: -5.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:37:14] [INFO] Trade skipped - edge negative after spread: -2.9% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:37:45] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:38:18] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:38:49] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:39:21] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:39:52] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:40:24] [INFO] Trade skipped - edge negative after spread: -3.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:40:56] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:41:28] [INFO] Trade skipped - edge negative after spread: -3.1% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:41:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:41:58] [INFO] SETTLEMENT: 401909956_fade_200342 WIN | game_id=401909956, pnl=51.89 
+[2026-11-09 21:41:58] [INFO] Settled 1 positions for game 401909956 | total_pnl=51.89 
+[2026-11-09 21:41:58] [INFO] Settled game 401909956: Dallas Mavericks won 
+[2026-11-09 21:41:59] [INFO] Trade skipped - edge negative after spread: -4.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:41:59] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:42:31] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:42:31] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:42:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 21:43:03] [INFO] Trade skipped - edge negative after spread: -2.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:43:03] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:43:35] [INFO] Trade skipped - edge negative after spread: -4.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:43:35] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:44:06] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:44:06] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:44:38] [INFO] Trade skipped - edge negative after spread: -3.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:44:38] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:45:10] [INFO] Trade skipped - edge negative after spread: -2.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:45:10] [INFO] Trade skipped - edge negative after spread: -1.3% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:45:41] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:45:42] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:46:13] [INFO] Trade skipped - edge negative after spread: -3.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:46:13] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:46:45] [INFO] Trade skipped - edge negative after spread: -2.9% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:46:45] [INFO] Trade skipped - edge negative after spread: -1.2% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:47:17] [INFO] Trade skipped - edge negative after spread: -2.8% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:47:17] [INFO] Trade skipped - edge negative after spread: -1.1% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:47:49] [INFO] Trade skipped - edge negative after spread: -2.7% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:47:49] [INFO] Trade skipped - edge negative after spread: -1.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:48:21] [INFO] Trade skipped - edge negative after spread: -2.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:48:21] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909959, strategy=with_leader 
+[2026-11-09 21:48:52] [INFO] Trade skipped - edge negative after spread: -2.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:48:53] [INFO] BALANCE: $1284.96 -> $1234.52 (-with_leader 50.44) | game_id=401909959 
+[2026-11-09 21:48:53] [INFO] TRADE: with_leader BUY_YES | game_id=401909959, price=0.97, size=52 
+[2026-11-09 21:48:53] [INFO] TRADE: with_leader BUY_YES | game_id=401909959, price=0.965, size=0.04 
+[2026-11-09 21:49:24] [INFO] Trade skipped - edge negative after spread: -2.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:49:56] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:50:27] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:50:59] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:51:30] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:52:02] [INFO] Trade skipped - edge negative after spread: -1.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:52:34] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:53:05] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:53:37] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:54:08] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:54:40] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:55:12] [INFO] Trade skipped - edge negative after spread: -1.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:55:43] [INFO] Trade skipped - edge negative after spread: -0.8% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:56:15] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:56:46] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:57:18] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:57:50] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:58:21] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:58:53] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:59:24] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 21:59:56] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:00:27] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:00:59] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:01:30] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:02:02] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:02:33] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:03:05] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:03:37] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:04:08] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:04:40] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:05:11] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:05:43] [INFO] Trade skipped - edge negative after spread: -0.2% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:06:14] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:06:46] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:07:18] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:07:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:07:49] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:08:21] [INFO] Trade skipped - edge negative after spread: -0.3% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:08:52] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:09:24] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:09:55] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:10:27] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:10:59] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:11:30] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:12:01] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:12:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:12:33] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:12:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:13:05] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:13:36] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:14:08] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:14:39] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:15:11] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:15:42] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:16:14] [INFO] Trade skipped - edge negative after spread: -0.6% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:16:45] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:17:16] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:17:48] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:18:20] [INFO] Trade skipped - edge negative after spread: -0.4% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:18:51] [INFO] Trade skipped - edge negative after spread: -0.5% | game_id=401909958, strategy=with_leader 
+[2026-11-09 22:22:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:25:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:26:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:30:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:41:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:42:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:43:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 22:47:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:02:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:05:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:17:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:18:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:22:27] [INFO] SETTLEMENT: 401909959_with_leader_214853 WIN | game_id=401909959, pnl=1.45 
+[2026-11-09 23:22:27] [INFO] Settled 1 positions for game 401909959 | total_pnl=1.45 
+[2026-11-09 23:22:27] [INFO] Settled game 401909959: Golden State Warriors won 
+[2026-11-09 23:29:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:30:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:34:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:38:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:40:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:44:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:45:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:50:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:52:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-09 23:53:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:03:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:04:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:05:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:06:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:15:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:19:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:31:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:32:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:49:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:52:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 00:52:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:00:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:06:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:17:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:20:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:21:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:22:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:24:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:25:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:26:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:30:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:33:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:35:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:38:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:41:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:45:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:55:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 01:58:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:16:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:20:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:25:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:32:11] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:32:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:36:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:37:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:48:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:52:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 02:56:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:00:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:02:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:03:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:05:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:06:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:07:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:10:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:12:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:14:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:28:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:33:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:50:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:51:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 03:59:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:16:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:18:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:28:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:29:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:30:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:37:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:38:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:39:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:46:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:47:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:48:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:52:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 04:58:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:02:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:09:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:18:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:26:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:33:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:39:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:50:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 05:53:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:06:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:08:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:10:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:15:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:29:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:40:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:42:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:49:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:49:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:55:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:57:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 06:58:49] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:08:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:12:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:13:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:13:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:17:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:27:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:40:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:41:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:53:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 07:57:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:00:20] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:06:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:07:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:09:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:10:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:13:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:26:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:32:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:33:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:34:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 08:43:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:03:20] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:09:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:12:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:14:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:15:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:17:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:19:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:20:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:24:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:25:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:31:34] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:36:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:38:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:41:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:45:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 09:59:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:02:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:06:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:07:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:13:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:17:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:18:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:28:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:33:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:34:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:38:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:43:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:49:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:50:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 10:56:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:04:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:10:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:13:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:17:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:19:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:42:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:43:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:50:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:52:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:55:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 11:56:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:02:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:11:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:12:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:23:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:24:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:25:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:31:50] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:34:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:40:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:42:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:45:57] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:49:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 12:53:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:06:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:08:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:09:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:12:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:25:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:31:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:36:53] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:38:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:40:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:45:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:49:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:54:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 13:58:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:01:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:02:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:03:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:14:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:18:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:21:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:33:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:37:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:38:25] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:40:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 14:59:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:07:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:10:41] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:13:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:40:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:41:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:42:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:45:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:47:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 15:54:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:01:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:08:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:09:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:14:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:24:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:25:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:26:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:32:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:39:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:46:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:47:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 16:52:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:05:09] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:06:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:11:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:20:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:23:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:26:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:28:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:29:35] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:32:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:40:29] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:42:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:43:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:45:58] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 17:48:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:00:37] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:16:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:18:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:18:34] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:19:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:33:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:33:44] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:39:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:40:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:44:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 18:52:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 19:00:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 19:02:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 19:02:33] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 19:03:42] [INFO] Trading loop stopped 
+[2026-11-10 19:03:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-10 19:03:42] [INFO] Session ended, state saved 

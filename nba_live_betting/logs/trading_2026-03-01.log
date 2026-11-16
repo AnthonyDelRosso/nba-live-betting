@@ -88,3 +88,174 @@
 [2026-03-01 14:36:47] [INFO] SETTLEMENT: 401810723_with_leader_134021 WIN | game_id=401810723, pnl=50.59 
 [2026-03-01 14:36:47] [INFO] Settled 2 positions for game 401810723 | total_pnl=102.97 
 [2026-03-01 14:36:47] [INFO] Settled game 401810723: New York Knicks won 
+[2026-03-01 14:39:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:40:49] [INFO] [MARKET] Fetched 48 NBA game markets 
+[2026-03-01 14:40:49] [INFO] [MARKET] Exact match: MIL vs CHI -> KXNBAGAME-26MAR01MILCHI-CHI 
+[2026-03-01 14:41:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:41:59] [INFO] [MARKET] Fetched 48 NBA game markets 
+[2026-03-01 14:41:59] [INFO] [MARKET] Exact match: CLE vs BKN -> KXNBAGAME-26MAR01CLEBKN-BKN 
+[2026-03-01 14:43:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:46:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:47:09] [INFO] [MARKET] Fetched 48 NBA game markets 
+[2026-03-01 14:47:09] [INFO] [MARKET] Exact match: MIN vs DEN -> KXNBAGAME-26MAR01MINDEN-DEN 
+[2026-03-01 14:52:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:54:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:58:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 14:59:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:06:04] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:09:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:15:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:26:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:32:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:34:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:36:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:38:43] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:39:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:39:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:44:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:45:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:47:47] [INFO] BALANCE: $1162.48 -> $1128.03 (-with_leader 34.45) | game_id=401810725 
+[2026-03-01 15:47:47] [INFO] TRADE: with_leader BUY_NO | game_id=401810725, price=0.65, size=53 
+[2026-03-01 15:47:47] [INFO] TRADE: with_leader BUY_NO | game_id=401810725, price=0.895, size=0.03 
+[2026-03-01 15:51:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 15:53:01] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:01:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:03:15] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:06:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:08:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:10:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:11:21] [INFO] [MARKET] Fetched 48 NBA game markets 
+[2026-03-01 16:11:21] [INFO] [MARKET] Exact match: MEM vs IND -> KXNBAGAME-26MAR01MEMIND-IND 
+[2026-03-01 16:11:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:11:55] [INFO] BALANCE: $1128.03 -> $1094.36 (-fade 33.67) | game_id=401810726 
+[2026-03-01 16:11:55] [INFO] TRADE: fade BUY_YES | game_id=401810726, price=0.37, size=91 
+[2026-03-01 16:11:55] [INFO] TRADE: fade BUY_YES | game_id=401810726, price=0.385, size=0.03 
+[2026-03-01 16:21:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:26:20] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:34:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:44:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:44:47] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:48:43] [INFO] SETTLEMENT: 401810725_with_leader_154747 LOSS | game_id=401810725, pnl=-34.45 
+[2026-03-01 16:48:43] [INFO] Settled 1 positions for game 401810725 | total_pnl=-34.45 
+[2026-03-01 16:48:43] [INFO] Settled game 401810725: Chicago Bulls won 
+[2026-03-01 16:50:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:52:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 16:53:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:00:11] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:06:33] [INFO] SETTLEMENT: 401810726_fade_161155 LOSS | game_id=401810726, pnl=-33.67 
+[2026-03-01 17:06:33] [INFO] Settled 1 positions for game 401810726 | total_pnl=-33.67 
+[2026-03-01 17:06:33] [INFO] Settled game 401810726: Minnesota Timberwolves won 
+[2026-03-01 17:11:46] [INFO] [MARKET] Fetched 44 NBA game markets 
+[2026-03-01 17:11:46] [INFO] [MARKET] Exact match: POR vs ATL -> KXNBAGAME-26MAR01PORATL-ATL 
+[2026-03-01 17:11:46] [INFO] [MARKET] Exact match: DET vs ORL -> KXNBAGAME-26MAR01DETORL-ORL 
+[2026-03-01 17:22:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:23:17] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:26:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:28:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:33:10] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:36:41] [INFO] BALANCE: $1094.36 -> $1050.89 (-with_leader 43.47) | game_id=401810728 
+[2026-03-01 17:36:41] [INFO] TRADE: with_leader BUY_YES | game_id=401810728, price=0.69, size=63 
+[2026-03-01 17:36:41] [INFO] TRADE: with_leader BUY_YES | game_id=401810728, price=0.925, size=0.04 
+[2026-03-01 17:42:59] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:46:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:55:13] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 17:58:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:01:07] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:08:49] [INFO] BALANCE: $1050.89 -> $1009.29 (-with_leader 41.60) | game_id=401810727 
+[2026-03-01 18:08:49] [INFO] TRADE: with_leader BUY_NO | game_id=401810727, price=0.64, size=65 
+[2026-03-01 18:08:49] [INFO] TRADE: with_leader BUY_NO | game_id=401810727, price=0.99, size=0.04 
+[2026-03-01 18:19:44] [INFO] SETTLEMENT: 401810727_with_leader_180849 WIN | game_id=401810727, pnl=21.76 
+[2026-03-01 18:19:44] [INFO] Settled 1 positions for game 401810727 | total_pnl=21.76 
+[2026-03-01 18:19:44] [INFO] Settled game 401810727: Memphis Grizzlies won 
+[2026-03-01 18:28:08] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:34:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:50:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:54:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:55:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:57:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 18:57:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:05:11] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:10:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:11:06] [INFO] [MARKET] Fetched 40 NBA game markets 
+[2026-03-01 19:11:06] [INFO] [MARKET] Exact match: OKC vs DAL -> KXNBAGAME-26MAR01OKCDAL-DAL 
+[2026-03-01 19:13:30] [INFO] [MARKET] Fetched 40 NBA game markets 
+[2026-03-01 19:13:30] [INFO] [MARKET] Exact match: PHI vs BOS -> KXNBAGAME-26MAR01PHIBOS-BOS 
+[2026-03-01 19:18:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:26:00] [INFO] SETTLEMENT: 401810728_with_leader_173641 WIN | game_id=401810728, pnl=18.16 
+[2026-03-01 19:26:00] [INFO] Settled 1 positions for game 401810728 | total_pnl=18.16 
+[2026-03-01 19:26:00] [INFO] Settled game 401810728: Atlanta Hawks won 
+[2026-03-01 19:27:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:34:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:35:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:40:32] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:48:19] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:54:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 19:55:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:11:03] [INFO] [MARKET] Fetched 36 NBA game markets 
+[2026-03-01 20:11:03] [INFO] [MARKET] Exact match: NO vs LAC -> KXNBAGAME-26MAR01NOPLAC-LAC 
+[2026-03-01 20:20:05] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:22:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:32:03] [INFO] BALANCE: $1134.29 -> $1100.47 (-with_leader 33.82) | game_id=401810729 
+[2026-03-01 20:32:03] [INFO] TRADE: with_leader BUY_YES | game_id=401810729, price=0.89, size=38 
+[2026-03-01 20:32:03] [INFO] TRADE: with_leader BUY_YES | game_id=401810729, price=0.94, size=0.03 
+[2026-03-01 20:33:14] [INFO] BALANCE: $1100.47 -> $1068.17 (-with_leader 32.30) | game_id=401810731 
+[2026-03-01 20:33:14] [INFO] TRADE: with_leader BUY_NO | game_id=401810731, price=0.95, size=34 
+[2026-03-01 20:33:14] [INFO] TRADE: with_leader BUY_NO | game_id=401810731, price=0.975, size=0.03 
+[2026-03-01 20:41:42] [INFO] [MARKET] Fetched 36 NBA game markets 
+[2026-03-01 20:41:42] [INFO] [MARKET] Exact match: SAC vs LAL -> KXNBAGAME-26MAR01SACLAL-LAL 
+[2026-03-01 20:41:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:47:14] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:49:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:55:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 20:56:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:08:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:09:48] [INFO] BALANCE: $1068.17 -> $1026.03 (-with_leader 42.14) | game_id=401810733 
+[2026-03-01 21:09:48] [INFO] TRADE: with_leader BUY_YES | game_id=401810733, price=0.86, size=49 
+[2026-03-01 21:09:48] [INFO] TRADE: with_leader BUY_YES | game_id=401810733, price=0.975, size=0.04 
+[2026-03-01 21:10:23] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:14:30] [INFO] SETTLEMENT: 401810731_with_leader_203314 WIN | game_id=401810731, pnl=1.58 
+[2026-03-01 21:14:30] [INFO] Settled 1 positions for game 401810731 | total_pnl=1.58 
+[2026-03-01 21:14:30] [INFO] Settled game 401810731: Oklahoma City Thunder won 
+[2026-03-01 21:17:02] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:18:51] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:23:39] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:30:20] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:30:56] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:33:22] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:37:30] [INFO] SETTLEMENT: 401810729_with_leader_203203 WIN | game_id=401810729, pnl=3.89 
+[2026-03-01 21:37:30] [INFO] Settled 1 positions for game 401810729 | total_pnl=3.89 
+[2026-03-01 21:37:30] [INFO] Settled game 401810729: Boston Celtics won 
+[2026-03-01 21:37:38] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 21:51:02] [INFO] BALANCE: $1097.61 -> $1064.85 (-with_leader 32.76) | game_id=401810732 
+[2026-03-01 21:51:02] [INFO] TRADE: with_leader BUY_YES | game_id=401810732, price=0.91, size=36 
+[2026-03-01 21:51:02] [INFO] TRADE: with_leader BUY_YES | game_id=401810732, price=0.96, size=0.03 
+[2026-03-01 22:08:31] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:12:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:24:16] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:25:27] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:27:55] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:31:28] [INFO] SETTLEMENT: 401810732_with_leader_215102 WIN | game_id=401810732, pnl=3.01 
+[2026-03-01 22:31:28] [INFO] Settled 1 positions for game 401810732 | total_pnl=3.01 
+[2026-03-01 22:31:28] [INFO] Settled game 401810732: LA Clippers won 
+[2026-03-01 22:34:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:35:12] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:43:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:45:34] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 22:53:22] [INFO] SETTLEMENT: 401810733_with_leader_210948 WIN | game_id=401810733, pnl=6.38 
+[2026-03-01 22:53:22] [INFO] Settled 1 positions for game 401810733 | total_pnl=6.38 
+[2026-03-01 22:53:22] [INFO] Settled game 401810733: Los Angeles Lakers won 
+[2026-03-01 22:53:28] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:05:00] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:05:36] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:09:54] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:10:30] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:11:06] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:15:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:19:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:19:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:22:45] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:33:40] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-01 23:37:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-02 00:07:03] [INFO] Trading loop stopped 
+[2026-03-02 00:07:03] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-03-02 00:07:03] [INFO] Session ended, state saved 

@@ -211,7 +211,7 @@ performanceServer <- function(id, state, state_version = NULL) {
         )
       }
 
-      colors <- c("with_leader" = "#007bff", "fade" = "#ffc107")
+      colors <- c("with_leader" = "#007bff", "fade" = "#ffc107", "pregame_big_fav" = "#28a745")
 
       plot_ly(strategy_data, labels = ~strategy, values = ~total_trades,
               type = 'pie',
@@ -246,6 +246,7 @@ performanceServer <- function(id, state, state_version = NULL) {
           strategy_label = case_when(
             strategy == "with_leader" ~ "With Leader",
             strategy == "fade" ~ "Selective Fade",
+            strategy == "pregame_big_fav" ~ "Pregame Big Fav (spread)",
             TRUE ~ strategy
           ),
           win_rate_fmt = sprintf("%.1f%%", win_rate * 100),

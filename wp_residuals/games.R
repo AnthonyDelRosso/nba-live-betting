@@ -1,0 +1,7 @@
+suppressMessages(library(dplyr))
+r <- readRDS("wp_residuals/raw.rds")
+up <- c(TRUE, diff(r$secs) > 0)
+rc <- c(TRUE, diff(r$rating) != 0 | diff(r$y) != 0)
+cat("secs increases:", sum(up), " rating/y changes:", sum(rc), " both:", sum(up&rc), " up-only:", sum(up&!rc), " rc-only:", sum(rc&!up), "\n")
+gid <- cumsum(up | rc); cat("games:", max(gid), " rows/game median:", median(tabulate(gid)), "\n")
+print(head(r[which(up & !rc)[1:3] + rep(-2:2, each=3), c("secs","margin","rating","y")], 15))

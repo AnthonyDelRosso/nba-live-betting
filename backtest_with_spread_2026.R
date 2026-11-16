@@ -323,7 +323,7 @@ for (g in 1:nrow(unique_games)) {
           home_leading = home_leading,
           entry_price = signal_no_spread$fade$entry_price,
           bet_size = fade_bet_size_ns,
-          trailer_win_prob = signal_no_spread$fade$blown_rate,
+          trailer_win_prob = signal_no_spread$fade$calibrated_prob,
           breakeven = signal_no_spread$fade$breakeven,
           edge = signal_no_spread$fade$edge,
           spread = 0,
@@ -378,7 +378,7 @@ for (g in 1:nrow(unique_games)) {
 
         # For fade: we're betting on the trailer
         market_mid_trailer <- signal_spread$fade$entry_price
-        model_trailer_win_prob <- signal_spread$fade$blown_rate
+        model_trailer_win_prob <- signal_spread$fade$calibrated_prob
 
         # Apply spread to the trade
         spread_info <- apply_spread_to_trade(

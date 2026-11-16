@@ -12,7 +12,8 @@ PaperTradingEngine <- R6::R6Class(
   public = list(
     state = NULL,           # TradingState object
     logger = NULL,          # Logger object
-    kalshi_fee = NULL,      # Kalshi fee rate on wins
+    kalshi_fee = NULL,      # Kalshi fee coefficient (fee = rate * C * P * (1-P), every fill)
+    min_leader_ask = NULL,  # with_leader entry floor on the leader's ask
 
     # Configuration
     min_contract_value = NULL,  # Minimum contract value ($)
@@ -36,10 +37,12 @@ PaperTradingEngine <- R6::R6Class(
     #' @param kalshi_client Optional KalshiClient for real price data
     initialize = function(state, logger = NULL, kalshi_fee = 0.07,
                          min_contract_value = 1, base_spread = 0.02,
-                         kalshi_client = NULL) {
+                         kalshi_client = NULL, min_leader_ask = NULL) {
       self$state <- state
       self$logger <- logger
       self$kalshi_fee <- kalshi_fee
+      self$min_leader_ask <- min_leader_ask %||%
+        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.90 else 0.90)
       self$min_contract_value <- min_contract_value
       self$default_bet_size <- 0.02  # 2% default
       self$base_spread <- base_spread
@@ -259,9 +262,8 @@ PaperTradingEngine <- R6::R6Class(
         execution_price <- spread_data$buy_no_price
       }
 
-      # Calculate breakeven with fee-on-profit model
-      payout_if_win <- 1 - self$kalshi_fee * (1 - execution_price)
-      breakeven_prob <- execution_price / payout_if_win
+      # Breakeven with Kalshi's per-fill fee: price + rate * P * (1 - P)
+      breakeven_prob <- execution_price + self$kalshi_fee * execution_price * (1 - execution_price)
 
       # Actual edge after spread and fees
       # model_win_prob is already the probability we win (not home team)
@@ -269,8 +271,7 @@ PaperTradingEngine <- R6::R6Class(
 
       # Edge at mid (what we'd have without spread)
       mid_execution <- if (side == "yes" || side == "BUY_YES") market_price else (1 - market_price)
-      mid_payout <- 1 - self$kalshi_fee * (1 - mid_execution)
-      mid_breakeven <- mid_execution / mid_payout
+      mid_breakeven <- mid_execution + self$kalshi_fee * mid_execution * (1 - mid_execution)
       mid_edge <- model_win_prob - mid_breakeven
 
       list(
@@ -355,13 +356,19 @@ PaperTradingEngine <- R6::R6Class(
         message(sprintf("[TRADE] WARNING: No model probability in signal, using market price"))
       }
 
+      # signal$entry_price is the price of the SIDE being bought (leader's
+      # price for with_leader, trailer's for fade), not the home price.
+      # Convert to a home-team mid before simulating a spread; passing the
+      # side price straight in is what produced the 6c NO fills on Nov 2.
+      home_mid_est <- if (side == "BUY_YES") model_entry_price else (1 - model_entry_price)
+
       # Get spread data — use fresh_spread if provided (bypasses stale cache),
       # otherwise fall back to cached/simulated spread
       if (!is.null(fresh_spread) && is.list(fresh_spread) && !is.na(fresh_spread$mid_price %||% NA)) {
         spread_data <- fresh_spread
         message(sprintf("[TRADE] Using FRESH spread data (source: %s)", fresh_spread$source %||% "fresh"))
       } else {
-        spread_data <- self$get_spread_data(game_id, model_entry_price, game_state)
+        spread_data <- self$get_spread_data(game_id, home_mid_est, game_state)
       }
 
       # Guard: ensure spread_data is a proper list
@@ -370,29 +377,73 @@ PaperTradingEngine <- R6::R6Class(
         return(NULL)
       }
 
-      # Get execution price based on side
+      spread_source <- spread_data$source %||% "unknown"
+      home_bid <- spread_data$best_bid %||% spread_data$bid %||% NA_real_
+      home_ask <- spread_data$best_ask %||% spread_data$ask %||% NA_real_
+
+      # Get execution price, bid and mid for the side we're buying
       if (side == "BUY_YES") {
         execution_price <- spread_data$buy_yes_price %||% (model_entry_price + 0.01)
-        market_mid <- spread_data$mid_price %||% spread_data$mid %||% model_entry_price
+        side_bid <- home_bid
+        market_mid <- spread_data$mid_price %||% spread_data$mid %||% home_mid_est
       } else {
-        execution_price <- spread_data$buy_no_price %||% (1 - model_entry_price + 0.01)
-        market_mid <- 1 - (spread_data$mid_price %||% spread_data$mid %||% model_entry_price)
+        execution_price <- spread_data$buy_no_price %||% (model_entry_price + 0.01)
+        side_bid <- if (is.na(home_ask)) NA_real_ else 1 - home_ask
+        market_mid <- 1 - (spread_data$mid_price %||% spread_data$mid %||% home_mid_est)
       }
 
-      # Handle NA execution_price (e.g., no liquidity)
-      if (is.na(execution_price) || !is.numeric(execution_price)) {
-        execution_price <- if (side == "BUY_YES") model_entry_price + 0.01 else (1 - model_entry_price + 0.01)
-      }
       if (is.na(market_mid) || !is.numeric(market_mid)) {
         market_mid <- model_entry_price
       }
 
-      # Calculate breakeven with fee-on-profit model
-      # Kalshi charges fee on profits (not gross payout):
-      #   payout_if_win = 1 - fee * (1 - execution_price)
-      #   breakeven = execution_price / payout_if_win
-      payout_if_win <- 1 - self$kalshi_fee * (1 - execution_price)
-      breakeven_prob <- execution_price / payout_if_win
+      # Entry context recorded on the position, or on the skip record
+      clock_str <- if (is.list(game_state)) {
+        sprintf("%d:%02d", as.integer(game_state$clock_minutes %||% 0),
+                as.integer(game_state$clock_seconds %||% 0))
+      } else NA_character_
+      ctx <- list(
+        ticker = spread_data$ticker %||% NA_character_,
+        home_score = if (is.list(game_state)) game_state$home_score else NA,
+        away_score = if (is.list(game_state)) game_state$away_score else NA,
+        period = if (is.list(game_state)) game_state$period else NA,
+        clock = clock_str,
+        model_prob = model_win_prob,
+        bid = side_bid,
+        ask = execution_price,
+        fee_per_contract = NA_real_
+      )
+      skip <- function(reason) {
+        message(sprintf("[TRADE] SKIPPED %s %s: %s", game_id, strategy, reason))
+        tryCatch(self$state$log_skipped_entry(game_id, strategy, side, reason, ctx),
+                 error = function(e) message(sprintf("[TRADE] skip log failed: %s", e$message)))
+        NULL
+      }
+
+      # With real prices on, only trade a matched live Kalshi market. A
+      # simulated quote means no ticker matched this game, so there is nothing
+      # real to trade against.
+      if (self$use_real_prices && !spread_source %in% c("kalshi", "kalshi_fresh")) {
+        return(skip(sprintf("no matched Kalshi market (spread source: %s)", spread_source)))
+      }
+
+      # Handle NA execution_price (e.g., no liquidity)
+      if (is.na(execution_price) || !is.numeric(execution_price)) {
+        return(skip("no ask on our side (no liquidity)"))
+      }
+
+      # Kalshi fee is charged on every fill: rate * P * (1 - P) per contract
+      fee_per_contract <- self$kalshi_fee * execution_price * (1 - execution_price)
+      ctx$fee_per_contract <- fee_per_contract
+
+      # Hard entry floor for with_leader. A team up 15+ in the 2H (or 21+) is
+      # almost never priced below ~90c; when it is, either our score/team/side
+      # is wrong or the market knows something the lookup table doesn't.
+      if (strategy == "with_leader" && execution_price < self$min_leader_ask) {
+        return(skip(sprintf("leader ask %.3f below floor %.2f", execution_price, self$min_leader_ask)))
+      }
+
+      # Breakeven: we pay price + fee per contract and receive $1 on a win
+      breakeven_prob <- execution_price + fee_per_contract
 
       # Actual edge after spread and fees
       actual_edge <- model_win_prob - breakeven_prob
@@ -404,7 +455,6 @@ PaperTradingEngine <- R6::R6Class(
       }
 
       # Log with source info
-      spread_source <- spread_data$source %||% "unknown"
       spread_pct <- spread_data$spread_pct %||% ((spread_data$spread %||% 0.02) / max(market_mid, 0.01) * 100)
 
       message(sprintf("[TRADE] %s %s: signal=%s, market=%.3f, model_prob=%.1f%%, exec_price=%.3f, spread=%.1f%% (%s), edge=%.1f%%",
@@ -435,7 +485,7 @@ PaperTradingEngine <- R6::R6Class(
         return(NULL)
       }
 
-      contracts <- self$calculate_contracts(bet_size, execution_price)
+      contracts <- self$calculate_contracts(bet_size, execution_price + fee_per_contract)
 
       if (contracts < 1) {
         if (!is.null(self$logger)) {
@@ -456,6 +506,13 @@ PaperTradingEngine <- R6::R6Class(
       signal_with_spread$actual_edge <- actual_edge
       signal_with_spread$model_win_prob <- model_win_prob
       signal_with_spread$breakeven_prob <- breakeven_prob
+      signal_with_spread$fee <- kalshi_trade_fee(contracts, execution_price, self$kalshi_fee)
+      signal_with_spread$ticker <- ctx$ticker
+      signal_with_spread$home_score <- ctx$home_score
+      signal_with_spread$away_score <- ctx$away_score
+      signal_with_spread$clock <- ctx$clock
+      signal_with_spread$side_bid <- ctx$bid
+      signal_with_spread$side_ask <- execution_price
 
       # Add position through state
       position_id <- self$state$add_position(
@@ -524,6 +581,9 @@ PaperTradingEngine <- R6::R6Class(
     #' @return Total P&L for the game
     settle_game = function(game_id, home_won) {
       open_positions <- self$state$get_game_positions(game_id, status = "open")
+      # Spread-market positions settle on their own Kalshi market result
+      # (PregameFavStrategy$check_settlements), never on the moneyline winner.
+      open_positions <- open_positions[!open_positions$strategy %in% SPREAD_SETTLED_STRATEGIES, , drop = FALSE]
 
       if (nrow(open_positions) == 0) {
         return(0)

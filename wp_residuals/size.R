@@ -1,0 +1,7 @@
+suppressMessages(library(tidymodels)); f <- readRDS("win_probability_model_v2.rds")
+sz <- function(x) round(length(serialize(x, NULL))/1e6, 2)
+cat("pre:", sz(f$pre), " fit:", sz(f$fit), "\n")
+g <- f$fit$fit$fit; print(sort(sapply(unclass(g), sz), decreasing=TRUE)[1:5])
+print(sort(sapply(unclass(f$fit$fit), sz), decreasing=TRUE)[1:3])
+rec <- f$pre$mold$blueprint; cat("mold:", sz(f$pre$mold), " blueprint:", sz(rec), " predictors:", sz(f$pre$mold$predictors), "\n")
+cat("actions:", sz(f$pre$actions), "\n")

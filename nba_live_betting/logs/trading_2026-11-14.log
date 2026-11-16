@@ -1,0 +1,13 @@
+[2026-11-14 13:28:09] [INFO] Application started 
+[2026-11-14 13:28:09] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-11-14 13:28:09] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=52, balance=1160.6867 
+[2026-11-14 13:28:09] [INFO] Loaded saved state 
+[2026-11-14 13:28:09] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-11-14 13:28:09] [INFO] [MARKET] Fetched 64 NBA game markets 
+[2026-11-14 13:28:09] [INFO] Kalshi client connected — 64 NBA markets available 
+[2026-11-14 13:28:13] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-11-14 13:28:13] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-11-14 13:28:14] [INFO] Team ratings updated | n_teams=30 
+[2026-11-14 13:28:14] [INFO] Loaded team ratings | n_teams=30 
+[2026-11-14 14:47:52] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-14 14:47:52] [INFO] Session ended, state saved 

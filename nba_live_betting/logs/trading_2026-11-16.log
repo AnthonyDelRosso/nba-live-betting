@@ -1,0 +1,31 @@
+[2026-11-16 00:12:00] [INFO] Application started 
+[2026-11-16 00:12:00] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-11-16 00:12:00] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=61, balance=1138.2473 
+[2026-11-16 00:12:00] [INFO] Loaded saved state 
+[2026-11-16 00:12:00] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-11-16 00:12:00] [INFO] [MARKET] Fetched 60 NBA game markets 
+[2026-11-16 00:12:00] [INFO] Kalshi client connected — 60 NBA markets available 
+[2026-11-16 00:12:05] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-11-16 00:12:05] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-11-16 00:12:05] [INFO] Team ratings updated | n_teams=30 
+[2026-11-16 00:12:05] [INFO] Loaded team ratings | n_teams=30 
+[2026-11-16 00:12:07] [INFO] Trading loop started 
+[2026-11-16 00:12:08] [INFO] Trading started by user in paper mode 
+[2026-11-16 00:19:42] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:26:46] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:28:48] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:29:18] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:34:21] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:40:24] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 00:43:26] [INFO] State saved | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds 
+[2026-11-16 09:35:06] [INFO] Application started 
+[2026-11-16 09:35:06] [INFO] TradingState initialized in paper mode | balance=1000 
+[2026-11-16 09:35:06] [INFO] State loaded | path=C:\Users\Anthony\OneDrive\Documents\High Dimensional Data Analytics\testing\nba_live_betting/data/trading_state.rds, positions=61, balance=1138.2473 
+[2026-11-16 09:35:06] [INFO] Loaded saved state 
+[2026-11-16 09:35:06] [INFO] KalshiClient initialized | api_base=https://api.elections.kalshi.com/trade-api/v2, has_auth=TRUE 
+[2026-11-16 09:35:06] [INFO] [MARKET] Fetched 60 NBA game markets 
+[2026-11-16 09:35:06] [INFO] Kalshi client connected — 60 NBA markets available 
+[2026-11-16 09:35:13] [INFO] Paper trading using REAL Kalshi prices for market data 
+[2026-11-16 09:35:13] [INFO] AutomatedTrader initialized | mode=paper, poll_interval=30 
+[2026-11-16 09:35:14] [INFO] Team ratings updated | n_teams=30 
+[2026-11-16 09:35:14] [INFO] Loaded team ratings | n_teams=30 

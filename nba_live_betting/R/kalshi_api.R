@@ -218,7 +218,7 @@ KalshiClient <- R6::R6Class(
     #' @param method HTTP method
     #' @param body Request body (for POST/PUT)
     #' @return Response data
-    api_request = function(endpoint, method = "GET", body = NULL) {
+    api_request = function(endpoint, method = "GET", body = NULL, return_error = FALSE) {
       if (!self$is_authenticated()) {
         if (!is.null(self$logger)) {
           self$logger$error("Kalshi client not configured (missing API key or private key file)")
@@ -271,13 +271,21 @@ KalshiClient <- R6::R6Class(
 
       tryCatch({
         resp <- req %>% req_perform()
+        # 204 No Content (e.g. DELETE /communications/rfqs/{id}) has no JSON body
+        if (!resp_has_body(resp)) return(list(status = resp_status(resp)))
         resp_body_json(resp)
       }, error = function(e) {
         if (!is.null(self$logger)) {
           self$logger$error(sprintf("API request failed: %s", e$message),
                            endpoint = endpoint)
         }
-        NULL
+        if (!return_error) return(NULL)
+        # Surface Kalshi's error code (e.g. invalid_market_combination) to the caller
+        err <- tryCatch(resp_body_json(e$resp)$error, error = function(e2) NULL)
+        list(.error = TRUE,
+             status = tryCatch(resp_status(e$resp), error = function(e2) NA_integer_),
+             code = err$code %||% NA_character_,
+             message = err$message %||% conditionMessage(e))
       })
     },
 
@@ -479,9 +487,13 @@ KalshiClient <- R6::R6Class(
     #' @param ticker Market ticker
     #' @return List with bid, ask, mid, spread, and depth info
     get_spread_data = function(ticker) {
-      # First, try to find data in cached market listing
+      # Go through get_nba_markets() (not self$market_cache directly) so its
+      # TTL check actually runs — market_cache only ever got refreshed as a
+      # side effect of some OTHER ticker's first-time lookup, so a ticker
+      # resolved once early in a game could sit there, found-but-stale,
+      # indefinitely for the rest of that game.
       market_data <- NULL
-      for (m in self$market_cache) {
+      for (m in self$get_nba_markets()) {
         if (!is.list(m)) next
         if (identical(m$ticker, ticker)) {
           market_data <- m
@@ -700,6 +712,54 @@ KalshiClient <- R6::R6Class(
       }
       response <- self$api_request(endpoint)
       response$fills %||% list()
+    },
+
+    # --------------------------------------------------------------------------
+    # Combos (multivariate event collections) + RFQ — QUOTE DISCOVERY ONLY.
+    # Deliberately no accept/confirm methods: nothing in this client can turn
+    # an RFQ into a fill. Add them only as a conscious decision to trade combos.
+    # --------------------------------------------------------------------------
+
+    #' List open multivariate (combo) event collections (public)
+    get_mve_collections = function() {
+      resp <- self$public_request("/multivariate_event_collections?status=open&limit=200")
+      resp$multivariate_contracts %||% list()
+    },
+
+    #' Create (or fetch the existing) combo market for a set of legs (auth)
+    #' @param legs list of list(market_ticker, event_ticker, side)
+    #' @return list(market_ticker, event_ticker) or list(.error = TRUE, code, ...)
+    create_combo_market = function(collection_ticker, legs) {
+      self$api_request(sprintf("/multivariate_event_collections/%s", collection_ticker),
+                       method = "POST",
+                       body = list(selected_markets = legs, with_market_payload = FALSE),
+                       return_error = TRUE)
+    },
+
+    #' Request quotes on a market (auth). Never rests, never accepts.
+    #' @return list(id) or list(.error = TRUE, code, ...)
+    create_rfq = function(market_ticker, contracts) {
+      self$api_request("/communications/rfqs", method = "POST",
+                       body = list(market_ticker = market_ticker,
+                                   contracts = as.integer(contracts),
+                                   rest_remainder = FALSE),
+                       return_error = TRUE)
+    },
+
+    #' All quotes (any status) received on one of our RFQs (auth)
+    get_rfq_quotes = function(rfq_id) {
+      # rfq_user_filter=self is required in practice (403 "Either creator_user_id
+      # or rfq_creator_user_id must be filled" without it), despite the docs
+      resp <- self$api_request(sprintf("/communications/quotes?rfq_id=%s&rfq_user_filter=self&limit=500", rfq_id),
+                               return_error = TRUE)
+      if (isTRUE(resp$.error)) return(resp)
+      resp$quotes %||% list()
+    },
+
+    #' Close one of our RFQs (auth)
+    delete_rfq = function(rfq_id) {
+      self$api_request(sprintf("/communications/rfqs/%s", rfq_id), method = "DELETE",
+                       return_error = TRUE)
     },
 
     #' Find NBA game market tickers for a game

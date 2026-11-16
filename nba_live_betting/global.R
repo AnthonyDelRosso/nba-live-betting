@@ -135,6 +135,8 @@ source(file.path(APP_DIR, "R/trading_state.R"))
 source(file.path(APP_DIR, "R/espn_api.R"))
 source(file.path(APP_DIR, "R/paper_trading.R"))
 source(file.path(APP_DIR, "R/kalshi_api.R"))
+source(file.path(APP_DIR, "R/pregame_fav_strategy.R"))
+source(file.path(APP_DIR, "R/combo_quote_logger.R"))
 source(file.path(APP_DIR, "R/automated_trader.R"))
 
 # Source Shiny modules
@@ -143,6 +145,7 @@ source(file.path(APP_DIR, "modules/mod_positions.R"))
 source(file.path(APP_DIR, "modules/mod_trade_log.R"))
 source(file.path(APP_DIR, "modules/mod_controls.R"))
 source(file.path(APP_DIR, "modules/mod_performance.R"))
+source(file.path(APP_DIR, "modules/mod_pregame_fav.R"))
 
 # ------------------------------------------------------------------------------
 # Configuration
@@ -152,11 +155,21 @@ source(file.path(APP_DIR, "modules/mod_performance.R"))
 CONFIG <- list(
   paper_balance = 4500,        # Updated: $4,500 bankroll for realistic P&L
   poll_interval = 30,
-  kalshi_fee = 0.07,
+  kalshi_fee = 0.07,            # Kalshi fee coefficient: ceil(fee * C * P * (1-P)) per fill
+  # with_leader entry floor: skip (and log) when the leader's ask is below this.
+  # A 15+/21+ lead the market prices under ~90c means our data is wrong or the
+  # market knows something the lookup table doesn't.
+  min_leader_ask = 0.90,
   log_level = "INFO",
   # In-game adjustment settings
   enable_ingame_adjustments = TRUE,
-  price_history_minutes = 5    # Minutes of price history to track for velocity
+  price_history_minutes = 5,   # Minutes of price history to track for velocity
+  # Frozen pregame big-favorite spread rule (R/pregame_fav_strategy.R), paper only
+  enable_pregame_fav = TRUE,
+  pregame_fav_contracts = 10,
+  # Combo RFQ quote logger (R/combo_quote_logger.R): sends real RFQs on combos
+  # of the rule's legs to measure maker markup; never accepts. Needs API creds.
+  enable_combo_quote_logger = TRUE
 )
 
 config_path <- file.path(APP_DIR, "config/config.yml")
@@ -174,6 +187,10 @@ MODEL_PATHS <- list(
 # Data and log directories
 DATA_DIR <- file.path(APP_DIR, "data")
 LOG_DIR <- file.path(APP_DIR, "logs")
+
+# The one and only paper-trading state file (absolute). TradingState has no
+# relative-path fallback; scripts must source global.R or pass this path.
+STATE_FILE <- normalizePath(file.path(DATA_DIR, "trading_state.rds"), mustWork = FALSE)
 
 # Create directories if they don't exist
 if (!dir.exists(DATA_DIR)) dir.create(DATA_DIR, recursive = TRUE)
@@ -305,7 +322,12 @@ validate_game_state <- function(game_state) {
     net_rating_advantage = as.numeric(game_state$net_rating_advantage %||% 0),
     # Preserve team identifiers for Kalshi market ticker lookup
     home_team_abbrev = as.character(game_state$home_team_abbrev %||% ""),
-    away_team_abbrev = as.character(game_state$away_team_abbrev %||% "")
+    away_team_abbrev = as.character(game_state$away_team_abbrev %||% ""),
+    # Preserve live-status fields for the pre-entry live-game check
+    game_id = as.character(game_state$game_id %||% NA_character_),
+    is_in_progress = isTRUE(game_state$is_in_progress),
+    is_final = isTRUE(game_state$is_final),
+    start_time = as.character(game_state$start_time %||% NA_character_)
   )
 }
 
@@ -363,7 +385,7 @@ safe_get_wp <- function(predictor, game_state) {
 #' Get team net ratings for current season
 #' @param season Season year
 #' @return Tibble with team ratings
-get_team_ratings <- function(season = 2026) {
+get_team_ratings <- function(season = 2027) {
   message(sprintf("[RATINGS] Loading team ratings for season %d...", season))
 
   tryCatch({

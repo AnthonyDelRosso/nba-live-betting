@@ -17,6 +17,8 @@ AutomatedTrader <- R6::R6Class(
     paper_engine = NULL,      # PaperTradingEngine for paper mode
     kalshi_client = NULL,     # KalshiClient for live mode
     logger = NULL,            # Logger object
+    pregame_strategy = NULL,  # PregameFavStrategy (frozen big-fav spread rule)
+    combo_logger = NULL,      # ComboQuoteLogger (combo RFQ quotes on rule legs; never trades)
 
     # Configuration
     poll_interval = NULL,     # Seconds between polls
@@ -27,6 +29,7 @@ AutomatedTrader <- R6::R6Class(
     is_running = NULL,        # Whether the loop is active
     last_poll = NULL,         # Last poll timestamp
     games_today = NULL,       # Current day's games
+    live_game_ids = NULL,     # Game IDs ESPN reported in progress on the latest poll
     scheduled_task = NULL,    # later() task handle
 
     # In-game adjustment tracking
@@ -55,6 +58,24 @@ AutomatedTrader <- R6::R6Class(
 
       self$is_running <- FALSE
       self$games_today <- list()
+
+      # Frozen pregame big-favorite spread rule — paper only, needs a Kalshi
+      # client for public market reads (the paper engine's price client).
+      pg_client <- paper_engine$kalshi_client %||% NULL
+      if (identical(self$mode, "paper") && !is.null(pg_client) &&
+          isTRUE(if (exists("CONFIG")) CONFIG$enable_pregame_fav %||% TRUE else TRUE)) {
+        self$pregame_strategy <- PregameFavStrategy$new(
+          state = state, client = pg_client, logger = logger,
+          contracts = if (exists("CONFIG")) CONFIG$pregame_fav_contracts %||% 10 else 10,
+          kalshi_fee = if (exists("CONFIG")) CONFIG$kalshi_fee %||% 0.07 else 0.07)
+
+        # Combo quote discovery on the rule's legs (RFQs only, never accepts)
+        if (isTRUE(if (exists("CONFIG")) CONFIG$enable_combo_quote_logger %||% FALSE else FALSE)) {
+          self$combo_logger <- ComboQuoteLogger$new(
+            client = pg_client, strategy = self$pregame_strategy, logger = logger,
+            cfg = list(contracts = if (exists("CONFIG")) CONFIG$pregame_fav_contracts %||% 10 else 10))
+        }
+      }
 
       # Initialize price history tracking for in-game adjustments
       self$price_history <- list()
@@ -182,6 +203,28 @@ AutomatedTrader <- R6::R6Class(
         }
       })
 
+      # 1b. Frozen pregame big-favorite spread rule (entries + own settlement)
+      if (!is.null(self$pregame_strategy)) {
+        tryCatch({
+          self$pregame_strategy$run(self$games_today)
+        }, error = function(e) {
+          if (!is.null(self$logger)) {
+            self$logger$error(sprintf("Pregame fav strategy error: %s", e$message))
+          }
+        })
+      }
+
+      # 1c. Combo RFQ quote logger (reads the rule's legs; quotes only)
+      if (!is.null(self$combo_logger)) {
+        tryCatch({
+          self$combo_logger$run()
+        }, error = function(e) {
+          if (!is.null(self$logger)) {
+            self$logger$error(sprintf("Combo quote logger error: %s", e$message))
+          }
+        })
+      }
+
       # 2. Check for settlements (ended games)
       tryCatch({
         self$check_settlements()
@@ -241,6 +284,9 @@ AutomatedTrader <- R6::R6Class(
       if (!is.list(live_states)) {
         live_states <- list()
       }
+
+      # Only games ESPN reports in progress *this poll* are tradable
+      self$live_game_ids <- names(live_states) %||% character(0)
 
       # Update game states in trading state
       for (game_id in names(live_states)) {
@@ -368,10 +414,13 @@ AutomatedTrader <- R6::R6Class(
             for (i in 1:nrow(open_positions)) {
               tryCatch({
                 pos <- open_positions[i, , drop = FALSE]
-                signal_val <- as.character(pos$signal)
-                position_won <- (signal_val == "BUY_YES" && home_won) ||
-                                (signal_val == "BUY_NO" && !home_won)
-                self$state$settle_position(as.character(pos$position_id), position_won)
+                # Spread-market positions settle on their own market result
+                if (!pos$strategy %in% SPREAD_SETTLED_STRATEGIES) {
+                  signal_val <- as.character(pos$signal)
+                  position_won <- (signal_val == "BUY_YES" && home_won) ||
+                                  (signal_val == "BUY_NO" && !home_won)
+                  self$state$settle_position(as.character(pos$position_id), position_won)
+                }
               }, error = function(e) {
                 # Ignore individual position settle errors
               })
@@ -411,9 +460,11 @@ AutomatedTrader <- R6::R6Class(
         return(invisible(NULL))
       }
 
-      # Get game IDs safely
+      # Get game IDs safely; only games ESPN reported in progress on this
+      # poll. Cached states for anything else (stale, final, last season)
+      # are never traded.
       game_ids <- tryCatch({
-        names(game_states)
+        intersect(names(game_states), self$live_game_ids %||% character(0))
       }, error = function(e) {
         character(0)
       })
@@ -627,43 +678,28 @@ AutomatedTrader <- R6::R6Class(
             next
           }
 
-          # Check actual open positions in TradingState (source of truth)
-          open_wl <- 0
-          open_fade <- 0
-          tryCatch({
-            game_open <- self$state$get_game_positions(game_id, status = "open")
-            if (is.data.frame(game_open) && nrow(game_open) > 0) {
-              open_wl <- sum(game_open$strategy == "with_leader")
-              open_fade <- sum(game_open$strategy == "fade")
-            }
-          }, error = function(e) {
-            # On error, allow trading (don't block on state query failure)
-          })
-
-          # Process with_leader signal (max 1 open per game)
-          wl_signal_data <- signal$with_leader
-          if (is.list(wl_signal_data) && !is.null(wl_signal_data$signal)) {
-            wl_signal <- as.character(wl_signal_data$signal)
-            if (length(wl_signal) == 1 && !is.na(wl_signal) && wl_signal != "HOLD") {
-              if (open_wl >= 1) {
-                message(sprintf("[SIGNAL] BLOCKED: game %s already has %d open with_leader position(s)", game_id, open_wl))
-              } else {
-                self$execute_signal(game_id, "with_leader", wl_signal_data, game_state)
-              }
-            }
+          # One open moneyline position per game across with_leader and fade
+          # (TradingState is the source of truth). Re-checked before each
+          # strategy so a fill by the first blocks the second in the same poll.
+          open_moneyline <- function() {
+            tryCatch({
+              game_open <- self$state$get_game_positions(game_id, status = "open")
+              game_open$strategy[game_open$strategy %in% MONEYLINE_STRATEGIES]
+            }, error = function(e) character(0))
           }
 
-          # Process fade signal (max 1 open per game)
-          fade_signal_data <- signal$fade
-          if (is.list(fade_signal_data) && !is.null(fade_signal_data$signal)) {
-            fade_signal <- as.character(fade_signal_data$signal)
-            if (length(fade_signal) == 1 && !is.na(fade_signal) && fade_signal != "HOLD") {
-              if (open_fade >= 1) {
-                message(sprintf("[SIGNAL] BLOCKED: game %s already has %d open fade position(s)", game_id, open_fade))
-              } else {
-                self$execute_signal(game_id, "fade", fade_signal_data, game_state)
-              }
+          for (strat in c("with_leader", "fade")) {
+            strat_signal <- signal[[strat]]
+            if (!is.list(strat_signal) || is.null(strat_signal$signal)) next
+            sig_val <- as.character(strat_signal$signal)
+            if (length(sig_val) != 1 || is.na(sig_val) || sig_val == "HOLD") next
+            held <- open_moneyline()
+            if (length(held) > 0) {
+              message(sprintf("[SIGNAL] BLOCKED: game %s %s %s; already holding an open %s position",
+                             game_id, strat, sig_val, held[1]))
+              next
             }
+            self$execute_signal(game_id, strat, strat_signal, game_state)
           }
 
         }, error = function(e) {
@@ -940,6 +976,20 @@ AutomatedTrader <- R6::R6Class(
         }
         # --- End fresh data re-validation ---
 
+        # --- Live-game / ticker match check ---
+        live_check <- self$validate_live_entry(game_id)
+        if (!isTRUE(live_check$ok)) {
+          message(sprintf("[EXEC] Trade ABORTED for %s/%s: %s", game_id, strategy, live_check$reason))
+          tryCatch(self$state$log_skipped_entry(
+            game_id, strategy, signal$signal, live_check$reason,
+            list(ticker = live_check$ticker, home_score = game_state$home_score,
+                 away_score = game_state$away_score, period = game_state$period,
+                 model_prob = signal$hold_rate %||% signal$expected_win_rate %||% NA,
+                 ask = signal$entry_price)),
+            error = function(e) NULL)
+          return(invisible(NULL))
+        }
+
         # Create a copy of signal to avoid modifying the original
         signal_copy <- as.list(signal)
 
@@ -1040,8 +1090,79 @@ AutomatedTrader <- R6::R6Class(
       invisible(NULL)
     },
 
+    #' Check that a game is genuinely live and that its Kalshi ticker belongs
+    #' to it before entering. Uses the raw ESPN state (refreshed in
+    #' execute_signal), not the validated copy.
+    #' @return list(ok, reason, ticker)
+    validate_live_entry = function(game_id) {
+      gid <- as.character(game_id)
+      fail <- function(reason, ticker = NA_character_) list(ok = FALSE, reason = reason, ticker = ticker)
+
+      if (!gid %in% (self$live_game_ids %||% character(0))) {
+        return(fail("game not in this poll's ESPN in-progress list"))
+      }
+      gs <- self$state$game_states[[gid]]
+      if (!is.list(gs)) return(fail("no ESPN state for game"))
+      if (isTRUE(gs$is_final) || !isTRUE(gs$is_in_progress)) {
+        return(fail(sprintf("game not in progress (status %s)", gs$status %||% "?")))
+      }
+
+      # Game date in US Eastern (Kalshi ticker dates are ET game dates)
+      start_utc <- suppressWarnings(as.POSIXct(gs$start_time %||% NA_character_,
+                                               tz = "UTC", tryFormats = c("%Y-%m-%dT%H:%MZ",
+                                                                          "%Y-%m-%dT%H:%M:%SZ")))
+      if (length(start_utc) != 1 || is.na(start_utc)) return(fail("no ESPN start time"))
+      game_date_et <- as.Date(format(start_utc, tz = "America/New_York", "%Y-%m-%d"))
+      if (abs(as.numeric(game_date_et - Sys.Date())) > 1) {
+        return(fail(sprintf("game date %s is not today (%s)", game_date_et, Sys.Date())))
+      }
+
+      # Ticker checks only apply when trading against real Kalshi markets
+      ticker <- NULL
+      if (self$mode == "paper") {
+        if (is.null(self$paper_engine) || !isTRUE(self$paper_engine$use_real_prices)) {
+          return(list(ok = TRUE, reason = "simulated prices; no ticker", ticker = NA_character_))
+        }
+        ticker <- self$paper_engine$get_market_ticker(gid, gs)
+      } else if (!is.null(self$kalshi_client)) {
+        ticker <- self$kalshi_client$find_game_market(gid, gs$home_team_abbrev, gs$away_team_abbrev, Sys.Date())
+      }
+      if (is.null(ticker) || !nzchar(ticker)) return(fail("no matched Kalshi ticker"))
+      tk <- toupper(ticker)
+
+      tk_date_str <- regmatches(tk, regexpr("[0-9]{2}[A-Z]{3}[0-9]{2}", tk))
+      expected_str <- toupper(format(game_date_et, "%y%b%d"))
+      if (length(tk_date_str) != 1 || tk_date_str != expected_str) {
+        return(fail(sprintf("ticker date %s != game date %s",
+                            if (length(tk_date_str)) tk_date_str else "?", expected_str), ticker))
+      }
+      home_k <- normalize_team_abbrev(gs$home_team_abbrev %||% "")
+      away_k <- normalize_team_abbrev(gs$away_team_abbrev %||% "")
+      event_part <- sub("^[^-]*-([^-]*).*$", "\\1", tk)
+      if (!nzchar(home_k) || !nzchar(away_k) ||
+          !grepl(home_k, event_part, fixed = TRUE) || !grepl(away_k, event_part, fixed = TRUE)) {
+        return(fail(sprintf("ticker %s does not contain both %s and %s", tk, away_k, home_k), ticker))
+      }
+      if (!grepl(paste0("-", home_k, "$"), tk)) {
+        return(fail(sprintf("ticker %s is not the %s (home) YES market", tk, home_k), ticker))
+      }
+
+      list(ok = TRUE, reason = "ok", ticker = ticker)
+    },
+
     #' Execute a live trade on Kalshi
     execute_live_trade = function(game_id, strategy, signal, game_state) {
+      floor_px <- if (!is.null(self$paper_engine)) self$paper_engine$min_leader_ask else
+        (if (exists("CONFIG")) CONFIG$min_leader_ask %||% 0.90 else 0.90)
+      if (strategy == "with_leader" && isTRUE(signal$entry_price < floor_px)) {
+        self$state$log_skipped_entry(game_id, strategy, signal$signal,
+                                     sprintf("leader price %.3f below floor %.2f", signal$entry_price, floor_px),
+                                     list(home_score = game_state$home_score, away_score = game_state$away_score,
+                                          period = game_state$period, model_prob = signal$hold_rate %||% NA,
+                                          ask = signal$entry_price))
+        return(NULL)
+      }
+
       if (is.null(self$kalshi_client)) {
         if (!is.null(self$logger)) {
           self$logger$error("No Kalshi client configured for live trading")

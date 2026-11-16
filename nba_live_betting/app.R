@@ -86,6 +86,7 @@ ui <- dashboardPage(
         tabName = "dashboard",
         h2("Dashboard"),
         performanceUI("performance"),
+        pregameFavUI("pregame_fav"),
         liveGamesUI("games_dashboard")
       ),
 
@@ -145,7 +146,8 @@ server <- function(input, output, session) {
 
   message("[DEBUG] 5. Loading saved state...")
   # Try to load saved state
-  state_file <- file.path(DATA_DIR, "trading_state.rds")
+  state_file <- STATE_FILE
+  state$fee_rate <- CONFIG$kalshi_fee %||% 0.07
   if (file.exists(state_file)) {
     tryCatch({
       state$load_state(state_file)
@@ -246,7 +248,7 @@ server <- function(input, output, session) {
   team_ratings_data <- reactiveVal(NULL)
 
   tryCatch({
-    ratings <- get_team_ratings(season = 2026)
+    ratings <- get_team_ratings(season = 2027)
     if (nrow(ratings) > 0) {
       trader$update_team_ratings(ratings)
       team_ratings_data(ratings)  # Store for UI display
@@ -300,9 +302,9 @@ server <- function(input, output, session) {
   message("[DEBUG] 15a. controlsServer...")
   controlsServer("controls", trading_state, automated_trader, logger, paper_engine, state_version)
   message("[DEBUG] 15b. liveGamesServer (dashboard)...")
-  liveGamesServer("games_dashboard", trading_state, predictor, team_ratings_data, state_version)
+  liveGamesServer("games_dashboard", trading_state, predictor, team_ratings_data, state_version, paper_engine)
   message("[DEBUG] 15c. liveGamesServer (full)...")
-  liveGamesServer("games_full", trading_state, predictor, team_ratings_data, state_version)
+  liveGamesServer("games_full", trading_state, predictor, team_ratings_data, state_version, paper_engine)
   message("[DEBUG] 15d. positionsServer...")
   positionsServer("positions", trading_state, state_version)
   message("[DEBUG] 15e. tradeLogServer...")
@@ -311,6 +313,8 @@ server <- function(input, output, session) {
   performanceServer("performance", trading_state, state_version)
   message("[DEBUG] 15g. performanceServer (full)...")
   performanceServer("performance_full", trading_state, state_version)
+  message("[DEBUG] 15h. pregameFavServer...")
+  pregameFavServer("pregame_fav", automated_trader, state_version)
   message("[DEBUG] 16. Server initialization complete!")
 }
 

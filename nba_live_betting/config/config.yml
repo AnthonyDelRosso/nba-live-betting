@@ -15,7 +15,7 @@ kalshi:
   private_key_path: "config/kalshi_private_key.pem"
 
 # Kalshi Fee
-kalshi_fee: 0.07             # 7% fee on winning contracts
+kalshi_fee: 0.07             # fee = ceil(0.07 * contracts * P * (1-P)), charged on every fill
 
 # Logging
 log_level: "INFO"            # DEBUG, INFO, WARN, ERROR
